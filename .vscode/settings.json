@@ -1,0 +1,6 @@
+{
+	"[markdown]": {
+		"editor.defaultFormatter": "rvben.rumdl"
+	},
+	"rumdl.linkCompletions.contentRoots": ["exampleSite/content", "assets"]
+}

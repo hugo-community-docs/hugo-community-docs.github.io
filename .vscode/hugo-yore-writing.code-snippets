@@ -1,0 +1,151 @@
+{
+	"Yore Admonition": {
+		"scope": "markdown",
+		"prefix": "yore-admonition",
+		"body": [
+			"{{% admonition type=\"${1|note,abstract,info,todo,tip,success,question,warning,failure,danger,bug,example,quote|}\" sign=\"${2|+,-,none|}\" title=\"${3:Title}\"${4: icon=\"${5:twitter}\"} %}}",
+			"",
+			"${6:Content}",
+			"",
+			"{{% /admonition %}}"
+		],
+		"description": "Admonition callout."
+	},
+
+	"Yore Lead": {
+		"scope": "markdown",
+		"prefix": "yore-lead",
+		"body": [
+			"{{% lead %}}",
+			"${1:This is a **bold introduction** to grab the reader's attention.}",
+			"{{% /lead %}}"
+		],
+		"description": "Lead shortcode for emphasized intro text. Must use markdown notation {{%  %}}."
+	},
+
+	"Yore Text Center": {
+		"scope": "markdown",
+		"prefix": "yore-text-center",
+		"body": [
+			"{{% text-center %}}",
+			"${1:Centered text.}",
+			"{{% /text-center %}}"
+		],
+		"description": "Text-center shortcode for larger, centered text. Must use markdown notation {{%  %}}."
+	},
+
+	"Yore Ruby": {
+		"scope": "markdown",
+		"prefix": "yore-ruby",
+		"body": [
+			"{{% ruby \"${1:とうきょう}\" %}}${2:東京}{{% /ruby %}}"
+		],
+		"description": "Ruby annotation shortcode for pronunciation guides (e.g. Japanese furigana). Argument 0 (positional) is required."
+	},
+
+	"Yore Steps Block": {
+		"scope": "markdown",
+		"prefix": "yore-steps",
+		"body": [
+			"{{% steps${1: number=false} %}}",
+			"",
+			"  {{< step label=\"${2:1}\" >}}",
+			"",
+			"  ${3:Step content.}",
+			"",
+			"  {{< /step >}}",
+			"",
+			"  {{< step label=\"${4:2}\" >}}",
+			"",
+			"  ${5:Step content.}",
+			"",
+			"  {{< /step >}}",
+			"",
+			"{{% /steps %}}"
+		],
+		"description": "Steps shortcode: ordered step list. 'number' (bool, default true) controls the automated step counter."
+	},
+
+	"Yore Step (single)": {
+		"scope": "markdown",
+		"prefix": "yore-step",
+		"body": [
+			"{{< step ${1|label,icon|}=\"${2:1}\"${3: circleClass=\"text-success bg-success\"} >}}",
+			"",
+			"${4:Step content.}",
+			"",
+			"{{< /step >}}"
+		],
+		"description": "Single step item. Use inside a steps block. icon takes priority over label when both are set."
+	},
+
+	"Yore Tabs Block": {
+		"scope": "markdown",
+		"prefix": "yore-tabs",
+		"body": [
+			"{{% tabs${1: group=\"${2:lang}\"}${3: default=\"${4:Python}\"} %}}",
+			"  {{< tab label=\"${5:Label A}\"${6: icon=\"${7:code}\"} >}}",
+			"",
+			"  ${8:Content A}",
+			"",
+			"  {{< /tab >}}",
+			"",
+			"  {{< tab label=\"${9:Label B}\"${10: icon=\"${11:sun-light}\"} >}}",
+			"",
+			"  ${12:Content B}",
+			"",
+			"  {{< /tab >}}",
+			"{{% /tabs %}}"
+		],
+		"description": "Tabs shortcode: tabbed content with optional group-based synchronization and default active tab."
+	},
+
+	"Yore Tab (single)": {
+		"scope": "markdown",
+		"prefix": "yore-tab",
+		"body": [
+			"{{< tab label=\"${1:Label}\"${2: icon=\"${3:code}\"} >}}",
+			"",
+			"${4:Content}",
+			"",
+			"{{< /tab >}}"
+		],
+		"description": "Single tab item. label is required; use inside a tabs block."
+	},
+
+	"Yore Accordion Block": {
+		"scope": "markdown",
+		"prefix": "yore-accordion",
+		"body": [
+			"{{% accordion${1: exclusive=true}${2: separated=true} %}}",
+			"",
+			"  {{< accordion-item title=\"${3:Question one?}\" >}}",
+			"",
+			"  ${4:Answer one.}",
+			"",
+			"  {{< /accordion-item >}}",
+			"",
+			"  {{< accordion-item title=\"${5:Question two?}\" >}}",
+			"",
+			"  ${6:Answer two.}",
+			"",
+			"  {{< /accordion-item >}}",
+			"",
+			"{{% /accordion %}}"
+		],
+		"description": "Accordion shortcode: collapsible content panels. exclusive closes other panels when one opens; separated renders bordered cards."
+	},
+
+	"Yore Accordion Item (single)": {
+		"scope": "markdown",
+		"prefix": "yore-accordion-item",
+		"body": [
+			"{{< accordion-item title=\"${1:Question?}\"${2: open=true} >}}",
+			"",
+			"${3:Answer.}",
+			"",
+			"{{< /accordion-item >}}"
+		],
+		"description": "Single accordion item. title is required; use inside an accordion block. open (bool) expands by default."
+	}
+}

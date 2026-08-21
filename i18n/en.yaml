@@ -1,0 +1,1 @@
+hugo_version_info: "Hugo version at last documentation update: {{ .Version }}"

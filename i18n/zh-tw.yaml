@@ -1,0 +1,1 @@
+hugo_version_info: "文檔最終更新時對應的 Hugo 版本：{{ .Version }}"

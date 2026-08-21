@@ -1,0 +1,64 @@
+[global]
+    disable = [
+        # "MD002", # First header should be a h1 header
+        "MD003", # Heading style - conflict with mermaid syntax
+        "MD004", # List marker '+' does not match expected style, conflict LaTeX
+        "MD005", # List indent - conflict shortcode/react component
+        "MD013", # Line length
+        "MD023", # Headings at the beginning of lines, conflict reason same as MD005
+        "MD025", # Multiple top level headers
+        "MD026", # Trailing punctuation in header
+        "MD028", # Blank line inside blockquote
+        "MD029", # Ordered list item prefix
+        "MD031", # Code blocks should be surrounded by blank lines
+        "MD032", # List marker '+' does not match expected style, conflict LaTeX
+        "MD033", # Inline HTML
+        "MD034", # Bare URL used
+        "MD036", # Emphasis used instead of a header
+        "MD041", # First line in file should be a top level header
+        "MD046", # Code block style
+        "MD059", # Link text should be descriptive
+        "MD060", # Table column style
+    ]
+
+    # Opt-in rules (disabled by default): MD060, MD063, MD070, MD072, MD073, MD074
+    # extend-enable = ["MD060", "MD063", "MD072", "MD073", "MD074"]
+
+    # Rules that survive CLI --disable overrides
+    # extend-disable = []
+
+    # List of file/directory patterns to exclude from linting
+    exclude = [
+        # Common directories to exclude
+        ".git",
+        ".github",
+        "node_modules",
+        "vendor",
+        "dist",
+        "build",
+        "themes",
+
+        # Specific files or patterns
+        "CHANGELOG.md",
+        "LICENSE.md",
+    ]
+
+    # Markdown flavor/dialect
+    # Options: standard (default), gfm, commonmark, mkdocs, kramdown, jekyll, mdx, quarto
+    flavor = "gfm"
+
+[MD004]
+    style = "dash" # Unordered list style
+
+[MD024]
+    siblings-only = true # Multiple headers with the same content
+
+[MD049]
+    style = "asterisk" # Emphasis style
+
+[MD050]
+    style = "asterisk" # Strong style
+
+[MD057]
+    absolute-links = "relative_to_roots"
+    roots = ["content/en", "content/zh-tw", "assets"]

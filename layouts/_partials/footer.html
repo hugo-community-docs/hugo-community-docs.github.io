@@ -1,0 +1,33 @@
+<footer class="base-spacing mt-24">
+	<div class="mt-4 flex flex-col items-center">
+		{{- if site.Menus.footer -}}
+			<nav aria-label="{{ i18n `nav.footer_navigation` | default `Footer navigation` }}">
+				<ul class="flex flex-wrap justify-center gap-x-5 gap-y-1">
+					{{- range site.Menus.footer -}}
+						<li class="list-none">
+							<a href="{{ .URL }}" class="hover:text-link-hover transition-colors">
+								{{- .Name -}}
+							</a>
+						</li>
+					{{- end -}}
+				</ul>
+			</nav>
+		{{- end -}}
+		<span class="inline-flex items-center gap-1.5">
+			{{- $version := printf "v%s" (.Param "lastUpdated") -}}
+			{{- $link := printf "<a href='https://github.com/gohugoio/hugo/releases/tag/%s' target='_blank' rel='noopener noreferrer' class='underline decoration-transparent text-link'>%s</a>" $version $version -}}
+			<span>{{ i18n "hugo_version_info" (dict "Version" $link) | safeHTML }}</span>
+		</span>
+
+		{{- with site.Params.footerCopyrightText -}}
+			<p>{{- . | markdownify -}}</p>
+		{{- end -}}
+		{{- if site.Params.footerShowCredit | default true -}}
+			<p>
+				{{- $newTabHint := printf "<span class=\"sr-only\"> (%s)</span>" (i18n "a11y.opens_new_tab" | default "opens in new tab") -}}
+				{{- $theme := printf "<a title='Version %s' class='underline decoration-transparent text-link' href='https://yore.zsl0621.cc/' target='_blank' rel='noopener noreferrer'>Yore%s</a>" (hugo.Data.theme.yoreVersion) $newTabHint -}}
+				{{- i18n "footer.powered_by" (dict "Theme" $theme) | safeHTML -}}
+			</p>
+		{{- end -}}
+	</div>
+</footer>

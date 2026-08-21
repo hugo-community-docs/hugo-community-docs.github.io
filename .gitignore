@@ -1,0 +1,29 @@
+# Hugo
+.hugo_build.lock
+/.hugo_build.lock
+/assets/jsconfig.json
+/public/
+/resources/_gen/
+exampleSite/public/
+exampleSite/resources/
+jsconfig.json
+hugo.darwin
+hugo.exe
+hugo.linux
+hugo_stats.json
+go.work
+
+# System
+.DS_Store
+.tmp*
+
+# Custom
+!.vscode
+.hintrc
+.next
+node_modules
+static/.next
+
+# vscode-front-matter
+frontmatter.json
+.frontmatter
