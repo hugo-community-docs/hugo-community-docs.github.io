@@ -4,7 +4,7 @@ slug: build-a-theme
 weight: 900
 ---
 
-This article walks you through building a theme from scratch. Learning by doing gets you there faster, don't you think?
+This article walks you through building a theme from scratch. Learning by doing gets you there faster.
 
 ## Create the Project
 
@@ -218,7 +218,7 @@ main {
 
 `baseof` is the HTML skeleton shared by every page. Create `layouts/baseof.html`:
 
-```go-html-template
+```go-html-template {title="layouts/baseof.html"}
 <!doctype html>
 <html lang="{{ .Site.Language.Locale }}">
   <head>
@@ -258,13 +258,13 @@ Right now the skeleton has no base template, so running it throws an error. Star
 {{ define "main" }}
   <main>
     {{ .Content }}
-  </main>
 
-  {{ with .Pages }}
-    {{ range . }}
-      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+    {{ with .Pages }}
+      {{ range . }}
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{ end }}
     {{ end }}
-  {{ end }}
+  </main>
 {{ end }}
 ```
 
@@ -385,7 +385,7 @@ menu:
 
 Update the template to add the header nav under `<header>`:
 
-```go-html-template
+```go-html-template {title="baseof.html"}
 		<header class="site-header">
 			<a class="site-title" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
 			<nav class="site-nav">
@@ -460,11 +460,14 @@ Check the page. The header should now show Home and Blog links.
   <h1 class="page-title">Site taxonomy, categorized by {{ .Title }}</h1>
   {{ with .Content }}<article class="prose">{{ . }}</article>{{ end }}
 
-  {{ range .Pages }}
-    <p>
-      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-    </p>
-  {{ end }}
+  <ul class="post-list">
+    {{- range .Data.Terms.ByCount -}}
+      <li>
+        <a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a>
+        ({{ .Count }})
+      </li>
+    {{- end -}}
+  </ul>
 </main>
 
 {{ end }}
@@ -610,6 +613,7 @@ CSS now supports more capabilities:
 @import "./layout.css" layer(base);
 
 /* supports importing from node_modules */
+/* the .woff2 files are hashed automatically */
 @import "@fontsource-variable/nunito-sans";
 ```
 

@@ -17,7 +17,7 @@ cd my-blog
 
 先把樣式準備好，CSS 和模板無關，這裡直接複製一個簡易範本到 `assets/css/main.css` 即可。
 
-放在 `assets/` 而不是 `static/` 的原因則如同[圖片引用](guide/content-authoring.md)說的，`assets/` 底下的資源才能經過 Hugo Pipes 處理，放在 `static/` 則會以未經壓縮的原樣輸出。
+放在 `assets/` 而不是 `static/` 的原因則如同[圖片引用](../docs/guide/content-authoring.md)說的，`assets/` 底下的資源才能經過 Hugo Pipes 處理，放在 `static/` 則會以未經壓縮的原樣輸出。
 
 {{% admonition type="note" sign="-" title="CSS 範本" %}}
 
@@ -219,7 +219,7 @@ main {
 
 baseof 是所有頁面共用的 HTML 骨架。建立 `layouts/baseof.html`：
 
-```go-html-template
+```go-html-template {title="layouts/baseof.html"}
 <!doctype html>
 <html lang="{{ .Site.Language.Locale }}">
   <head>
@@ -243,11 +243,11 @@ baseof 是所有頁面共用的 HTML 骨架。建立 `layouts/baseof.html`：
 </html>
 ```
 
-首先渲染 `lang` 使的 `{{ .Site.Language.Locale }}` 就是[基礎篇](guide/basic-configuration.md#locale)的 `locale` 設定，直接被渲染，因此才會需要 `en-US` 這種區域碼大寫的形式。
+首先渲染 `lang` 使的 `{{ .Site.Language.Locale }}` 就是[基礎篇](../docs/guide/basic-configuration.md#locale)的 `locale` 設定，直接被渲染，因此才會需要 `en-US` 這種區域碼大寫的形式。
 
 接下來 `<head>` `<header>` 都是簡單的基本骨架設定。
 
-`block "main"` 是本段落重點，使用 Hugo 的 [block](https://gohugo.io/functions/go-template/block/) 函式，在渲染不同的 [Page Kind](concept/templates.md#page-kind) 時會對應到不同的基礎模板，並且將基礎模板的 `{{ define "main" }}{{ end }}` 放進來。這也是 `{{ block "main" . }}{{ end }}` 在整份 layouts 裡唯一會出現的一次。
+`block "main"` 是本段落重點，使用 Hugo 的 [block](https://gohugo.io/functions/go-template/block/) 函式，在渲染不同的 [Page Kind](../docs/concept/templates.md#page-kind) 時會對應到不同的基礎模板，並且將基礎模板的 `{{ define "main" }}{{ end }}` 放進來。這也是 `{{ block "main" . }}{{ end }}` 在整份 layouts 裡唯一會出現的一次。
 
 最後的 `<footer>` 同樣是基本骨架設定。
 
@@ -259,13 +259,13 @@ baseof 是所有頁面共用的 HTML 骨架。建立 `layouts/baseof.html`：
 {{ define "main" }}
   <main>
     {{ .Content }}
-  </main>
 
-  {{ with .Pages }}
-    {{ range . }}
-      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+    {{ with .Pages }}
+      {{ range . }}
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{ end }}
     {{ end }}
-  {{ end }}
+  </main>
 {{ end }}
 ```
 
@@ -386,7 +386,7 @@ menu:
 
 再來更新模板，在 `<header>` 部分新增頁首選單
 
-```go-html-template
+```go-html-template {title="layouts/baseof.html"}
 		<header class="site-header">
 			<a class="site-title" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
 			<nav class="site-nav">
@@ -461,11 +461,14 @@ menu:
   <h1 class="page-title">網站分類法：以 {{ .Title }} 分類</h1>
   {{ with .Content }}<article class="prose">{{ . }}</article>{{ end }}
 
-  {{ range .Pages }}
-    <p>
-      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-    </p>
-  {{ end }}
+  <ul class="post-list">
+    {{- range .Data.Terms.ByCount -}}
+      <li>
+        <a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a>
+        ({{ .Count }})
+      </li>
+    {{- end -}}
+  </ul>
 </main>
 
 {{ end }}
@@ -537,7 +540,7 @@ my-blog/
 └── hugo.toml
 ```
 
-五個 layout 檔案（`baseof`、`page`、`section`、`taxonomy`、`term`）對應到前面 [Page Kind](concept/templates.md) 那篇整理過的五種 kind，三個 partials 對應可重複使用的區塊。這是一個沒有主題依賴、完全自己掌控的小巧主題。
+五個 layout 檔案（`baseof`、`page`、`section`、`taxonomy`、`term`）對應到前面 [Page Kind](../docs/concept/templates.md) 那篇整理過的五種 kind，三個 partials 對應可重複使用的區塊。這是一個沒有主題依賴、完全自己掌控的小巧主題。
 
 > [!TIP]
 > 你也可以把主題相關的內容都放到 themes 目錄讓他真的變成 theme，這樣做的好處是讓源碼與 Markdown 內容有更清晰的權責分離。

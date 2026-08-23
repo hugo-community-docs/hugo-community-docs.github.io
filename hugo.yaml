@@ -94,7 +94,7 @@ permalinks:
 cascade:
   - type: docs
     target:
-      path: '{/docs,/docs/**,/api,/api/**,/reference,/reference/**}'
+      path: '{/docs,/docs/**,/tutorial,/tutorial/**,/reference,/reference/**}'
       kind: page
   - params:
       metaRobots: ""
@@ -183,7 +183,7 @@ params:
   homepageShowMoreLink: docs # Where the homepage "more" link points to
 
   # Header
-  headerLayout: hideOnScroll # Header behavior on scroll. [sticky | static | hideOnScroll]
+  headerLayout: sticky # Header behavior on scroll. [sticky | static | hideOnScroll]
   headerShowTitle: true # Show the site title text in the header
 
   # Page
@@ -297,6 +297,10 @@ languages:
           pageRef: /docs/guide/introduction
           weight: 40
 
+        - name: 教學
+          pageRef: /tutorial
+          weight: 80
+
         - name: 參考
           pageRef: /reference
           weight: 120
@@ -321,7 +325,7 @@ module:
       target: content
       sites:
         matrix:
-          languages: ['**']
+          languages: ['en']
 
 # dev server only. configure equivalent redirects on your production server
 # See https://discourse.gohugo.io/t/404-in-multilingual-site/49273

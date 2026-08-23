@@ -26,19 +26,16 @@ To change how URLs are generated, configure `permalinks` in `hugo.toml`:
 
 ```toml
 [permalinks]
-  posts = '/:year/:month/:slugorcontentbasename/'
+  posts = '/:year-:month-:slugorcontentbasename/'
 ```
 
 The setting above makes URLs under `posts` include the year and month, for example:
 
 ```text
-content/posts/my-first-post.md   →   /2026/08/my-first-post/
+content/posts/my-first-post.md   →   /2026-08-my-first-post/
 ```
 
 For the full configuration reference, see the [permalinks documentation](https://gohugo.io/configuration/permalinks/#article).
-
-> [!INFO]
-> Unless you have a specific reason to, hugo-community-docs doesn't recommend using date tokens as path segments in this syntax, since it results in intermediate directories like `/:year/:month/` that have no page of their own, which is counterintuitive. Using date tokens as part of the filename instead doesn't have this problem.
 
 ## Manually Setting a Single Page's URL
 

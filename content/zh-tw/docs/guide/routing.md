@@ -25,7 +25,7 @@ content/about.md                 →   /about/
 
 ```toml
 [permalinks]
-  posts = '/:year/:month/:slugorcontentbasename/'
+  posts = '/:year-:month-:slugorcontentbasename/'
 ```
 
 上面的設定會讓 `posts` 底下的文章網址變成包含年份與月份，例如：
@@ -35,9 +35,6 @@ content/posts/my-first-post.md   →   /2026/08/my-first-post/
 ```
 
 完整設定方式請參閱 [permalink 文檔](https://gohugo.io/configuration/permalinks/#article)。
-
-> [!INFO]
-> 除非有特殊理由，否則 hugo-community-docs 不建議把日期 token 當作路徑片段使用，因為這會產生 `/:year/:month/` 這類沒有自身頁面的中間目錄，不符合直覺。把日期 token 放進檔名則不會有這個問題。
 
 ## 手動指定單篇網址
 
