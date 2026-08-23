@@ -220,7 +220,6 @@ params:
 
   # Footer
   footerShowCredit: true # Show a "powered by" Yore credit line in the footer
-  footerCopyrightText: Copyright © 2026 Hugo Community Docs. # Copyright text shown in the footer
 
   # Misc
   accessibilityEnabled: true # Enable accessibility enhancement toggles
@@ -266,6 +265,9 @@ languages:
       description: Hugo Community Docs
       homepageTitle: Hugo Community Docs
       homepageTagline: ""
+      footerCopyrightText: |
+        Copyright © 2026 Hugo Community Docs.<br>
+        Content is licensed under [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc/4.0/deed.en)
     menus:
       main:
         - name: Docs
@@ -291,6 +293,9 @@ languages:
     hasCJKLanguage: true
     params:
       description: Hugo 社群文檔
+      footerCopyrightText: |
+        版權所有 © 2026 Hugo Community Docs。<br>
+        內容以 [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hant) 條款授權
     menus:
       main:
         - name: 文檔
