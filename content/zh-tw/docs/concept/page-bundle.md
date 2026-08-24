@@ -9,6 +9,8 @@ description: 'Leaf bundle 與 branch bundle 的差異，以及何時該用 post/
 
 ## Leaf Bundle 與 Branch Bundle
 
+`index.md` 與 `_index.md` 只差一個底線，代表的語意完全不同。
+
 - Leaf bundle：目錄下是 `index.md`，代表獨立頁面，**不會再有子頁面**。
 
 ```text
@@ -27,13 +29,11 @@ description: 'Leaf bundle 與 branch bundle 的差異，以及何時該用 post/
       └── cover.png
 ```
 
-- Headless bundles：進階用途，主要目的在不發佈頁面的情況下將資產放到指定位置，請見[文檔](https://gohugo.io/content-management/build-options/)。
-
-`index.md` 與 `_index.md` 只差一個底線，代表的語意完全不同。
+- Headless bundles：進階用途，主要目的在不發佈頁面的情況下，只發佈指定的頁面、資產，請見[文檔](https://gohugo.io/content-management/build-options/)。
 
 ## post/index.md 與 post.md
 
-`post/index.md` 和 `post.md` 都可以建立 leaf bundle，但是只有前者可以擁有自身 bundle 的資源，如圖片或影片，後者不是 bundle，自然也無法自身 bundle 的資源。
+`post/index.md` 和 `post.md` 都可以建立獨立的文章，但是只有前者是 leaf bundle 可以擁有自身 bundle 的資源，如圖片或影片，後者不是 bundle，自然也無法擁有自身 bundle 的資源。
 
 您應該永遠選擇 `post/index.md` 形式這樣專案結構才會統一，除非兩種情況：
 

@@ -21,47 +21,48 @@ With combinations of multiple languages, versions, and roles, many sites can be 
 
 The [Sites Matrix](https://gohugo.io/content-management/front-matter/#sites) is the setting used to **specify which site combinations a piece of content or a template applies to**. It's written in front matter or in a module mount, expressed as `sites.matrix`, and can constrain `languages`, `versions`, and `roles` independently:
 
-```yaml
-sites:
-  matrix:
-    versions: [v2.0.0]
+```toml
+[sites.matrix]
+    versions = ["v2.0.0"]
 ```
 
 When multiple dimensions appear together, they're combined with AND logic. Constraining both `languages` and `versions` at once, for example, means the setting only applies to sites matching both the language and the version:
 
-```yaml
-sites:
-  matrix:
-    languages: [zh-cn]
-    versions: [v2.0.0]
+```toml
+[sites.matrix]
+    languages = ["zh-cn"]
+    versions = ["v2.0.0"]
 ```
 
 Values are written as a glob slice. You can use `**` to match everything, or a semver expression:
 
-```yaml
-sites:
-  matrix:
-    versions: '>= v2.0.0'
+```toml
+[sites.matrix]
+    versions = ">= v2.0.0"
 ```
 
 ## Practical Configuration
 
 Most projects have a simple version structure: one version maps to one folder, with no need for cross version fallback. In practice this is mainly used with **module mounts**:
 
-```yaml {title="hugo.toml"}
-module:
-  mounts:
-    - source: content/v2.0.0
-      target: content
-      sites:
-        matrix:
-          versions: [v2.0.0]
+```toml {title="hugo.toml"}
+[versions]
+    [versions.'v1.0.0']
+    [versions.'v2.0.0']
 
-    - source: content/v1.0.0
-      target: content
-      sites:
-        matrix:
-          versions: [v1.0.0]
+[[module.mounts]]
+    source = "content/v2.0.0"
+    target = "content"
+
+    [module.mounts.sites.matrix]
+        versions = ["v2.0.0"]
+
+[[module.mounts]]
+    source = "content/v1.0.0"
+    target = "content"
+
+    [module.mounts.sites.matrix]
+        versions = ["v1.0.0"]
 ```
 
 This means the `content/vN.0.0` module is **mounted** onto the `content` directory of the `vN.0.0` version. With this configuration, everything under `content/v2.0.0/` will only appear on the `v2.0.0` site.

@@ -20,47 +20,48 @@ weight: 500
 
 [Sites Matrix](https://gohugo.io/content-management/front-matter/#sites) 是用來**指定某份內容或某個模板該套用到哪些 site 組合**的設定，寫在 front matter 或 module mount 裡，用 `sites.matrix` 表示，底下可以分別限制 `languages`、`versions`、`roles`：
 
-```yaml
-sites:
-  matrix:
-    versions: [v2.0.0]
+```toml
+[sites.matrix]
+    versions = ["v2.0.0"]
 ```
 
 多個維度同時出現時是 AND 條件，例如同時限制 `languages` 與 `versions`，代表只有語言與版本都符合的 site 才會套用：
 
-```yaml
-sites:
-  matrix:
-    languages: [zh-cn]
-    versions: [v2.0.0]
+```toml
+[sites.matrix]
+    languages = ["zh-cn"]
+    versions = ["v2.0.0"]
 ```
 
 值的寫法是 glob slice，可以用 `**` 代表全部符合，也可以用 semver 條件式：
 
-```yaml
-sites:
-  matrix:
-    versions: '>= v2.0.0'
+```toml
+[sites.matrix]
+    versions = ">= v2.0.0"
 ```
 
 ## 實際設定
 
 多數專案的版本結構很單純：一個版本對應一個資料夾，不需要跨版本 fallback，實務上主要用在 **module mount**：
 
-```yaml {title="hugo.toml"}
-module:
-  mounts:
-    - source: content/v2.0.0
-      target: content
-      sites:
-        matrix:
-          versions: [v2.0.0]
+```toml {title="hugo.toml"}
+[versions]
+    [versions.'v1.0.0']
+    [versions.'v2.0.0']
 
-    - source: content/v1.0.0
-      target: content
-      sites:
-        matrix:
-          versions: [v1.0.0]
+[[module.mounts]]
+    source = "content/v2.0.0"
+    target = "content"
+
+    [module.mounts.sites.matrix]
+        versions = ["v2.0.0"]
+
+[[module.mounts]]
+    source = "content/v1.0.0"
+    target = "content"
+
+    [module.mounts.sites.matrix]
+        versions = ["v1.0.0"]
 ```
 
 意思是把 `content/vN.0.0` 這個模組<strong>固定（mount）</strong>在 `vN.0.0` 的版本 `content` 目錄，這樣設定後，`content/v2.0.0/` 底下的所有內容將只出現在 `v2.0.0` 這個 site。
