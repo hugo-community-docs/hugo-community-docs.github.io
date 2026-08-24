@@ -109,6 +109,8 @@ output formats 常見的用途有三種：
 <ul id="results"></ul>
 ```
 
+</details>
+
 ## 用途二：利用構建順序預處理
 
 Hugo 依照 `weight` 決定各 output format 的渲染順序，數字小的先渲染。這代表你可以讓某個 output format 先執行，把資料寫入 `.Store`，讓之後渲染的其他格式（例如 HTML）取用：

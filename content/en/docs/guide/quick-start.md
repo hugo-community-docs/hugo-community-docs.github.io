@@ -122,13 +122,8 @@ hugo_stats.json
 .DS_Store
 .tmp*
 
-# Custom
-!.vscode
+# JS
 node_modules
-
-# vscode-front-matter
-frontmatter.json
-.frontmatter
 ```
 
 {{% /admonition %}}
