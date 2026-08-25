@@ -2,14 +2,13 @@
 title: 'Logical Path'
 slug: logical-path
 weight: 200
-description: 'How Hugo uses logical paths, rather than physical file paths, to understand the content directory structure.'
 ---
 
-When Hugo processes content, what it actually works with is the logical path, not the file's physical path on disk.
+When Hugo processes content, it actually works with logical paths, not physical paths on the filesystem.
 
 ## Logical Path
 
-The logical path is how Hugo interprets the `content` directory structure. Take this directory structure, for example:
+A logical path represents where content sits within the `content` directory. It's how Hugo interprets your `content` directory structure. Take this directory structure as an example:
 
 ```sh
 content/
@@ -19,14 +18,9 @@ content/
     └── m2.md
 ```
 
-This maps to the logical path Hugo understands:
+Hugo interprets these as the logical paths `/movies/m1` and `/movies/m2`.
 
-```sh
-content/
-└── movies/
-    ├── m1
-    └── m2
-```
+Logical paths aren't limited to files that physically exist in `content`. Hugo also assigns logical paths to pages it generates automatically, such as taxonomy and term pages.
 
 ## Why It Matters
 

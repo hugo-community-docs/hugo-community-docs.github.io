@@ -8,7 +8,7 @@ Hugo 處理內容時，實際使用的是邏輯路徑（logical path），而不
 
 ## Logical Path
 
-Logical path 是 Hugo 理解 `content` 目錄結構的方法，比如以下目錄結構：
+Logical path 代表內容在 `content` 目錄的對應路徑，是 Hugo 理解 `content` 目錄結構的方法，比如以下目錄結構：
 
 ```sh
 content/
@@ -18,14 +18,9 @@ content/
     └── m2.md
 ```
 
-對應到 Hugo 理解的 logical path：
+對應到 Hugo 理解的 logical path 分別為 `/movies/m1` 和 `/movies/m2`。
 
-```sh
-content/
-└── movies/
-    ├── m1
-    └── m2
-```
+邏輯路徑並不限於物理存在於 `content` 目錄下的檔案。 Hugo 也會為自動產生的頁面（例如分類法頁面和術語頁面）指派邏輯路徑。
 
 ## 為什麼重要
 
