@@ -1,6 +1,6 @@
 ---
 title: 'CLI Index'
-slug: cli-index
+slug: cli
 weight: 1000
 description: 'A pointer to the official Hugo CLI command reference.'
 ---

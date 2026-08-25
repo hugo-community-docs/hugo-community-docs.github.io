@@ -1,6 +1,6 @@
 ---
 title: 'CLI 索引'
-slug: cli-index
+slug: cli
 weight: 1000
 ---
 

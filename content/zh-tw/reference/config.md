@@ -1,6 +1,6 @@
 ---
 title: '設定檔索引'
-slug: config-index
+slug: config
 weight: 800
 ---
 

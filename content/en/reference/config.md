@@ -1,6 +1,6 @@
 ---
 title: 'Configuration Index'
-slug: config-index
+slug: config
 weight: 800
 description: 'A pointer to the official Hugo configuration reference page.'
 ---
