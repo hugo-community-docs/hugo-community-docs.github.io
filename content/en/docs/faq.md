@@ -7,15 +7,13 @@ description: 'Practical answers to problems that come up while building a Hugo s
 
 Hugo merges different configuration keys using different rules: no merging, shallow merging, and deep merging. See [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings).
 
+Because of the UFS mechanism, your final configuration is built by layering settings on top of each other. Run `hugo config` to check the merged result.
+
 ## Environment Variables
 
 You can use environment variables to temporarily override settings from the command line without changing any files, for example `HUGO_IGNOREFILES="['content/foo','content/bar']"`. See [Environment variables](https://gohugo.io/configuration/introduction/#environment-variables) for details.
 
 Environment variables can also point to a different Hugo configuration directory. See the official [configuration tutorial](https://gohugo.io/configuration/introduction/#example).
-
-## Viewing the Final Configuration
-
-Because of the UFS mechanism, your final configuration is built by layering settings on top of each other. Run `hugo config` to check the merged result.
 
 ## Debugging Variables
 
@@ -33,7 +31,11 @@ Also see the [debug functions](https://gohugo.io/functions/debug/) and [template
 
 ## Live Reload Not Updating Automatically
 
-See [Template System](concept/templates.md#live-reload-will-not-update-automatically).
+In some cases, such as when a template only references data indirectly through a partial, Hugo's live reload won't detect the change automatically. If this happens, add the following line at the top of `baseof.html` to force the update:
+
+```go-html-template {title="layouts/baseof.html"}
+{{ $noop := partial "..." }}
+```
 
 ## .Page.Store.Get Returns No Value
 

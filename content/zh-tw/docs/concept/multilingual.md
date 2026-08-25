@@ -6,9 +6,6 @@ weight: 400
 
 Hugo 每個語言就是獨立一個 site，每個 site 各自獨立，多語言網站中每種語言都是 language 這個維度上的一個 site，本篇說明具體應該如何設定。
 
-> [!INFO]
-> 讀到這裡代表你已經能夠靈活架設、管理一個 Hugo 網站了。本篇是最後一個用戶導向的內容，如果你只需要一個簡單的個人網站，後續內容都可以安心跳過。
-
 ## 設定
 
 在 `hugo.toml` 宣告網站使用的語言：
@@ -71,7 +68,7 @@ content/
 
 兩個語言目錄底下相同路徑、相同檔名的內容，會被視為彼此的翻譯版本。
 
-`contentDir` 實際運作是幫你設定了 `module.mount`，每個語言目錄實際上限定了 `sites.matrix.languages`，只是一個語法糖，前面的 `contentDir` 設定等同此 module 設定：
+`contentDir` 實際運作是幫你設定了 `module.mount`，只是一個語法糖，前面的 `contentDir` 設定等同此 module 設定：
 
 ```toml
 [module]
@@ -84,7 +81,7 @@ content/
     target = 'content'
 ```
 
-我們可以先記住 `module` 這個詞彙，這是 Hugo 很強大的一個工具，在稍後的文章我們會專門介紹他。
+我們可以先記住 `module` 這個詞彙，這是 Hugo 很強大的一個工具，在 [Hugo Modules](hugo-module.md) 我們會專門介紹他。
 
 ## 兩種結構如何選擇
 

@@ -5,9 +5,9 @@ weight: 500
 description: 'How Hugo v0.153.0 extends the single-dimension site model into a three-dimensional matrix of language, version, and role.'
 ---
 
-The previous page, [Multilingual Sites](multilingual.md), introduced the concept of a site and explained that each language in Hugo is its own independent site. [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) went further and introduced the sites matrix concept, raising the old single dimension model of "one language equals one site" into a combination of three dimensions. This page explains the concept and how to use it to control the scope of content generation.
+[Multilingual Sites](multilingual.md) introduced the concept of a site and explained that each language in Hugo is its own independent site. [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) went further and introduced the sites matrix concept, raising the old single dimension model of "one language equals one site" into a combination of three dimensions. This page explains the concept and how to use it to control the scope of content generation.
 
-## From One Dimension to Three
+## Three Dimensions
 
 In the old model, a site had only one variable: language. The new model defines a site as the intersection of three combined dimensions:
 
@@ -43,7 +43,7 @@ Values are written as a glob slice. You can use `**` to match everything, or a s
 
 ## Practical Configuration
 
-Most projects have a simple version structure: one version maps to one folder, with no need for cross version fallback. In practice this is mainly used with **module mounts**:
+Most projects have a simple version structure: one version maps to one folder, with no need for cross version fallback. In practice this is mainly used with module mounts:
 
 ```toml {title="hugo.toml"}
 [versions]

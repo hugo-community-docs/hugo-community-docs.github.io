@@ -3,19 +3,45 @@ title: FAQ
 description: '針對建置 Hugo 網站時遇到的問題，提供切實可行的解決方案，這些方案均來自真實的故障排除經驗。'
 ---
 
+## Partial 與 Template
+
+`{{ template }}` 是 Go template 提供的 template 功能，只能直接渲染文字，沒有任何其他功能。`{{ partial }}` 則是 Hugo 在 template 的基礎包裝後提供的功能，額外支援計數、回傳值、`partialCache` 等功能。
+
+應選擇 partial 而不是原生的 template。
+
+## Inline Define
+
+除了放在 `_partials` 目錄的獨立檔案，Hugo 也支援在模板內直接用 inline define 定義子模板，適合在不想額外建立檔案、只是要把當前模板裡的一小段內容抽離出來時採用。實際使用範例如下：
+
+```go-html-template
+<!-- template -->
+{{ define "foo" }}
+foo
+{{ end }}
+
+{{ template "foo" }}
+
+<!-- partial -->
+{{ define "_partials/inline/foo.html" }}
+foo
+{{ end }}
+
+{{ partial "inline/foo.html" }}
+```
+
+Hugo 初始化時會先掃描所有模板，因此 inline define 沒有順序問題。inline define 定義的模板名稱是全域可見的，需注意命名問題。
+
 ## 設定檔合併
 
 Hugo 對設定檔不同的鍵有不同的合併機制，分成不合併、淺層合併和深層合併，請見 [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings)。
+
+最終的設定檔由於 UFS 機制所以設定會層層疊加，你可以用 `hugo config` 指令檢查最終結果。
 
 ## 環境變數
 
 你可以透過環境變數在命令行中臨時修改設定而不需要更改檔案，比如 `HUGO_IGNOREFILES="['content/foo','content/bar']"`，詳細說明請見 [Environment variables](https://gohugo.io/configuration/introduction/#environment-variables)。
 
 環境變數同時也能用於指定不同的 Hugo 設定目錄，請見官方的[設定教學](https://gohugo.io/configuration/introduction/#example)。
-
-## 目前設定檔
-
-最終的設定檔由於 UFS 機制所以設定會層層疊加，你可以用 `hugo config` 指令檢查最終結果。
 
 ## 變數偵錯
 
@@ -33,7 +59,11 @@ Hugo 對設定檔不同的鍵有不同的合併機制，分成不合併、淺層
 
 ## Live reload 沒有自動更新
 
-見[模板系統](concept/templates.md#live-reload-沒有自動更新)。
+某些情況下（例如模板只透過 partial 間接引用資料時），修改內容後 Hugo 的 live reload 不會自動偵測到變更。若遇到這種情況，可以在 `baseof.html` 最前面加上以下這行，強制觸發更新機制：
+
+```go-html-template {title="layouts/baseof.html"}
+{{ $noop := partial "..." }}
+```
 
 ## .Page.Store.Get 沒有值
 

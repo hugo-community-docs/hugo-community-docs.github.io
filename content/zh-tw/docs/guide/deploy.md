@@ -1,5 +1,6 @@
 ---
 title: 部署網站
+slug: deploy
 weight: 700
 ---
 

@@ -4,7 +4,10 @@ slug: templates
 weight: 600
 ---
 
-本文介紹 Hugo 的模板查找機制，查找機制決定每個頁面該套用哪個模板，主要由三個因素決定：page kind、page type，以及 front matter 手動指定的 layout。
+本文介紹 Hugo 的模板查找機制，查找機制決定每個頁面該套用哪個模板，主要由三個基本概念決定：page kind、page type，以及 front matter 手動指定的 layout。理解基本概念之後，我們會介紹完整的模板分類，才真正說明完整的查找順序，在文章的最後搭配兩個範例總結本文。
+
+<br>
+<br>
 
 ## Page Kind
 
@@ -208,10 +211,10 @@ Render hook 讓你自訂 Markdown 指定元素轉換成 HTML 的方式，例如�
 - [Heading](https://gohugo.io/render-hooks/headings/)
 - [Image](https://gohugo.io/render-hooks/images/)
 - [Link](https://gohugo.io/render-hooks/links/)
-- [Passthrough element](https://gohugo.io/render-hooks/passthrough/)
+- [Passthrough](https://gohugo.io/render-hooks/passthrough/)
 - [Table](https://gohugo.io/render-hooks/tables/)
 
-### _partials 目錄
+### _partials 目錄{#partials}
 
 `layouts/_partials` 底下放可重用的模板片段，用 `partial` 函數呼叫。以渲染 `layouts/_partials/head.html` 為例：
 
@@ -221,27 +224,13 @@ Render hook 讓你自訂 Markdown 指定元素轉換成 HTML 的方式，例如�
 
 第一個參數是模板名稱，二個參數（`.`）是傳入的 context。
 
-### _shortcodes 目錄
+### _shortcodes 目錄{#shortcodes}
 
 `layouts/_shortcodes` 底下放供 Markdown 呼叫的模板，用於在 Markdown 內容裡插入結構化元件，例如嵌入音訊、影片，或其他 HTML 區塊。
 
-例如以下 shortcode 渲染一個音訊播放器：
-
-```go-html-template {title="layouts/_shortcodes/audio.html"}
-{{ with resources.Get (.Get "src") }}
-  <audio controls preload="auto" src="{{ .RelPermalink }}"></audio>
-{{ end }}
-```
-
-在 Markdown 裡呼叫：
-
-```md {title="content/example.md"}
-{{</* audio src="/audio/test.mp3" */>}}
-```
-
 ### View
 
-[View](https://gohugo.io/templates/types/#view) 模板用於自動在不同頁面使用不同的 `partial` 模板，而不是和 `partial` 一樣以指定的固定模板渲染。
+[View](https://gohugo.io/templates/types/#view) 模板用於自動在不同頁面使用不同模板，而不是和 `partial` 一樣以指定的固定模板渲染。
 
 View 模板必須以 `.Render` 渲染，查找規則與 Hugo 的[模板查找順序](#lookup-order)相同。
 
@@ -359,40 +348,4 @@ layouts/
 │   └── footer.html
 └── _shortcodes/
     └── audio.html
-```
-
-## Partial 與 Template
-
-`{{ template }}` 是 Go template 提供的 template 功能，只能直接渲染文字，沒有任何其他功能。`{{ partial }}` 則是 Hugo 在 template 的基礎包裝後提供的功能，額外支援計數、回傳值、`partialCache` 等功能。
-
-應選擇 partial 而不是原生的 template。
-
-## Inline Define
-
-除了放在 `_partials` 目錄的獨立檔案，Hugo 也支援在模板內直接用 inline define 定義子模板，適合在不想額外建立檔案、只是要把當前模板裡的一小段內容抽離出來時採用。實際使用範例如下：
-
-```go-html-template
-<!-- template -->
-{{ define "foo" }}
-foo
-{{ end }}
-
-{{ template "foo" }}
-
-<!-- partial -->
-{{ define "_partials/inline/foo.html" }}
-foo
-{{ end }}
-
-{{ partial "inline/foo.html" }}
-```
-
-Hugo 初始化時會先掃描所有模板，因此 inline define 沒有順序問題。inline define 定義的模板名稱是全域可見的，需注意命名問題。
-
-## Live Reload 未自動觸發更新
-
-某些情況下（例如模板只透過 partial 間接引用資料時），修改內容後 Hugo 的 live reload 不會自動偵測到變更。若遇到這種情況，可以在 `baseof.html` 最前面加上以下這行，強制觸發更新機制：
-
-```go-html-template {title="layouts/baseof.html"}
-{{ $noop := partial "..." }}
 ```

@@ -54,3 +54,12 @@ This mechanism lets you keep updating the theme without losing your customizatio
 
 > [!IMPORTANT]
 > A common mistake is copying a theme's `assets` directory into the project root's `assets` directory. When the theme is later updated, the site still uses the old copied assets, and the styling breaks. Don't copy theme files into your own project unless you know exactly what you're doing.
+
+## UFS Merge Rules
+
+When multiple files share the same filename, priority runs from the first source to the last. Each directory follows its own merge rule:
+
+- `data`, `layouts`, `static`, `archetypes`: These merge file by file, using whichever copy sits closest.
+- `i18n`: These merge by key depth, so translations or data from multiple sources stack together.
+
+The `hugo.toml` configuration file also gets merged, and each field follows its own merge rule. See [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings) for details.

@@ -32,10 +32,7 @@ hugo mod init github.com/user/theme
 
 執行 `hugo` 構建時，會自動下載 module、寫入快取，並產生 `go.sum` 記錄版本與校驗碼。
 
-同時引用多個 module 時，相同檔名的檔案優先順序由上到下合併，並且不同目錄有各自的合併規則：
-
-- `data`、`layouts`、`static`、`archetypes`：以檔案為單位採用優先權最高的那一份，不合併內容。
-- `i18n`：依 key 深度合併，多個來源的翻譯或資料會疊加在一起。
+同時引用多個 module 時，同名檔案的合併規則按照 [UFS](project-structure.md) 規則合併。
 
 ## 常用指令
 
@@ -77,27 +74,23 @@ hugo mod init github.com/user/theme
     hugo mod clean
     ```
 
-## Vendor：本地檢視與臨時修改
+## Vendor
 
-`hugo mod vendor` 會把所有引用的 module 複製一份到 `_vendor` 目錄：
-
-```bash
-hugo mod vendor
-```
-
-用途是離線構建，或需要臨時檢視、修改某個 module 原始碼進行除錯。
+`hugo mod vendor` 用於本地檢視與臨時修改除錯，此指令會將所有引用的 module 複製到 `_vendor` 目錄。
 
 直接修改 `_vendor` 內的檔案僅用於快速除錯，再次 vendor 就會被覆蓋，正式的客製化方式仍然是透過 UFS 在專案根目錄用相同路徑覆蓋。
 
-## Replace：永久替換依賴
+## Replace
 
-在 `go.mod` 中使用 `replace` 永久替換某個 module 的來源，例如換成自己的 fork：
+Replace 功能用於永久替換依賴，比如改為自己的 fork：
 
 ```text {title="go.mod"}
-replace github.com/user/theme => github.com/your-fork/theme v0.1.0
+require example.com/othermodule v0.1.0
+
+replace example.com/othermodule => example.com/myfork/othermodule v0.1.0
 ```
 
-也可以指向本地目錄：
+或是指向本地目錄：
 
 ```text {title="go.mod"}
 replace github.com/user/theme => /home/user/projects/theme
@@ -105,32 +98,32 @@ replace github.com/user/theme => /home/user/projects/theme
 
 `replace` 寫在 `go.mod` 裡並隨專案一起發布，因此對所有建置這個專案的人都會生效，包含 CI。
 
-## hugo.work：本地開發{#workspace}
+## Workspace{#workspace}
 
-使用 `hugo.work` 開發本地 module（例如你正在製作的主題），不需要每次改動都發布新版本：
+Workspace 用於設定本地開發時的 module 配置，可以將他理解為暫時版的 replace 功能。舉例來說，開發本地 module 時直接套用本機檔案：
 
 ```text {title="hugo.work"}
-go 1.25
+go 1.20
 
 use .
 use ../theme
 ```
 
-在 `hugo.toml` 指定這個檔案，啟用 Go workspace 模式：
-
-```toml {title="hugo.toml"}
-workspace = 'hugo.work'
-```
-
-或用環境變數啟用：
+以環境變數暫時啟用：
 
 ```sh
 HUGO_MODULE_WORKSPACE=hugo.work hugo server
 ```
 
-## 實際應用範例
+或是在 `hugo.toml` 設定長期啟用 workspace 模式：
 
-Module 的彈性不只用在安裝主題，還能拿來解決專案結構上的實際問題。
+```toml {title="hugo.toml"}
+workspace = 'hugo.work'
+```
+
+Workspace 和 replace 最大的差異是允許暫時啟用且不會寫進 `go.mod`，當模組被外部依賴，不會有 replace 設定影響外部用戶的問題。
+
+## 實際應用範例
 
 ### 多語言網站
 
@@ -146,11 +139,22 @@ Module 的彈性不只用在安裝主題，還能拿來解決專案結構上的�
     path = 'github.com/your-org/shared-components'
 ```
 
-### exampleSite 與 hugo.work
+### exampleSite
 
-開發主題時常見的做法，是在主題 repo 裡放一個 `exampleSite/` 目錄，內含展示用的 `content/`、`hugo.toml`，但這個目錄本身不屬於主題的元件範圍（主題本體只需要 `layouts/`、`assets/` 等）。
+開發主題時常見的做法是在主題 repo 裡放一個 `exampleSite/` 目錄，作為主題的範例網站使用，但 `exampleSite/` 這個網站依賴的主題是專案根目錄的主題本身。
 
-設定方式同上方段落 [hugo.work：本地開發](#workspace)的描述。
+Workspace 可以輕鬆解決這個問題，設定方式為
+
+```text {title="hugo.work"}
+go 1.20
+
+use .
+use ../
+```
+
+```toml {title="hugo.toml"}
+workspace = 'hugo.work'
+```
 
 ### 內容與源碼分離
 

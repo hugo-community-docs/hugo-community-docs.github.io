@@ -6,7 +6,7 @@ weight: 500
 
 前一篇文章[多語言網站](multilingual.md)中介紹了 site 的概念，說明在 Hugo 中每個語言都是一個獨立的 site，而 [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) 進一步引入了 sites matrix 概念，將原本單一維度的「一個 language 對應一個 site」提升到三個維度的組合。本篇說明這個概念，以及如何用它控制內容的產生範圍。
 
-## 從單一維度到三個維度
+## 三個維度
 
 舊模型裡，site 只有語言這一個變數，新模型把 site 定義為三個維度組合出來的交集：
 
@@ -42,7 +42,7 @@ weight: 500
 
 ## 實際設定
 
-多數專案的版本結構很單純：一個版本對應一個資料夾，不需要跨版本 fallback，實務上主要用在 **module mount**：
+多數專案的版本結構很單純：一個版本對應一個資料夾，不需要跨版本 fallback，實務上主要用在 module mount：
 
 ```toml {title="hugo.toml"}
 [versions]

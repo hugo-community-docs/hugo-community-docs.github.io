@@ -5,7 +5,7 @@ weight: 600
 description: "Learn how Hugo's template lookup system chooses which template renders a page, based on page kind, type, layout, filename conditions, and directory structure."
 ---
 
-Hugo's template lookup system determines which template renders each page. Three factors drive this: page kind, page type, and a manually specified layout in front matter.
+This article introduces Hugo's template lookup mechanism, which determines which template applies to each page. Three core concepts drive this mechanism: page kind, page type, and the layout manually specified in front matter. Once you understand these core concepts, we'll walk through the full template classification, then explain the complete lookup order. Two examples at the end will tie everything together.
 
 ## Page Kind
 
@@ -213,10 +213,10 @@ Render hooks let you customize how Hugo converts specific Markdown elements to H
 - [Heading](https://gohugo.io/render-hooks/headings/)
 - [Image](https://gohugo.io/render-hooks/images/)
 - [Link](https://gohugo.io/render-hooks/links/)
-- [Passthrough element](https://gohugo.io/render-hooks/passthrough/)
+- [Passthrough](https://gohugo.io/render-hooks/passthrough/)
 - [Table](https://gohugo.io/render-hooks/tables/)
 
-### The `_partials` Directory
+### The `_partials` Directory{#partials}
 
 `layouts/_partials` holds reusable template fragments, invoked with the `partial` function. To render `layouts/_partials/head.html`:
 
@@ -226,27 +226,13 @@ Render hooks let you customize how Hugo converts specific Markdown elements to H
 
 The first argument is the template name, and the second (`.`) is the context passed in.
 
-### The `_shortcodes` Directory
+### The `_shortcodes` Directory{#shortcodes}
 
 `layouts/_shortcodes` holds templates called from Markdown content, used to insert structured components such as embedded audio, video, or other HTML elements.
 
-For example, this shortcode renders an audio player:
-
-```go-html-template {title="layouts/_shortcodes/audio.html"}
-{{ with resources.Get (.Get "src") }}
-  <audio controls preload="auto" src="{{ .RelPermalink }}"></audio>
-{{ end }}
-```
-
-Call it from Markdown like this:
-
-```md {title="content/example.md"}
-{{</* audio src="/audio/test.mp3" */>}}
-```
-
 ### View
 
-A [view](https://gohugo.io/templates/types/#view) template automatically applies a different `partial` template depending on the page, rather than always rendering through one fixed template the way `partial` does.
+A [view](https://gohugo.io/templates/types/#view) template automatically applies a different template depending on the page, rather than always rendering through one fixed template the way `partial` does.
 
 View templates render through the `.Render` method, and follow the same [lookup order](#lookup-order) as other Hugo templates.
 
@@ -364,40 +350,4 @@ layouts/
 │   └── footer.html
 └── _shortcodes/
     └── audio.html
-```
-
-## Partial vs. Template
-
-`{{ template }}` is Go's native template function, and only renders text with no additional features. `{{ partial }}` is Hugo's wrapper around it, adding support for counting, return values, `partialCache`, and more.
-
-Use `partial` instead of the native `template` function.
-
-## Inline Define
-
-Beyond standalone files in `_partials`, Hugo also supports inline define, letting you define a sub-template directly within a template. This works well when you want to pull out a small piece of the current template without creating a separate file. Here's an example:
-
-```go-html-template
-<!-- template -->
-{{ define "foo" }}
-foo
-{{ end }}
-
-{{ template "foo" }}
-
-<!-- partial -->
-{{ define "_partials/inline/foo.html" }}
-foo
-{{ end }}
-
-{{ partial "inline/foo.html" }}
-```
-
-Hugo scans all templates at startup, so inline define has no ordering constraints. Names defined through inline define are globally visible, so watch for naming conflicts.
-
-## Live Reload Doesn't Trigger Automatically
-
-In some cases, such as when a template only references data indirectly through a partial, Hugo's live reload won't detect the change automatically. If this happens, add the following line at the top of `baseof.html` to force the update:
-
-```go-html-template {title="layouts/baseof.html"}
-{{ $noop := partial "..." }}
 ```

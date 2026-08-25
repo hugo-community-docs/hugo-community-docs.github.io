@@ -7,9 +7,6 @@ description: 'How Hugo treats each language as its own independent site, and how
 
 In Hugo, each language is an independent site In a multilingual website, each language is a site on the `language` dimension. This page explains how to configure it.
 
-> [!INFO]
-> If you've made it this far, you can already build, and manage a Hugo site with confidence. This is the last user-facing topic. If you only need a simple personal site, feel free to skip everything after this.
-
 ## Configuration
 
 Declare the languages your site uses in `hugo.toml`:
@@ -72,7 +69,7 @@ content/
 
 Content at the same path and filename under two different language directories is treated as a translation of the same page.
 
-Under the hood, `contentDir` sets up a `module.mount` for you. Each language directory actually scopes `sites.matrix.languages`. It's just syntactic sugar. The `contentDir` setting above is equivalent to this module configuration:
+Under the hood, `contentDir` sets up a `module.mount` for you. It's just syntactic sugar. The `contentDir` setting above is equivalent to this module configuration:
 
 ```toml
 [module]
@@ -85,7 +82,7 @@ Under the hood, `contentDir` sets up a `module.mount` for you. Each language dir
     target = 'content'
 ```
 
-Worth remembering the term `module` here. It's a powerful part of Hugo that we'll cover in detail in a later page.
+Worth remembering the term `module` here. It's a powerful part of Hugo that we'll cover in detail in [Hugo Modules](hugo-module.md).
 
 ## Choosing Between the Two Structures
 

@@ -1,5 +1,5 @@
 ---
-title: '邏輯路徑 Logical Path'
+title: '邏輯路徑'
 slug: logical-path
 weight: 200
 ---

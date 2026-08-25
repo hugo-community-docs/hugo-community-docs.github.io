@@ -33,10 +33,7 @@ Declare the module you want to import in `hugo.toml`:
 
 Running `hugo` to build the site automatically downloads the module, caches it, and generates `go.sum` to record its version and checksum.
 
-When importing multiple modules, files with the same name are merged by priority, top to bottom, with different rules for different directories:
-
-- `data`, `layouts`, `static`, `archetypes`: merged at the file level. Only the highest-priority version of each file is used, contents aren't combined.
-- `i18n`: merged at the key level. Translations or data from multiple sources are combined together.
+When you import multiple modules at once, files with the same name merge according to [UFS](project-structure.md) rules.
 
 ## Common Commands
 
@@ -78,24 +75,20 @@ Here is a summary of commonly used `hugo mod` commands:
     hugo mod clean
     ```
 
-## Vendoring: Local Inspection and Temporary Edits
+## Vendor
 
-`hugo mod vendor` copies every imported module into a `_vendor` directory:
+Use `hugo mod vendor` for local inspection and temporary debugging tweaks. This command copies every imported module into the `_vendor` directory.
 
-```bash
-hugo mod vendor
-```
+Editing files inside `_vendor` directly is only useful for quick debugging. The next vendor run overwrites your changes. For real customization, keep using UFS: override the same path in your project root.
 
-This is useful for offline builds, or when you need to temporarily inspect or modify a module's source code for debugging.
+## Replace
 
-Editing files inside `_vendor` directly is only good for quick debugging. Running vendor again overwrites your changes. The proper way to customize is still through UFS, overriding at the same path in your project root.
-
-## Replace: Permanent Dependency Override
-
-Use `replace` in `go.mod` to permanently swap a module's source, for example switching to your own fork:
+Use the replace directive to permanently swap out a dependency, for example when you switch to your own fork:
 
 ```text {title="go.mod"}
-replace github.com/user/theme => github.com/your-fork/theme v0.1.0
+require example.com/othermodule v0.1.0
+
+replace example.com/othermodule => example.com/myfork/othermodule v0.1.0
 ```
 
 Or point it to a local directory:
@@ -104,34 +97,34 @@ Or point it to a local directory:
 replace github.com/user/theme => /home/user/projects/theme
 ```
 
-`replace` lives in `go.mod` and ships with your project, so it applies to everyone who builds it, including CI.
+Because `replace` lives in `go.mod` and ships with your project, it applies to everyone who builds this project, including CI.
 
-## hugo.work: Local Development{#workspace}
+## Workspace{#workspace}
 
-Use `hugo.work` to work on a local module, like a theme you're building, without publishing a new version for every change:
+Use a workspace to configure modules for local development. Think of it as a temporary version of replace. For example, when you're developing a local module, you can point directly to your local files:
 
 ```text {title="hugo.work"}
-go 1.25
+go 1.20
 
 use .
 use ../theme
 ```
 
-Point `hugo.toml` at this file to enable Go workspace mode:
-
-```toml {title="hugo.toml"}
-workspace = 'hugo.work'
-```
-
-Or enable it using environment variable:
+Enable it temporarily with an environment variable:
 
 ```sh
 HUGO_MODULE_WORKSPACE=hugo.work hugo server
 ```
 
-## Practical Examples
+Or enable workspace mode long-term in `hugo.toml`:
 
-The flexibility of modules isn't limited to installing themes. It can also solve real project structure problems.
+```toml {title="hugo.toml"}
+workspace = 'hugo.work'
+```
+
+The key difference between workspace and replace: workspace can be enabled temporarily and never gets written to `go.mod`. So when other people depend on your module, your replace settings won't affect them.
+
+## Practical Examples
 
 ### Multilingual Sites
 
@@ -147,11 +140,22 @@ The most basic use case: multiple sites sharing the same set of shortcodes, part
     path = 'github.com/your-org/shared-components'
 ```
 
-### exampleSite and hugo.work
+### exampleSite
 
-A common pattern when developing a theme is to place an `exampleSite/` directory inside the theme repo, containing a demonstration `content/` and `hugo.toml`. This directory itself isn't part of the theme's component scope, since the theme itself only needs `layouts/`, `assets/`, and similar.
+When building a theme, it's common to include an `exampleSite/` directory inside the theme's repo as a demo site. But that `exampleSite/` site depends on the theme sitting in the project's own root.
 
-The configuration is the same as described in [hugo.work: Local Development](#workspace) above.
+A workspace solves this cleanly:
+
+```text {title="hugo.work"}
+go 1.20
+
+use .
+use ../
+```
+
+```toml {title="hugo.toml"}
+workspace = 'hugo.work'
+```
 
 ### Separating Content From Source Code
 

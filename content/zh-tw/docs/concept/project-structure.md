@@ -53,3 +53,12 @@ layouts/partials/xxx.html                 # 你的覆蓋版本，優先套用
 
 > [!IMPORTANT]
 > 一個常見的錯誤是複製主題的 `assets` 到根目錄的 `assets` 中，導致未來更新主題卻仍舊使用先前複製的舊版 assets，造成樣式損壞。除非知道自己在做什麼，否則不要複製主題檔案到自己的專案中。
+
+## UFS 的合併規則
+
+相同檔名的檔案優先順序由前到後合併，並且不同目錄有各自的合併規則：
+
+- `data`、`layouts`、`static`、`archetypes`：以檔案為單位採用最靠近的那一份。
+- `i18n`：依 key 深度合併，多個來源的翻譯或資料會疊加在一起。
+
+`hugo.toml` 設定檔也會被合併，並且不同的 field 有各自的合併規則，請見文檔 [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings)。
