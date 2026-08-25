@@ -156,6 +156,23 @@ use ../
 workspace = 'hugo.work'
 ```
 
+### node_modules
+
+Mounts 功能也可用於 node_modules，讓你直接將 node_modules 內容 mount 到指定目錄，不需手動 vendor 套件。設定方式為：
+
+```toml
+[module]
+  [[module.mounts]]
+  source = "assets"
+  target = "assets"
+
+  [[module.mounts]]
+  source = "node_modules/@awmottaz/prettier-plugin-void-html/"
+  target = "assets/prettier-plugin-void-html"
+```
+
+在 JS 和模板中就能直接使用該目錄的內容。
+
 ### 內容與源碼分離
 
 把 `content/` `assets/` 獨立成一個 module（獨立的 git repo），讓寫手完全不需要碰觸主題原始碼：

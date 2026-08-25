@@ -157,6 +157,23 @@ use ../
 workspace = 'hugo.work'
 ```
 
+### node_modules
+
+Mounts also work with `node_modules`, letting you mount its contents directly into a target directory without manually vendoring the package. Configure it like this:
+
+```toml
+[module]
+  [[module.mounts]]
+  source = "assets"
+  target = "assets"
+
+  [[module.mounts]]
+  source = "node_modules/@awmottaz/prettier-plugin-void-html/"
+  target = "assets/prettier-plugin-void-html"
+```
+
+You can then use the contents of that directory directly in your JS and templates.
+
 ### Separating Content From Source Code
 
 Split `content/` and `assets/` into their own module, backed by an independent git repo, so writers never need to touch the theme's source code:
