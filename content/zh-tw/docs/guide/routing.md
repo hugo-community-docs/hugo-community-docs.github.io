@@ -31,7 +31,7 @@ content/about.md                 →   /about/
 上面的設定會讓 `posts` 底下的文章網址變成包含年份與月份，例如：
 
 ```text
-content/posts/my-first-post.md   →   /2026/08/my-first-post/
+content/posts/my-first-post.md   →   /2026-08-my-first-post/
 ```
 
 完整設定方式請參閱 [permalink 文檔](https://gohugo.io/configuration/permalinks/#article)。

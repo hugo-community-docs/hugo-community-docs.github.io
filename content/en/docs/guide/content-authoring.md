@@ -22,6 +22,7 @@ A YAML-format Markdown front matter block looks like this:
 ```markdown {title="posts/article-1/index.md"}
 ---
 title: 'My First Post'
+date: '2026-08-15T10:00:00+08:00'
 lastmod: '2026-08-15T10:00:00+08:00'
 draft: false
 tags: ['hugo', 'notes']
@@ -38,6 +39,7 @@ Common fields:
 | --- | --- |
 | `title` | The title |
 | `date` | Publish date. **If the date is in the future, the `-F` flag is required to build the page.** |
+| `lastmod` | The last modification date |
 | `draft` | Draft status. **If `true`, the `-D` flag is required to build the page.** |
 | `tags` / `categories` | Categorization, displayed depending on theme support |
 | `weight` | Manual sort weight |

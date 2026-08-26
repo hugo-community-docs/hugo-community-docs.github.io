@@ -4,7 +4,7 @@ slug: build-a-theme
 weight: 900
 ---
 
-這篇文章帶從零你建立主題，做中學更快理解，你說對吧。
+這篇文章帶你從零建立主題，做中學更快理解，你說對吧。
 
 ## 建立專案
 
@@ -17,7 +17,7 @@ cd my-blog
 
 先把樣式準備好，CSS 和模板無關，這裡直接複製一個簡易範本到 `assets/css/main.css` 即可。
 
-放在 `assets/` 而不是 `static/` 的原因則如同[圖片引用](../docs/guide/content-authoring.md)說的，`assets/` 底下的資源才能經過 Hugo Pipes 處理，放在 `static/` 則會以未經壓縮的原樣輸出。
+放在 `assets/` 而不是 `static/` 的原因則如同[圖片引用](../docs/guide/content-authoring.md#referencing-images)說的，`assets/` 底下的資源才能經過 Hugo Pipes 處理，放在 `static/` 則會以未經壓縮的原樣輸出。
 
 {{% admonition type="note" sign="-" title="CSS 範本" %}}
 
@@ -243,7 +243,7 @@ baseof 是所有頁面共用的 HTML 骨架。建立 `layouts/baseof.html`：
 </html>
 ```
 
-首先渲染 `lang` 使的 `{{ .Site.Language.Locale }}` 就是[基礎篇](../docs/guide/basic-configuration.md#locale)的 `locale` 設定，直接被渲染，因此才會需要 `en-US` 這種區域碼大寫的形式。
+首先渲染 `lang` 使用的 `{{ .Site.Language.Locale }}` 就是[基礎篇](../docs/guide/basic-configuration.md#locale)的 `locale` 設定，直接被渲染，因此才會需要 `en-US` 這種區域碼大寫的形式。
 
 接下來 `<head>` `<header>` 都是簡單的基本骨架設定。
 

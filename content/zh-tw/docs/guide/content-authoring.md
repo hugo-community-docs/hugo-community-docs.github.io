@@ -21,6 +21,7 @@ Front matter 是每個內容檔案開頭的區塊，記錄該篇內容的中繼�
 ```markdown {title="posts/article-1/index.md"}
 ---
 title: '我的第一篇文章'
+date: '2026-08-15T10:00:00+08:00'
 lastmod: '2026-08-15T10:00:00+08:00'
 draft: false
 tags: ['hugo', '筆記']
@@ -37,6 +38,7 @@ params:
 | --- | --- |
 | `title` | 標題 |
 | `date` | 發布日期，**若日期是未來則需要 `-F` 旗標才會構建該文章** |
+| `lastmod` | 最後修改日期 |
 | `draft` | 草稿狀態，**若是 `true` 則需要 `-D` 旗標才會構建該文章** |
 | `tags` / `categories` | 分類，依主題支援情況顯示 |
 | `weight` | 手動排序權重 |
@@ -76,7 +78,7 @@ Markdown 內容中也能直接寫 HTML，但預設會被移除，需要在 `hugo
 </div>
 ```
 
-## 圖片引用
+## 圖片引用{#referencing-images}
 
 圖片的存放位置決定了引用它的方式。 Hugo 中有三個常用的存放位置：`assets/` 目錄、與內容檔案並列的「頁麵包」（page bundle），以及 `static/` 目錄。後續章節將詳細介紹完整的目錄結構；目前僅針對這三種位置引用圖像的方法做介紹：
 

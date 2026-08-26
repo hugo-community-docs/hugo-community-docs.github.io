@@ -15,8 +15,6 @@ The site's production URL, which needs a trailing slash:
 baseURL = 'https://example.com/'
 ```
 
-`baseURL` affects every absolute path link that gets generated. You don't need to change it for local development. `hugo server` automatically overrides it with your local address.
-
 ## [locale](https://gohugo.io/configuration/all/#locale)
 
 The site's language code, which affects output like the RSS feed and the HTML `lang` attribute:

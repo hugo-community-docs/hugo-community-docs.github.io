@@ -14,8 +14,6 @@ Hugo 的設定檔有上百個選項可以設定，初學者看到一定會非常
 baseURL = 'https://example.com/'
 ```
 
-`baseURL` 影響所有絕對路徑連結的產生結果，本地開發時不需要跟著改，`hugo server` 會自動用本機位址覆蓋。
-
 ## [locale](https://gohugo.io/configuration/all/#locale)
 
 網站語言代碼，影響 RSS feed、HTML `lang` 屬性等輸出：
