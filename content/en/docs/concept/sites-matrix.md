@@ -17,29 +17,29 @@ In the old model, a site had only one variable: language. The new model defines 
 
 With combinations of multiple languages, versions, and roles, many sites can be produced. Four languages times five versions times two roles, for instance, produces 80 sites.
 
-## The Sites Matrix
+## Sites Matrix
 
-The [Sites Matrix](https://gohugo.io/content-management/front-matter/#sites) is the setting used to **specify which site combinations a piece of content or a template applies to**. It's written in front matter or in a module mount, expressed as `sites.matrix`, and can constrain `languages`, `versions`, and `roles` independently:
+[Sites Matrix](https://gohugo.io/content-management/front-matter/#sites) is a setting that specifies which combination of sites a piece of content or a template applies to. It's expressed through `sites.matrix`, and can constrain `languages`, `versions`, and `roles` independently.
 
-```toml
-[sites.matrix]
-    versions = ["v2.0.0"]
+When multiple dimensions appear together, they combine as an AND condition. For example, constraining both `languages` and `versions` means a site only applies when both the language and the version match. Here's an example using a module mount:
+
+```yaml {title="hugo.yaml"}
+module:
+  mounts:
+    - sites:
+        matrix:
+          languages:
+            - zh-cn
+          versions:
+            - v2.0.0
 ```
 
-When multiple dimensions appear together, they're combined with AND logic. Constraining both `languages` and `versions` at once, for example, means the setting only applies to sites matching both the language and the version:
+Configuration files use sites in the following places:
 
-```toml
-[sites.matrix]
-    languages = ["zh-cn"]
-    versions = ["v2.0.0"]
-```
-
-Values are written as a glob slice. You can use `**` to match everything, or a semver expression:
-
-```toml
-[sites.matrix]
-    versions = ">= v2.0.0"
-```
+- [Module mounts](https://gohugo.io/configuration/module/#default-mounts)
+- [Segments](https://gohugo.io/configuration/segments/)
+- [Front matter](https://gohugo.io/content-management/front-matter/#sites)
+- [Cascade](https://gohugo.io/configuration/cascade/#sites)
 
 ## Practical Configuration
 

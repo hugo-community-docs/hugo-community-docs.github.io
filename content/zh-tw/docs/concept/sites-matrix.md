@@ -18,27 +18,27 @@ weight: 500
 
 ## Sites Matrix
 
-[Sites Matrix](https://gohugo.io/content-management/front-matter/#sites) 是用來**指定某份內容或某個模板該套用到哪些 site 組合**的設定，寫在 front matter 或 module mount 裡，用 `sites.matrix` 表示，底下可以分別限制 `languages`、`versions`、`roles`：
+[Sites Matrix](https://gohugo.io/content-management/front-matter/#sites) 是用來指定某份內容或某個模板該套用到哪些 site 組合的設定，用 `sites.matrix` 表示，可以分別限制 `languages`、`versions`、`roles`。
 
-```toml
-[sites.matrix]
-    versions = ["v2.0.0"]
+多個維度同時出現時是 AND 條件，例如同時限制 `languages` 與 `versions`，代表只有語言與版本都符合的 site 才會套用，以 module mount 為例：
+
+```yaml {title="hugo.yaml"}
+module:
+  mounts:
+    - sites:
+        matrix:
+          languages:
+            - zh-cn
+          versions:
+            - v2.0.0
 ```
 
-多個維度同時出現時是 AND 條件，例如同時限制 `languages` 與 `versions`，代表只有語言與版本都符合的 site 才會套用：
+設定檔使用到 sites 的地方包含
 
-```toml
-[sites.matrix]
-    languages = ["zh-cn"]
-    versions = ["v2.0.0"]
-```
-
-值的寫法是 glob slice，可以用 `**` 代表全部符合，也可以用 semver 條件式：
-
-```toml
-[sites.matrix]
-    versions = ">= v2.0.0"
-```
+- [Module mounts](https://gohugo.io/configuration/module/#default-mounts)
+- [Segments](https://gohugo.io/configuration/segments/)
+- [Front matter](https://gohugo.io/content-management/front-matter/#sites)
+- [Cascade](https://gohugo.io/configuration/cascade/#sites)
 
 ## 實際設定
 
