@@ -84,7 +84,7 @@ It works through an LRU cache that is independent per [site](concept/sites-matri
 
 As of v0.165.0, `partialCached`'s LRU size is set to 1000. This is an internal implementation detail, not a public guarantee, and it can change at any time.
 
-## How Related Content Works
+## How Related Content Works{#related-article}
 
 Hugo's related content feature depends on exactly three things.
 

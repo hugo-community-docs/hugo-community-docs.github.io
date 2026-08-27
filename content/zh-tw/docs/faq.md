@@ -112,7 +112,7 @@ Hugo 非常快，因此大多數情況無須擔心效能問題，而 [`partialCa
 
 目前（v0.165.0）`partialCached` 的 LRU size 設定為 1000，此數值為內部實現沒有對外保證，隨時可能變動。
 
-## 相關文章運作
+## 相關文章運作{#related-article}
 
 Hugo 的相關文章只依賴三個東西：
 

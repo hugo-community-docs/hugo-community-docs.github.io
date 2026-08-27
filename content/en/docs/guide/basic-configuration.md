@@ -93,7 +93,7 @@ The site's navigation menu. Most themes read this setting to generate header or 
 ```
 
 - `name` is the displayed label.
-- `pageRef` refers to a [logical path](../concept/logical-path.md).
+- `pageRef` refers to a [logical path](../concept/content-management.md#logical-path).
 - Lower `weight` numbers sort earlier.
 - If a target directory doesn't render, try adding an `identifier` field to resolve it.
 - `menu` settings can be placed under the `languages` block to support localization, for example:

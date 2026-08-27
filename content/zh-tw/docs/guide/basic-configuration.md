@@ -92,7 +92,7 @@ Hugo Modules 方式不使用 themes，以 modules 方式安裝
 ```
 
 - `name` 代表顯示的名稱
-- `pageRef` 代表 [logical path](../concept/logical-path.md)
+- `pageRef` 代表 [logical path](../concept/content-management.md#logical-path)
 - `weight` 數字越小排序越前面
 - 若指定目錄沒有被渲染，可嘗試新增 `identifier` field 解決
 - `menu` 設定可以放到 `languages` 區塊底下以達成本地化，比如
