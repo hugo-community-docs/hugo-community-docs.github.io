@@ -247,7 +247,7 @@ baseof 是所有頁面共用的 HTML 骨架。建立 `layouts/baseof.html`：
 
 接下來 `<head>` `<header>` 都是簡單的基本骨架設定。
 
-`block "main"` 是本段落重點，使用 Hugo 的 [block](https://gohugo.io/functions/go-template/block/) 函式，在渲染不同的 [Page Kind](../docs/concept/templates.md#page-kind) 時會對應到不同的基礎模板，並且將基礎模板的 `{{ define "main" }}{{ end }}` 放進來。這也是 `{{ block "main" . }}{{ end }}` 在整份 layouts 裡唯一會出現的一次。
+`block "main"` 是本段落重點，使用 Hugo 的 [block](https://gohugo.io/functions/go-template/block/) 函式，在渲染不同的 [Page Kind](../docs/concept/templates.md#page-kind) 時會對應到不同的基礎模板，並且將基礎模板的 `{{ define "main" }}{{ end }}` 放進來。
 
 最後的 `<footer>` 同樣是基本骨架設定。
 
@@ -508,7 +508,7 @@ menu:
 現在我們把內容全部寫在基礎模板裡，隨著專案膨脹就開始要拆分。拆分也很簡單，比如把整個 `<head>` 標籤的內容放到 `layouts/_partials/head.html`，然後在原本的位置使用 `{{ partial "head.html" . }}` 就好了。
 
 > [!INFO] [context](https://gohugo.io/templates/introduction/#context)
-> 請注意 `partial` 後面的 `.` 代表 「目前 scope 的 context」，比如一般頁面最外層的 `.` 代表 `.Page` 頁面本身[^1]，因此 `head.html` partial 接收到的就是目前頁面。或是 `{{ range }}` 和 `{{ with }}` 也會改變 context，像是剛才的 `{{ range site.Menus.main }}` 就改變成各個 menu，常見的錯誤是搞錯 scope，或是少打一個 `.`，沒有 context 傳入，內部渲染自然出錯。
+> 請注意 `partial` 後面的 `.` 代表 「目前 scope 的 context」，比如一般頁面最外層的 `.` 代表 `.Page` 頁面本身[^1]，因此 `head.html` partial 接收到的就是目前頁面。
 
 [^1]: 最外層的 `.` 代表 `.Page` 頁面本身，這個意思是目前的 context 就是 page 自己，而 page 這個 context 包含一個 method 叫做 `Page`，因此 `.Page` 出來的還是自己。在 Hugo 或是任何程式語言，搞清楚目前的 context 是一件基本且重要的事情。
 
@@ -589,8 +589,13 @@ my-blog/
 `resources.Concat` 只是簡單的串接，有很多限制，而 Hugo 0.158.0 新推出的 `css.Build` 功能更為強大，支援在 CSS files 間互相使用 `@import` 語法，讓開發更現代化。模板使用很簡單：
 
 ```go-html-template
-<!-- 只須加上 " | css.Build " 即可享受此功能 -->
-{{ with resources.Get "css/main.css" | css.Build }}
+{{/* 只須加上  '| css.Build'  即可享受此功能 */}}
+{{ $buildOpts := dict
+	"minify" (hugo.IsProduction)
+	"target" (slice "chrome121" "firefox122" "safari17.3")
+}}
+
+{{ with resources.Get "css/main.css" | css.Build $buildOpts }}
   {{ if hugo.IsDevelopment }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">
   {{ else }}

@@ -246,7 +246,7 @@ The rendered `lang` attribute uses `{{ .Site.Language.Locale }}`, the same `loca
 
 `<head>` and `<header>` are simple skeleton setup, nothing more.
 
-`block "main"` is the key part here. It uses Hugo's [block](https://gohugo.io/functions/go-template/block/) function. When rendering different [Page Kinds](../docs/concept/templates.md#page-kind), Hugo maps to a different base template and slots that template's `{{ define "main" }}{{ end }}` into this spot. This is also the only place `{{ block "main" . }}{{ end }}` appears in the whole layouts directory.
+`block "main"` is the key part here. It uses Hugo's [block](https://gohugo.io/functions/go-template/block/) function. When rendering different [Page Kinds](../docs/concept/templates.md#page-kind), Hugo maps to a different base template and slots that template's `{{ define "main" }}{{ end }}` into this spot.
 
 The `<footer>` is, again, basic skeleton setup.
 
@@ -507,7 +507,7 @@ Run `hugo server -D` again. Browse between pages, tweak the Markdown or partials
 Everything sits in the base template right now, and as the project grows it's time to split things up. Splitting is straightforward: take the entire content of the `<head>` tag, move it into `layouts/_partials/head.html`, and use `{{ partial "head.html" . }}` in its original spot.
 
 > [!INFO] [context](https://gohugo.io/templates/introduction/#context)
-> The `.` after `partial` represents the context of the current scope. For a regular page, the outermost `.` represents `.Page`, the page itself[^1], so the `head.html` partial receives the current page as context. `{{ range }}` and `{{ with }}` syntax also changes context. For instance, `{{ range site.Menus.main }}` changes the context to each individual menu item. A common mistake is getting the scope wrong, or missing a `.`. With no context passed in, the internal rendering naturally breaks.
+> The `.` after `partial` represents the context of the current scope. For a regular page, the outermost `.` represents `.Page`, the page itself[^1], so the `head.html` partial receives the current page as context.
 
 [^1]: The outermost `.` represents `.Page`, the page itself. The current context is the page, and the page context has a method called `Page`, so `.Page` returns itself. In Hugo, and in any programming language, knowing the current context is fundamental and important.
 
@@ -588,11 +588,11 @@ This example loads a single stylesheet. A typical project usually has multiple C
 `resources.Concat` performs simple concatenation and has several limitations. Hugo 0.158.0's new `css.Build` feature is more powerful. It supports `@import` between CSS files, which makes development more modern. The template usage stays simple:
 
 ```go-html-template
-<!-- just add " | css.Build " to get this feature -->
-{{- $buildOpts := dict
+{{/* just add  '| css.Build'  to get this feature */}}
+{{ $buildOpts := dict
 	"minify" (hugo.IsProduction)
 	"target" (slice "chrome121" "firefox122" "safari17.3")
--}}
+}}
 
 {{ with resources.Get "css/main.css" | css.Build $buildOpts }}
   {{ if hugo.IsDevelopment }}
@@ -617,7 +617,7 @@ CSS now supports more capabilities:
 @import "@fontsource-variable/nunito-sans";
 ```
 
-There's an even more advanced technique: treat the resource as a template itself, which lets you build optional, configurable sections directly inside the CSS file.
+There's an even more advanced technique: treat the resource as a template, which lets you build optional, configurable sections directly inside the CSS file.
 
 ```go-html-template
 {{- with resources.Get "css/main.css" | resources.ExecuteAsTemplate "css/main-bundle.css" . -}}
