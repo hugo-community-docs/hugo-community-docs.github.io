@@ -10,7 +10,7 @@ With Hugo installed, this page explains how to create a new site and start the l
 ## Create a Project
 
 ```bash
-hugo new project my-site
+hugo new project my-site --format yaml
 cd my-site
 ```
 
@@ -35,12 +35,12 @@ hugo mod get github.com/gohugo-ananke/ananke/v2
 
 `git init` sets up a Git repository so you can track changes to your project. `hugo mod init` turns your site into a Go module. `hugo mod get` installs the theme.
 
-Then add this to `hugo.toml`.
+Then add this to `hugo.yaml`.
 
-```toml
-[module]
-  [[module.imports]]
-    path = "github.com/gohugo-ananke/ananke/v2"
+```yaml {title=hugo.yaml}
+module:
+  imports:
+    - path: github.com/gohugo-ananke/ananke/v2
 ```
 
   {{< /tab >}}
@@ -56,10 +56,10 @@ git submodule add https://github.com/gohugo-ananke/ananke.git themes/ananke
 
 `git init` sets up a Git repository, which is required before adding a submodule. `git submodule add` clones the theme into `themes/ananke` as a separate, linked repository.
 
-Then add this to `hugo.toml`.
+Then add this to `hugo.yaml`.
 
-```toml
-theme = ["ananke"]
+```yaml
+theme: ["ananke"]
 ```
 
   {{< /tab >}}

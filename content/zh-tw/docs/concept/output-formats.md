@@ -14,20 +14,24 @@ output formats 常見的用途有三種：
 
 ## 基本設定
 
-在 `hugo.toml` 定義要輸出的格式：
+在 `hugo.yaml` 定義要輸出的格式：
 
-```toml
-[outputFormats.searchIndex]
-  mediaType = 'application/json'
-  baseName = 'index'
-  isPlainText = true
+```yaml
+outputFormats:
+  searchIndex:
+    mediaType: application/json
+    baseName: index
+    isPlainText: true
 ```
 
-接著在 `hugo.toml` 指定哪些頁面要輸出這個格式：
+接著在 `hugo.yaml` 指定哪些頁面要輸出這個格式：
 
-```toml
-[outputs]
-  home = ['html', 'searchIndex']
+```yaml
+outputs:
+  home:
+    - html
+    - rss
+    - searchIndex
 ```
 
 這會讓首頁除了 `index.html` 之外，額外產生 `index.json`。
@@ -38,14 +42,18 @@ output formats 常見的用途有三種：
 
 最常見的用法是產生全站搜尋用的資料索引。模板遍歷所有頁面，輸出成一份 JSON：
 
-```toml
-[outputFormats.searchIndex]
-  mediaType = 'application/json'
-  baseName = 'searchIndex'
-  isPlainText = true
-  weight = 1
-[outputs]
-  home = ['html', 'rss', 'searchIndex']
+```yaml
+outputFormats:
+  searchIndex:
+    mediaType: application/json
+    baseName: searchIndex
+    isPlainText: true
+    weight: 1
+outputs:
+  home:
+    - html
+    - rss
+    - searchIndex
 ```
 
 ```go-html-template {title="layouts/home.searchIndex.json"}
@@ -135,16 +143,19 @@ Hugo 依照 `weight` 決定各 output format 的渲染順序，數字小的先�
 
 Output format 也能輸出純 Markdown，常見用途是產生 `llms.txt`，提供 AI 工具讀取網站內容的純文字版本：
 
-```toml
-[outputFormats.llmText]
-  mediaType = 'text/plain'
-  baseName = 'llms'
-  isPlainText = true
+```yaml
+outputFormats:
+  llmText:
+    mediaType: text/plain
+    baseName: llms
+    isPlainText: true
 ```
 
-```toml
-[outputs]
-  home = ['html', 'llmText']
+```yaml
+outputs:
+  home:
+    - html
+    - llmText
 ```
 
 對應模板 `layouts/index.llmText.txt` 直接輸出 Markdown 格式的內容，不經過 HTML 轉換。

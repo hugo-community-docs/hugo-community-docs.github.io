@@ -22,12 +22,12 @@ hugo mod init github.com/user/theme
 
 這會產生 `go.mod`。如果你不打算讓其他人導入你的模組，那麼具體的名稱並不重要，取個合理的名稱即可。
 
-在 `hugo.toml` 宣告要引用的 module：
+在 `hugo.yaml` 宣告要引用的 module：
 
-```toml
-[module]
-  [[module.imports]]
-    path = 'github.com/user/theme'
+```yaml
+module:
+  imports:
+    - path: github.com/user/theme
 ```
 
 執行 `hugo` 構建時，會自動下載 module、寫入快取，並產生 `go.sum` 記錄版本與校驗碼。
@@ -115,10 +115,10 @@ use ../theme
 HUGO_MODULE_WORKSPACE=hugo.work hugo server
 ```
 
-或是在 `hugo.toml` 設定長期啟用 workspace 模式：
+或是在 `hugo.yaml` 設定長期啟用 workspace 模式：
 
-```toml {title="hugo.toml"}
-workspace = 'hugo.work'
+```yaml {title="hugo.yaml"}
+workspace: 'hugo.work'
 ```
 
 Workspace 和 replace 最大的差異是允許暫時啟用且不會寫進 `go.mod`，當模組被外部依賴，不會有 replace 設定影響外部用戶的問題。
@@ -133,10 +133,10 @@ Workspace 和 replace 最大的差異是允許暫時啟用且不會寫進 `go.mo
 
 最基礎的應用，多個網站共用同一組 shortcode、partial 或 CSS，抽成獨立 module 讓所有網站引用：
 
-```toml
-[module]
-  [[module.imports]]
-    path = 'github.com/your-org/shared-components'
+```yaml
+module:
+  imports:
+    - path: github.com/your-org/shared-components
 ```
 
 ### exampleSite
@@ -152,7 +152,7 @@ use .
 use ../
 ```
 
-```toml {title="hugo.toml"}
+```yaml {title="hugo.yaml"}
 workspace = 'hugo.work'
 ```
 
@@ -160,15 +160,13 @@ workspace = 'hugo.work'
 
 Mounts 功能也可用於 node_modules，讓你直接將 node_modules 內容 mount 到指定目錄，不需手動 vendor 套件。設定方式為：
 
-```toml
-[module]
-  [[module.mounts]]
-  source = "assets"
-  target = "assets"
-
-  [[module.mounts]]
-  source = "node_modules/@awmottaz/prettier-plugin-void-html/"
-  target = "assets/prettier-plugin-void-html"
+```yaml
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - source: node_modules/@awmottaz/prettier-plugin-void-html/
+      target: assets/prettier-plugin-void-html
 ```
 
 在 JS 和模板中就能直接使用該目錄的內容。
@@ -177,10 +175,10 @@ Mounts 功能也可用於 node_modules，讓你直接將 node_modules 內容 mou
 
 把 `content/` `assets/` 獨立成一個 module（獨立的 git repo），讓寫手完全不需要碰觸主題原始碼：
 
-```toml
-[module]
-  [[module.imports]]
-    path = 'github.com/your-org/site-content'
+```yaml
+module:
+  imports:
+    - path: github.com/your-org/site-content
 ```
 
 寫手只需要對 `site-content` 這個獨立 repo 有存取權限，不會誤動到 layouts 等程式碼部分。工程師只需要設定 CI 構建時下載這個 module 即可簡單達成權責分離。
@@ -191,16 +189,16 @@ Mounts 功能也可用於 node_modules，讓你直接將 node_modules 內容 mou
 
 把正式站與預覽站需要的不同 `data/` 或 `params` 依環境切換引用：
 
-```toml {title="config/staging/hugo.toml"}
-[module]
-  [[module.imports]]
-    path = 'config-staging'
+```yaml {title="config/staging/hugo.yaml"}
+module:
+  imports:
+    - path: config-staging
 ```
 
-```toml {title="config/production/hugo.toml"}
-[module]
-  [[module.imports]]
-    path = 'config-production'
+```yaml {title="config/production/hugo.yaml"}
+module:
+  imports:
+    - path: config-production
 ```
 
 其中 `config/staging` 和 `config/production` 目錄會根據 environment variable [自動切換](https://gohugo.io/configuration/introduction/#example)，或是以 `hugo -e staging` 手動指定，也可搭配 CI/CD 依部署環境切換要引用的設定 module。

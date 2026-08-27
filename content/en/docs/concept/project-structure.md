@@ -16,10 +16,10 @@ my-project/
 ├── static/             # Can't be processed, copied to output as is
 ├── config/
 │   ├── _default/       # Default config
-│   │   └── hugo.toml   # Site configuration, can also live in the project root
+│   │   └── hugo.yaml   # Site configuration, can also live in the project root
 │   └── production/     # Environment-specific overrides
 ├── content/            # Markdown content 
-├── data/               # Custom data files (JSON/YAML/TOML) for templates
+├── data/               # Custom data files (JSON/YAML/yaml) for templates
 ├── i18n/               # Translations
 ├── layouts/            # Template files, the site's HTML structure
 ├── public/             # Build output directory
@@ -62,4 +62,4 @@ When multiple files share the same filename, priority runs from the first source
 - `data`, `layouts`, `static`, `archetypes`: These merge file by file, using whichever copy sits closest.
 - `i18n`: These merge by key depth, so translations or data from multiple sources stack together.
 
-The `hugo.toml` configuration file also gets merged, and each field follows its own merge rule. See [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings) for details.
+The `hugo.yaml` configuration file also gets merged, and each field follows its own merge rule. See [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings) for details.

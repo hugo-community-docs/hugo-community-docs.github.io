@@ -9,9 +9,9 @@ Building on the site created in the previous page, this page covers the Markdown
 
 ## Front Matter
 
-Front matter is the block at the start of every content file that records that content's metadata. It supports three formats, TOML, YAML, and JSON, distinguished purely by delimiter:
+Front matter is the block at the start of every content file that records that content's metadata. It supports three formats, yaml, YAML, and JSON, distinguished purely by delimiter:
 
-- TOML: wrapped in `+++`
+- yaml: wrapped in `+++`
 - YAML: wrapped in `---`
 - JSON: wrapped directly in `{ }`
 
@@ -45,20 +45,22 @@ Common fields:
 | `weight` | Manual sort weight |
 | `params` | Theme-specific settings. Hugo's core doesn't process these. They're read entirely by theme templates. |
 
-Front matter settings override the settings in `hugo.toml`. `params` holds theme-specific settings. Hugo can still read theme settings that aren't placed under `params`, but it's recommended to always nest them there, since this keeps things clearer and more intuitive when migrating themes or managing the site.
+Front matter settings override the settings in `hugo.yaml`. `params` holds theme-specific settings. Hugo can still read theme settings that aren't placed under `params`, but it's recommended to always nest them there, since this keeps things clearer and more intuitive when migrating themes or managing the site.
 
 > [!TIP]
-> If you're not familiar with TOML, YAML, or JSON at all, convert `hugo.toml` to YAML format. That way you only need to learn one format instead of confusing yourself by learning two at once.
+> If you're not familiar with yaml, YAML, or JSON at all, convert `hugo.yaml` to YAML format. That way you only need to learn one format instead of confusing yourself by learning two at once.
 
 ## HTML in Markdown
 
 Hugo parses Markdown according to the [CommonMark](https://commonmark.org/) spec. If you're not familiar with Markdown syntax, see [Learn Markdown in Y Minutes](https://learnxinyminutes.com/markdown/), or test rendering live in the [Playground](https://spec.commonmark.org/dingus/).
 
-You can also write raw HTML directly inside Markdown content, but it's stripped out by default. To allow it, enable this in `hugo.toml`:
+You can also write raw HTML directly inside Markdown content, but it's stripped out by default. To allow it, enable this in `hugo.yaml`:
 
-```toml
-[markup.goldmark.renderer]
-  unsafe = true
+```yaml
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
 ```
 
 When this isn't enabled, HTML tags are removed.

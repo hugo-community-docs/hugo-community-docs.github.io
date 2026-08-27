@@ -22,7 +22,7 @@ weight: 1000
 ## [hugo convert](https://gohugo.io/commands/hugo_convert/)
 
 - [hugo convert toJSON](https://gohugo.io/commands/hugo_convert_toJSON/)
-- [hugo convert toTOML](https://gohugo.io/commands/hugo_convert_toTOML/)
+- [hugo convert toyaml](https://gohugo.io/commands/hugo_convert_toyaml/)
 - [hugo convert toYAML](https://gohugo.io/commands/hugo_convert_toYAML/)
 
 ## [hugo deploy](https://gohugo.io/commands/hugo_deploy/)

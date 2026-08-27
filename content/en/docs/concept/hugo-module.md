@@ -23,12 +23,12 @@ hugo mod init github.com/user/theme
 
 This generates `go.mod`. If you don't plan on letting others import your module, the exact name doesn't matter much, pick anything reasonable.
 
-Declare the module you want to import in `hugo.toml`:
+Declare the module you want to import in `hugo.yaml`:
 
-```toml
-[module]
-  [[module.imports]]
-    path = 'github.com/user/theme'
+```yaml
+module:
+  imports:
+    - path: github.com/user/theme
 ```
 
 Running `hugo` to build the site automatically downloads the module, caches it, and generates `go.sum` to record its version and checksum.
@@ -116,10 +116,10 @@ Enable it temporarily with an environment variable:
 HUGO_MODULE_WORKSPACE=hugo.work hugo server
 ```
 
-Or enable workspace mode long-term in `hugo.toml`:
+Or enable workspace mode long-term in `hugo.yaml`:
 
-```toml {title="hugo.toml"}
-workspace = 'hugo.work'
+```yaml {title="hugo.yaml"}
+workspace: 'hugo.work'
 ```
 
 The key difference between workspace and replace: workspace can be enabled temporarily and never gets written to `go.mod`. So when other people depend on your module, your replace settings won't affect them.
@@ -134,7 +134,7 @@ As described in [Multilingual Sites](multilingual.md#separate-directories), you 
 
 The most basic use case: multiple sites sharing the same set of shortcodes, partials, or CSS. Extract them into an independent module that every site can import:
 
-```toml
+```yaml
 [module]
   [[module.imports]]
     path = 'github.com/your-org/shared-components'
@@ -153,23 +153,21 @@ use .
 use ../
 ```
 
-```toml {title="hugo.toml"}
-workspace = 'hugo.work'
+```yaml {title="hugo.yaml"}
+workspace: 'hugo.work'
 ```
 
 ### node_modules
 
 Mounts also work with `node_modules`, letting you mount its contents directly into a target directory without manually vendoring the package. Configure it like this:
 
-```toml
-[module]
-  [[module.mounts]]
-  source = "assets"
-  target = "assets"
-
-  [[module.mounts]]
-  source = "node_modules/@awmottaz/prettier-plugin-void-html/"
-  target = "assets/prettier-plugin-void-html"
+```yaml
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - source: node_modules/@awmottaz/prettier-plugin-void-html/
+      target: assets/prettier-plugin-void-html
 ```
 
 You can then use the contents of that directory directly in your JS and templates.
@@ -178,10 +176,10 @@ You can then use the contents of that directory directly in your JS and template
 
 Split `content/` and `assets/` into their own module, backed by an independent git repo, so writers never need to touch the theme's source code:
 
-```toml
-[module]
-  [[module.imports]]
-    path = 'github.com/your-org/site-content'
+```yaml
+module:
+  imports:
+    - path: github.com/your-org/site-content
 ```
 
 Writers only need access to the independent `site-content` repo, so they can't accidentally touch `layouts/` or other code. Engineers only need to configure CI to download this module at build time, which cleanly separates responsibilities.
@@ -192,16 +190,16 @@ For local development where you need to see content changes immediately, combine
 
 Switch which `data/` or `params` gets imported depending on whether you're building the production site or the preview site:
 
-```toml {title="config/staging/hugo.toml"}
-[module]
-  [[module.imports]]
-    path = 'config-staging'
+```yaml {title="config/staging/hugo.yaml"}
+module:
+  imports:
+    - path: config-staging
 ```
 
-```toml {title="config/production/hugo.toml"}
-[module]
-  [[module.imports]]
-    path = 'config-production'
+```yaml {title="config/production/hugo.yaml"}
+module:
+  imports:
+    - path: config-production
 ```
 
 The `config/staging` and `config/production` directories [switch automatically](https://gohugo.io/configuration/introduction/#example) based on an environment variable, or manually set via `hugo -e staging`. With CI/CD, the configuration module to import switches based on the deployment environment.

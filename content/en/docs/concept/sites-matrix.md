@@ -45,24 +45,24 @@ Configuration files use sites in the following places:
 
 Most projects have a simple version structure: one version maps to one folder, with no need for cross version fallback. In practice this is mainly used with module mounts:
 
-```toml {title="hugo.toml"}
-[versions]
-    [versions.'v1.0.0']
-    [versions.'v2.0.0']
-
-[[module.mounts]]
-    source = "content/v2.0.0"
-    target = "content"
-
-    [module.mounts.sites.matrix]
-        versions = ["v2.0.0"]
-
-[[module.mounts]]
-    source = "content/v1.0.0"
-    target = "content"
-
-    [module.mounts.sites.matrix]
-        versions = ["v1.0.0"]
+```yaml {title="hugo.yaml"}
+versions:
+  v1.0.0: {}
+  v2.0.0: {}
+module:
+  mounts:
+    - source: content/v2.0.0
+      target: content
+      sites:
+        matrix:
+          versions:
+            - v2.0.0
+    - source: content/v1.0.0
+      target: content
+      sites:
+        matrix:
+          versions:
+            - v1.0.0
 ```
 
 This means the `content/vN.0.0` module is **mounted** onto the `content` directory of the `vN.0.0` version. With this configuration, everything under `content/v2.0.0/` will only appear on the `v2.0.0` site.

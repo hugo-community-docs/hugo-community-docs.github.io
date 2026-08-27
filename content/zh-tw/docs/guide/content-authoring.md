@@ -8,9 +8,9 @@ weight: 300
 
 ## Front Matter
 
-Front matter 是每個內容檔案開頭的區塊，記錄該篇內容的中繼資料，支援 TOML、YAML、JSON 三種格式，純粹以分隔符號區分：
+Front matter 是每個內容檔案開頭的區塊，記錄該篇內容的中繼資料，支援 yaml、YAML、JSON 三種格式，純粹以分隔符號區分：
 
-- TOML：`+++` 包起來
+- yaml：`+++` 包起來
 - YAML：`---` 包起來
 - JSON：直接用 `{ }` 包起來
 
@@ -44,20 +44,22 @@ params:
 | `weight` | 手動排序權重 |
 | `params` | 主題自訂設定，Hugo 核心不處理，完全交由主題模板讀取 |
 
-frontmatter 的設定會覆蓋 `hugo.toml` 的設定；`params` 則是主題自訂設定，雖然主題設定不放在 `params` 底下 Hugo 也能讀取，但是建議永遠加上，這樣在遷移主題、網站管理上會更直觀清晰。
+frontmatter 的設定會覆蓋 `hugo.yaml` 的設定；`params` 則是主題自訂設定，雖然主題設定不放在 `params` 底下 Hugo 也能讀取，但是建議永遠加上，這樣在遷移主題、網站管理上會更直觀清晰。
 
 > [!TIP]
-> 如果你對 TOML/YAML/JSON 全都不熟悉，那麼建議把 `hugo.toml` 轉 YAML 格式，這樣你只需要學習一種格式，而不是一次學兩種格式把自己搞糊塗了。
+> 如果你對 yaml/YAML/JSON 全都不熟悉，那麼建議把 `hugo.yaml` 轉 YAML 格式，這樣你只需要學習一種格式，而不是一次學兩種格式把自己搞糊塗了。
 
 ## Markdown
 
 Hugo 遵循 [CommonMark](https://commonmark.org/) 規範解析 Markdown，如果不熟悉 Markdown 語法，可以參考 [Learn Markdown in Y minutes](https://learnxinyminutes.com/zh-cn/markdown/)，或在 [Playground](https://spec.commonmark.org/dingus/) 即時測試語法渲染結果。
 
-Markdown 內容中也能直接寫 HTML，但預設會被移除，需要在 `hugo.toml` 開啟：
+Markdown 內容中也能直接寫 HTML，但預設會被移除，需要在 `hugo.yaml` 開啟：
 
-```toml
-[markup.goldmark.renderer]
-  unsafe = true
+```yaml
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
 ```
 
 未開啟時 HTML 標籤會被移除。

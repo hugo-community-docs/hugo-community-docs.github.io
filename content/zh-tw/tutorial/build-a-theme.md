@@ -537,7 +537,7 @@ my-blog/
 │       ├── head.html
 │       ├── header.html
 │       └── footer.html
-└── hugo.toml
+└── hugo.yaml
 ```
 
 五個 layout 檔案（`baseof`、`page`、`section`、`taxonomy`、`term`）對應到前面 [Page Kind](../docs/concept/templates.md) 那篇整理過的五種 kind，三個 partials 對應可重複使用的區塊。這是一個沒有主題依賴、完全自己掌控的小巧主題。

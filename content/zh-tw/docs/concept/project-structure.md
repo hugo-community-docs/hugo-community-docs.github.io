@@ -15,10 +15,10 @@ my-project/
 ├── static/             # 不會被處理，原樣複製到輸出目錄
 ├── config/
 │   ├── _default/       # 預設設定
-│   │   └── hugo.toml   # 網站設定檔，也可放在專案根目錄
+│   │   └── hugo.yaml   # 網站設定檔，也可放在專案根目錄
 │   └── production/     # 環境專屬的覆寫設定
 ├── content/            # Markdown 內容
-├── data/               # 供模板讀取的自訂資料檔（JSON/YAML/TOML）
+├── data/               # 供模板讀取的自訂資料檔（JSON/YAML/yaml）
 ├── i18n/               # 翻譯檔
 ├── layouts/            # 模板檔案，網站的 HTML 結構
 ├── public/             # 建置輸出目錄
@@ -61,4 +61,4 @@ layouts/partials/xxx.html                 # 你的覆蓋版本，優先套用
 - `data`、`layouts`、`static`、`archetypes`：以檔案為單位採用最靠近的那一份。
 - `i18n`：依 key 深度合併，多個來源的翻譯或資料會疊加在一起。
 
-`hugo.toml` 設定檔也會被合併，並且不同的 field 有各自的合併規則，請見文檔 [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings)。
+`hugo.yaml` 設定檔也會被合併，並且不同的 field 有各自的合併規則，請見文檔 [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings)。

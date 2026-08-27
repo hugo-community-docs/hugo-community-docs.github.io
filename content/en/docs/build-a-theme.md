@@ -536,7 +536,7 @@ my-blog/
 │       ├── head.html
 │       ├── header.html
 │       └── footer.html
-└── hugo.toml
+└── hugo.yaml
 ```
 
 The five layout files, `baseof`, `page`, `section`, `taxonomy`, and `term`, correspond to the five Page Kinds covered in [Page Kind](concept/templates.md). The three partials correspond to reusable blocks. This is a small theme with no external dependency, fully under your own control.

@@ -22,9 +22,9 @@ In other words, you don't need to set URLs manually. Place a file in the right d
 
 ## Custom URLs (Permalinks)
 
-To change how URLs are generated, configure `permalinks` in `hugo.toml`:
+To change how URLs are generated, configure `permalinks` in `hugo.yaml`:
 
-```toml
+```yaml
 [permalinks]
   posts = '/:year-:month-:slugorcontentbasename/'
 ```

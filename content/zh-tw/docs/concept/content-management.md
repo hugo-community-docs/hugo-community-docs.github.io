@@ -110,11 +110,13 @@ Hugo 使用 [Chroma](https://github.com/alecthomas/chroma) 完成語法高亮，
 
 Markdown attributes 是 Markdown 的擴充功能，讓你可以在 Markdown 裡面為目標元素注入 HTML 屬性提供更多控制。你需要在設定檔中啟用這個功能
 
-```toml {title="hugo.toml"}
-[markup]
-  [markup.goldmark.parser.attribute]
-    block = true
-    title = true
+```yaml {title="hugo.yaml"}
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
+        title: true
 ```
 
 若主題有自訂 render hook，則需要該 render hook 有正確的實現 Markdown attributes 功能。以下是每個元素的語法：
@@ -174,14 +176,14 @@ tags:
 ---
 ```
 
-Hugo 支援自訂更多分類方式，只需要在 `hugo.toml` 設定 `taxonomies` 項目：
+Hugo 支援自訂更多分類方式，只需要在 `hugo.yaml` 設定 `taxonomies` 項目：
 
-```toml {title="hugo.toml"}
-[taxonomies]
-  category = 'categories'
-  tag = 'tags'
-  author = 'authors'
-  film = 'films'
+```yaml {title="hugo.yaml"}
+taxonomies:
+  category: categories
+  tag: tags
+  author: authors
+  film: films
 ```
 
 設定時使用 `單數 = 複數` 格式命名分類學名稱。
@@ -214,7 +216,7 @@ content/
 
 邏輯路徑並不限於物理存在於 `content` 目錄下的檔案。 Hugo 也會為自動產生的頁面（例如分類法頁面和術語頁面）指派邏輯路徑。
 
-作為用戶，邏輯路徑主要用途是設定 `hugo.toml`，如 menus 設定中使用 `pageRef` 設定 logical path，Hugo 才能夠知道對應的頁面，並且有能力調用相關的物件方法，舉例來說，[HasMenuCurrent](https://gohugo.io/methods/page/hasmenucurrent/) 可以判斷當前頁面是否屬於該 menu 頁面內部。
+作為用戶，邏輯路徑主要用途是設定 `hugo.yaml`，如 menus 設定中使用 `pageRef` 設定 logical path，Hugo 才能夠知道對應的頁面，並且有能力調用相關的物件方法，舉例來說，[HasMenuCurrent](https://gohugo.io/methods/page/hasmenucurrent/) 可以判斷當前頁面是否屬於該 menu 頁面內部。
 
 作為開發者，和路徑相關的[大部分方法](https://gohugo.io/methods/page/path/#finding-pages)都使用邏輯路徑。
 

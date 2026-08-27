@@ -21,9 +21,9 @@ content/about.md                 →   /about/
 
 ## 自訂網址（permalinks）
 
-如果想要改變網址的產生規則，可以在 `hugo.toml` 設定 `permalinks`：
+如果想要改變網址的產生規則，可以在 `hugo.yaml` 設定 `permalinks`：
 
-```toml
+```yaml
 [permalinks]
   posts = '/:year-:month-:slugorcontentbasename/'
 ```

@@ -8,20 +8,19 @@ Hugo 每個語言就是獨立一個 site，每個 site 各自獨立，多語言�
 
 ## 設定
 
-在 `hugo.toml` 宣告網站使用的語言：
+在 `hugo.yaml` 宣告網站使用的語言：
 
-```toml
-defaultContentLanguage = 'en'
-
-[languages.en]
-  label = 'English'
-  locale = 'en'
-  weight = 1
-
-[languages.fr]
-  label = 'Français'
-  locale = 'fr'
-  weight = 2
+```yaml
+defaultContentLanguage: en
+languages:
+  en:
+    label: English
+    locale: en
+    weight: 1
+  fr:
+    label: Français
+    locale: fr
+    weight: 2
 ```
 
 - `defaultContentLanguage`：預設語言，沒有標註語言的內容會歸屬於這個語言。
@@ -50,12 +49,13 @@ content/
 
 每個語言用獨立的內容目錄，透過 `contentDir` 對應：
 
-```toml
-[languages.en]
-  contentDir = 'content/en'
-
-[languages.fr]
-  contentDir = 'content/fr'
+```yaml
+module:
+  mounts:
+    - source: content/en
+      target: content
+    - source: content/fr
+      target: content
 ```
 
 ```text
@@ -70,15 +70,13 @@ content/
 
 `contentDir` 實際運作是幫你設定了 `module.mount`，只是一個語法糖，前面的 `contentDir` 設定等同此 module 設定：
 
-```toml
-[module]
-  [[module.mounts]]
-    source = 'content/en'
-    target = 'content'
-
-  [[module.mounts]]
-    source = 'content/fr'
-    target = 'content'
+```yaml
+module:
+  mounts:
+    - source: content/en
+      target: content
+    - source: content/fr
+      target: content
 ```
 
 我們可以先記住 `module` 這個詞彙，這是 Hugo 很強大的一個工具，在 [Hugo Modules](hugo-module.md) 我們會專門介紹他。

@@ -12,7 +12,7 @@ weight: 100
 hugo new project my-site
 cd my-site
 hugo new theme test
-echo "theme = [\"test\"]" >> hugo.toml
+echo "theme = [\"test\"]" >> hugo.yaml
 ```
 
 ## 理解專案結構

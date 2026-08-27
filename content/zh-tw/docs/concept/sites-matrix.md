@@ -44,24 +44,24 @@ module:
 
 多數專案的版本結構很單純：一個版本對應一個資料夾，不需要跨版本 fallback，實務上主要用在 module mount：
 
-```toml {title="hugo.toml"}
-[versions]
-    [versions.'v1.0.0']
-    [versions.'v2.0.0']
-
-[[module.mounts]]
-    source = "content/v2.0.0"
-    target = "content"
-
-    [module.mounts.sites.matrix]
-        versions = ["v2.0.0"]
-
-[[module.mounts]]
-    source = "content/v1.0.0"
-    target = "content"
-
-    [module.mounts.sites.matrix]
-        versions = ["v1.0.0"]
+```yaml {title="hugo.yaml"}
+versions:
+  v1.0.0: {}
+  v2.0.0: {}
+module:
+  mounts:
+    - source: content/v2.0.0
+      target: content
+      sites:
+        matrix:
+          versions:
+            - v2.0.0
+    - source: content/v1.0.0
+      target: content
+      sites:
+        matrix:
+          versions:
+            - v1.0.0
 ```
 
 意思是把 `content/vN.0.0` 這個模組<strong>固定（mount）</strong>在 `vN.0.0` 的版本 `content` 目錄，這樣設定後，`content/v2.0.0/` 底下的所有內容將只出現在 `v2.0.0` 這個 site。

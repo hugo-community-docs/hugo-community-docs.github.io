@@ -110,11 +110,13 @@ Hugo handles syntax highlighting with [Chroma](https://github.com/alecthomas/chr
 
 Markdown attributes are a Markdown extension that let you attach HTML attributes to a target element for finer control. You need to enable this feature in your configuration file:
 
-```toml {title="hugo.toml"}
-[markup]
-  [markup.goldmark.parser.attribute]
-    block = true
-    title = true
+```yaml {title="hugo.yaml"}
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
+        title: true
 ```
 
 If your theme uses a custom render hook, that render hook needs to implement Markdown attributes correctly as well. Here's the syntax for each element:
@@ -174,14 +176,14 @@ tags:
 ---
 ```
 
-Hugo lets you define additional taxonomies by setting the `taxonomies` field in `hugo.toml`:
+Hugo lets you define additional taxonomies by setting the `taxonomies` field in `hugo.yaml`:
 
-```toml {title="hugo.toml"}
-[taxonomies]
-  category = 'categories'
-  tag = 'tags'
-  author = 'authors'
-  film = 'films'
+```yaml {title="hugo.yaml"}
+taxonomies:
+  category: categories
+  tag: tags
+  author: authors
+  film: films
 ```
 
 Name each taxonomy using the `singular = plural` format.
@@ -214,7 +216,7 @@ Hugo resolves these to the logical paths `/movies/m1` and `/movies/m2`, respecti
 
 A logical path isn't limited to files that physically exist under `content`. Hugo also assigns logical paths to automatically generated pages, such as taxonomy and term pages.
 
-As a user, you'll mainly use logical paths when configuring `hugo.toml`, for example setting `pageRef` in a menu configuration to a logical path so Hugo can resolve the corresponding page and call related methods on it. For instance, [`HasMenuCurrent`](https://gohugo.io/methods/page/hasmenucurrent/) can check whether the current page falls under that menu item.
+As a user, you'll mainly use logical paths when configuring `hugo.yaml`, for example setting `pageRef` in a menu configuration to a logical path so Hugo can resolve the corresponding page and call related methods on it. For instance, [`HasMenuCurrent`](https://gohugo.io/methods/page/hasmenucurrent/) can check whether the current page falls under that menu item.
 
 As a developer, [most path-related methods](https://gohugo.io/methods/page/path/#finding-pages) work with logical paths.
 

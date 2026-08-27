@@ -15,20 +15,24 @@ There are three common uses for output formats:
 
 ## Basic Configuration
 
-Define the format you want to output in `hugo.toml`:
+Define the format you want to output in `hugo.yaml`:
 
-```toml
-[outputFormats.searchIndex]
-  mediaType = 'application/json'
-  baseName = 'index'
-  isPlainText = true
+```yaml
+outputFormats:
+  searchIndex:
+    mediaType: application/json
+    baseName: index
+    isPlainText: true
 ```
 
-Then specify which pages should output this format, also in `hugo.toml`:
+Then specify which pages should output this format, also in `hugo.yaml`:
 
-```toml
-[outputs]
-  home = ['html', 'searchIndex']
+```yaml
+outputs:
+  home:
+    - html
+    - rss
+    - searchIndex
 ```
 
 This produces `index.json` in addition to `index.html` for the homepage.
@@ -39,14 +43,18 @@ The output content is determined by the matching template. Hugo looks for a temp
 
 The most common use is generating a data index for site-wide search. A template loops through every page and outputs a single JSON file:
 
-```toml
-[outputFormats.searchIndex]
-  mediaType = 'application/json'
-  baseName = 'searchIndex'
-  isPlainText = true
-  weight = 1
-[outputs]
-  home = ['html', 'rss', 'searchIndex']
+```yaml
+outputFormats:
+  searchIndex:
+    mediaType: application/json
+    baseName: searchIndex
+    isPlainText: true
+    weight: 1
+outputs:
+  home:
+    - html
+    - rss
+    - searchIndex
 ```
 
 ```go-html-template {title="layouts/home.searchIndex.json"}
@@ -136,16 +144,19 @@ This approach fits situations that need cross page aggregation or a one-time pre
 
 Output formats can also output plain Markdown. A common use is generating `llms.txt`, which gives AI tools a plain text version of the site's content to read:
 
-```toml
-[outputFormats.llmText]
-  mediaType = 'text/plain'
-  baseName = 'llms'
-  isPlainText = true
+```yaml
+outputFormats:
+  llmText:
+    mediaType: text/plain
+    baseName: llms
+    isPlainText: true
 ```
 
-```toml
-[outputs]
-  home = ['html', 'llmText']
+```yaml
+outputs:
+  home:
+    - html
+    - llmText
 ```
 
 The matching template, `layouts/index.llmText.txt`, outputs Markdown formatted content directly, with no HTML conversion involved.

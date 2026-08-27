@@ -35,12 +35,12 @@ hugo mod get github.com/gohugo-ananke/ananke/v2
 
 `git init` 將目錄初始化成 Git 儲存庫，允許你追蹤專案的修改歷史記錄。`hugo mod init` 把你的網站變成 go module；`hugo mod get` 用於安裝主題。
 
-接著在 `hugo.toml` 加入：
+接著在 `hugo.yaml` 加入：
 
-```toml
-[module]
-  [[module.imports]]
-    path = "github.com/gohugo-ananke/ananke/v2"
+```yaml {title=hugo.yaml}
+module:
+  imports:
+    - path: github.com/gohugo-ananke/ananke/v2
 ```
 
   {{< /tab >}}
@@ -56,10 +56,10 @@ git submodule add https://github.com/gohugo-ananke/ananke.git themes/ananke
 
 `git init` 將目錄初始化為 Git 儲存庫，是 Git submodule 的必跳條件。`git submodule add` 則將主題作為一個獨立、連結的儲存庫克隆到 `themes/ananke`。
 
-接著在 `hugo.toml` 加入：
+接著在 `hugo.yaml` 加入：
 
-```toml
-theme = ["ananke"]
+```yaml
+theme: ["ananke"]
 ```
 
   {{< /tab >}}

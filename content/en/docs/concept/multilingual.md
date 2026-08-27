@@ -9,9 +9,9 @@ In Hugo, each language is an independent site In a multilingual website, each la
 
 ## Configuration
 
-Declare the languages your site uses in `hugo.toml`:
+Declare the languages your site uses in `hugo.yaml`:
 
-```toml
+```yaml
 defaultContentLanguage = 'en'
 
 [languages.en]
@@ -51,12 +51,13 @@ content/
 
 Each language gets its own content directory, mapped through `contentDir`:
 
-```toml
-[languages.en]
-  contentDir = 'content/en'
-
-[languages.fr]
-  contentDir = 'content/fr'
+```yaml
+module:
+  mounts:
+    - source: content/en
+      target: content
+    - source: content/fr
+      target: content
 ```
 
 ```text
@@ -71,15 +72,13 @@ Content at the same path and filename under two different language directories i
 
 Under the hood, `contentDir` sets up a `module.mount` for you. It's just syntactic sugar. The `contentDir` setting above is equivalent to this module configuration:
 
-```toml
-[module]
-  [[module.mounts]]
-    source = 'content/en'
-    target = 'content'
-
-  [[module.mounts]]
-    source = 'content/fr'
-    target = 'content'
+```yaml
+module:
+  mounts:
+    - source: content/en
+      target: content
+    - source: content/fr
+      target: content
 ```
 
 Worth remembering the term `module` here. It's a powerful part of Hugo that we'll cover in detail in [Hugo Modules](hugo-module.md).
