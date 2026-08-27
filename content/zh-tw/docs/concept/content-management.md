@@ -1,7 +1,7 @@
 ---
 title: '內容管理'
 slug: content-management
-weight: 50
+weight: 200
 description: '本文介紹 Hugo content 目錄所有有關的內容。'
 ---
 
@@ -52,7 +52,7 @@ title: '{{ .File.ContentBaseName }}'
 
 一個典型的 content 資料夾結構如下：
 
-```text
+```sh
 content
 ├── _index.md            # 1. 主頁
 ├── docs
@@ -83,6 +83,10 @@ content
 2. 網站資源規劃全部放到 `assets` 目錄
 
 這兩種情況都用不到 bundle 資源，因此直接使用 `post.md` 顯然更乾淨簡潔。
+
+## Cascade
+
+Cascade 用於一次設定指定路徑以下的內容，免去逐檔案一一設定的麻煩。可以在 [hugo.yaml 中設定 cascade](https://gohugo.io/configuration/cascade/)，也可以在 [frontmatter 設定 cascade](https://gohugo.io/content-management/front-matter/#cascade-1)。
 
 ## 引用文章和圖片
 
@@ -192,7 +196,7 @@ taxonomies:
 
 文章作者如何實現完全看主題各自的實現方式，應自行查看主題文檔。
 
-Hugo 建議將作者視作一種文章分類的方式，這樣未來如果網站擴充為多作者時就能無痛切換，並且原生契合 Hugo 的內容組織方式，實際設定方式請見[多作者範例](https://discourse.gohugo.io/t/authors-taxonomy-to-handle-site-and-page-authors/56151)。
+Hugo 建議將作者視作一種文章分類的方式，這樣未來如果網站擴充為多作者時就能無痛切換，並且原生契合 Hugo 的內容組織方式，實際設定方式請見[多作者範例](https://github.com/gohugoio/hugoDocs/issues/2494#issuecomment-2008486011)。
 
 ## 相關文章
 

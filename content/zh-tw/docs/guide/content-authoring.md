@@ -46,9 +46,6 @@ params:
 
 frontmatter 的設定會覆蓋 `hugo.yaml` 的設定；`params` 則是主題自訂設定，雖然主題設定不放在 `params` 底下 Hugo 也能讀取，但是建議永遠加上，這樣在遷移主題、網站管理上會更直觀清晰。
 
-> [!TIP]
-> 如果你對 yaml/YAML/JSON 全都不熟悉，那麼建議把 `hugo.yaml` 轉 YAML 格式，這樣你只需要學習一種格式，而不是一次學兩種格式把自己搞糊塗了。
-
 ## Markdown
 
 Hugo 遵循 [CommonMark](https://commonmark.org/) 規範解析 Markdown，如果不熟悉 Markdown 語法，可以參考 [Learn Markdown in Y minutes](https://learnxinyminutes.com/zh-cn/markdown/)，或在 [Playground](https://spec.commonmark.org/dingus/) 即時測試語法渲染結果。

@@ -331,6 +331,8 @@ layouts/
 ├── custom.html
 ├── movies/
 │   ├── page.html
+│   ├── _views/
+│   │   └── card.html
 │   ├── section.html
 │   ├── _markup/
 │   │   └── render-image.html

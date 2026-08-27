@@ -29,9 +29,9 @@ my-project/
 
 `resources` and `public` are regenerated on every build. You should add both directories to `.gitignore`, since there's no benefit to tracking generated files in Git.
 
-## UFS (Unified File System) {#ufs}
+# Unified File System{#ufs}
 
-UFS is Hugo's core mechanism. Every directory except the two output and cache directories, `public/` and `resources/`, connects into UFS. This includes
+UFS (Unified File System) is Hugo's core mechanism for merging files. It treats directories with the same name in your project root, your theme, and your modules as one virtual file system. These layers stack by priority: files in your project root always override the theme's files, and when multiple themes share the same path, the theme loaded later overrides the one loaded earlier. The directories connected to UFS include:
 
 - `archetypes/`
 - `assets/`
@@ -41,25 +41,30 @@ UFS is Hugo's core mechanism. Every directory except the two output and cache di
 - `data/`
 - `i18n/`
 
-Whether a theme lives under `themes/` as a git submodule or was installed as a Hugo Module, it connects into the UFS system the same way. UFS treats the project root and any matching directory names from themes or modules as a single virtual filesystem, layered by priority. Files in the project root take priority over the theme. When a file exists at the same path in both places, the root version overrides the theme version.
+Themes under `themes/` directory, as well as modules installed through Hugo Modules, both connect to the UFS system.
 
-This means that to customize a theme's template, you don't need to touch the theme's source code at all. You just create a file at the same path under `layouts/` in your project root:
+UFS lets you customize a theme without forking it. Just create a file at the matching path under your project root's `layouts/`:
 
-```text
-themes/ananke/layouts/partials/xxx.html   # The theme's original file
-layouts/partials/xxx.html                 # Your override, takes priority
+```sh
+.
+├── layouts/
+│   └── _partials/
+│       └── xxx.html            # Your override, takes priority
+└── themes/
+    └── ananke/
+        └── layouts/
+            └── _partials/
+                └── xxx.html    # Theme's original file
 ```
 
-This mechanism lets you keep updating the theme without losing your customizations, since your changes stay completely separate from the theme's source code. There's no need to fork the whole theme or manually merge changes.
-
 > [!IMPORTANT]
-> A common mistake is copying a theme's `assets` directory into the project root's `assets` directory. When the theme is later updated, the site still uses the old copied assets, and the styling breaks. Don't copy theme files into your own project unless you know exactly what you're doing.
+> Don't copy theme files into your own project unless you know what you're doing. A common mistake is copying the theme's `assets` into your project root's `assets`. When you later update the theme, your site keeps using the old copied files instead of the new ones, breaking your styles.
 
 ## UFS Merge Rules
 
 When multiple files share the same filename, priority runs from the first source to the last. Each directory follows its own merge rule:
 
-- `data`, `layouts`, `static`, `archetypes`: These merge file by file, using whichever copy sits closest.
+- `archetypes`、`assets`、`content`、`layouts`、`static`、`data`: These merge file by file, using whichever copy sits closest.
 - `i18n`: These merge by key depth, so translations or data from multiple sources stack together.
 
 The `hugo.yaml` configuration file also gets merged, and each field follows its own merge rule. See [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings) for details.

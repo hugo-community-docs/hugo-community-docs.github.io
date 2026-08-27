@@ -47,9 +47,6 @@ Common fields:
 
 Front matter settings override the settings in `hugo.yaml`. `params` holds theme-specific settings. Hugo can still read theme settings that aren't placed under `params`, but it's recommended to always nest them there, since this keeps things clearer and more intuitive when migrating themes or managing the site.
 
-> [!TIP]
-> If you're not familiar with yaml, YAML, or JSON at all, convert `hugo.yaml` to YAML format. That way you only need to learn one format instead of confusing yourself by learning two at once.
-
 ## HTML in Markdown
 
 Hugo parses Markdown according to the [CommonMark](https://commonmark.org/) spec. If you're not familiar with Markdown syntax, see [Learn Markdown in Y Minutes](https://learnxinyminutes.com/markdown/), or test rendering live in the [Playground](https://spec.commonmark.org/dingus/).

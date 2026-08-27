@@ -1,7 +1,7 @@
 ---
 title: 'Content Management'
 slug: content-management
-weight: 50
+weight: 200
 description: 'This article covers everything related to Hugo''s content directory.'
 ---
 
@@ -52,7 +52,7 @@ Just place the file at `archetypes/default.md`. You can also set different defau
 
 A typical content directory looks like this:
 
-```text
+```sh
 content
 ├── _index.md            # 1. Home page
 ├── docs
@@ -83,6 +83,10 @@ You should default to the `post/index.md` form to keep your project structure co
 2. All site assets are managed under the `assets` directory
 
 Neither case needs bundle resources, so using `post.md` directly is simpler and cleaner.
+
+## Cascade
+
+Cascade lets you set values for every piece of content under a given path at once, so you don't have to configure each file individually. You can set cascade [in `hugo.yaml`](https://gohugo.io/configuration/cascade/), or [in front matter](https://gohugo.io/content-management/front-matter/#cascade-1).
 
 ## Referencing Posts and Images
 
@@ -192,7 +196,7 @@ Name each taxonomy using the `singular = plural` format.
 
 How authors are implemented depends entirely on the theme. Check your theme's documentation for details.
 
-Hugo recommends treating authors as a taxonomy. This makes it painless to scale to multiple authors later, and fits naturally with how Hugo organizes content. See the [multi-author example](https://discourse.gohugo.io/t/authors-taxonomy-to-handle-site-and-page-authors/56151) for a working setup.
+Hugo recommends treating authors as a taxonomy. This makes it painless to scale to multiple authors later, and fits naturally with how Hugo organizes content. See the [multi-author example](https://github.com/gohugoio/hugoDocs/issues/2494#issuecomment-2008486011) for a working setup.
 
 ## Related Content
 
