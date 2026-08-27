@@ -1,5 +1,5 @@
 ---
-title: '手把手建立主題'
+title: 建立主題
 slug: build-a-theme
 weight: 900
 ---

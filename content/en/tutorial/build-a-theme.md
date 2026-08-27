@@ -1,5 +1,5 @@
 ---
-title: 'Build a Theme Step by Step'
+title: Build a Theme
 slug: build-a-theme
 weight: 900
 ---
@@ -17,7 +17,7 @@ cd my-blog
 
 Get the styles ready first. CSS has nothing to do with templates, so copy a simple template into `assets/css/main.css` for now.
 
-The reason it goes in `assets/` instead of `static/` is the same as what's covered in [Image References](guide/content-authoring.md): only resources under `assets/` get processed through Hugo Pipes. Anything in `static/` gets served as is, uncompressed.
+The reason it goes in `assets/` instead of `static/` is the same as what's covered in [Image References](../docs/guide/content-authoring.md): only resources under `assets/` get processed through Hugo Pipes. Anything in `static/` gets served as is, uncompressed.
 
 {{% admonition type="note" sign="-" title="CSS Template" %}}
 
@@ -242,11 +242,11 @@ main {
 </html>
 ```
 
-The rendered `lang` attribute uses `{{ .Site.Language.Locale }}`, the same `locale` setting covered in [Basic Configuration](guide/basic-configuration.md#locale), rendered directly. That's why you need a region code in capital form, like `en-US`.
+The rendered `lang` attribute uses `{{ .Site.Language.Locale }}`, the same `locale` setting covered in [Basic Configuration](../docs/guide/basic-configuration.md#locale), rendered directly. That's why you need a region code in capital form, like `en-US`.
 
 `<head>` and `<header>` are simple skeleton setup, nothing more.
 
-`block "main"` is the key part here. It uses Hugo's [block](https://gohugo.io/functions/go-template/block/) function. When rendering different [Page Kinds](concept/templates.md#page-kind), Hugo maps to a different base template and slots that template's `{{ define "main" }}{{ end }}` into this spot. This is also the only place `{{ block "main" . }}{{ end }}` appears in the whole layouts directory.
+`block "main"` is the key part here. It uses Hugo's [block](https://gohugo.io/functions/go-template/block/) function. When rendering different [Page Kinds](../docs/concept/templates.md#page-kind), Hugo maps to a different base template and slots that template's `{{ define "main" }}{{ end }}` into this spot. This is also the only place `{{ block "main" . }}{{ end }}` appears in the whole layouts directory.
 
 The `<footer>` is, again, basic skeleton setup.
 
@@ -539,7 +539,7 @@ my-blog/
 └── hugo.yaml
 ```
 
-The five layout files, `baseof`, `page`, `section`, `taxonomy`, and `term`, correspond to the five Page Kinds covered in [Page Kind](concept/templates.md). The three partials correspond to reusable blocks. This is a small theme with no external dependency, fully under your own control.
+The five layout files, `baseof`, `page`, `section`, `taxonomy`, and `term`, correspond to the five Page Kinds covered in [Page Kind](../docs/concept/templates.md). The three partials correspond to reusable blocks. This is a small theme with no external dependency, fully under your own control.
 
 > [!TIP]
 > You can also move all theme-related content into the themes directory to turn it into an actual theme. Doing so gives you a clearer separation of responsibility between your source code and your Markdown content.

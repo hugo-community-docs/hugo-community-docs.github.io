@@ -274,6 +274,10 @@ languages:
           pageRef: /docs/guide/introduction
           weight: 40
 
+        - name: Tutorial
+          pageRef: /tutorial
+          weight: 80
+
         - name: Reference
           pageRef: /reference
           weight: 120
