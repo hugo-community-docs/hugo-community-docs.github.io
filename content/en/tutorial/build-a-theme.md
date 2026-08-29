@@ -214,7 +214,7 @@ main {
 
 {{% /admonition %}}
 
-## baseof: The Shared Skeleton
+## Shared Skeleton
 
 `baseof` is the HTML skeleton shared by every page. Create `layouts/baseof.html`:
 
@@ -246,13 +246,13 @@ The rendered `lang` attribute uses `{{ .Site.Language.Locale }}`, the same `loca
 
 `<head>` and `<header>` are simple skeleton setup, nothing more.
 
-`block "main"` is the key part here. It uses Hugo's [block](https://gohugo.io/functions/go-template/block/) function. When rendering different [Page Kinds](../docs/concept/templates.md#page-kind), Hugo maps to a different base template and slots that template's `{{ define "main" }}{{ end }}` into this spot.
+`block "main"` is the key part here. It uses Hugo's [block](https://gohugo.io/functions/go-template/block/) function. When rendering different [Page Kinds](../docs/concept/templates.md#page-kind), Hugo maps to a different layout template and slots that template's `{{ define "main" }}{{ end }}` into this spot.
 
 The `<footer>` is, again, basic skeleton setup.
 
-## Create Base Templates
+## Create Layout Templates
 
-Right now the skeleton has no base template, so running it throws an error. Start with the simplest fallback, `all.html`. When Hugo can't find a matching template, `all.html` is the last resort:
+Right now the skeleton has no layout template, so running it throws an error. Start with the simplest fallback, `all.html`. When Hugo can't find a matching template, `all.html` is the last resort:
 
 ```go-html-template {title="layouts/all.html"}
 {{ define "main" }}
@@ -400,9 +400,9 @@ Update the template to add the header nav under `<header>`:
 
 Check the page. The header should now show Home and Blog links.
 
-## Add More Base Templates
+## Add More Layout Templates
 
-`all.html` was only a temporary stopgap. Stop the server with `Ctrl + C` and build more base templates so each Page Kind renders with its own dedicated template.
+`all.html` was only a temporary stopgap. Stop the server with `Ctrl + C` and build more layout templates so each Page Kind renders with its own dedicated template.
 
 {{% tabs %}}
   {{< tab label="page.html" >}}
@@ -504,7 +504,7 @@ Run `hugo server -D` again. Browse between pages, tweak the Markdown or partials
 
 ## Split Out Partials
 
-Everything sits in the base template right now, and as the project grows it's time to split things up. Splitting is straightforward: take the entire content of the `<head>` tag, move it into `layouts/_partials/head.html`, and use `{{ partial "head.html" . }}` in its original spot.
+Everything sits in the `baseof.html` right now, and as the project grows it's time to split things up. Splitting is straightforward: take the entire content of the `<head>` tag, move it into `layouts/_partials/head.html`, and use `{{ partial "head.html" . }}` in its original spot.
 
 > [!INFO] [context](https://gohugo.io/templates/introduction/#context)
 > The `.` after `partial` represents the context of the current scope. For a regular page, the outermost `.` represents `.Page`, the page itself[^1], so the `head.html` partial receives the current page as context.

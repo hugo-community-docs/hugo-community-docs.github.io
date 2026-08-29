@@ -215,7 +215,7 @@ main {
 
 {{% /admonition %}}
 
-## baseof：共用骨架
+## 共用骨架
 
 baseof 是所有頁面共用的 HTML 骨架。建立 `layouts/baseof.html`：
 
@@ -247,13 +247,13 @@ baseof 是所有頁面共用的 HTML 骨架。建立 `layouts/baseof.html`：
 
 接下來 `<head>` `<header>` 都是簡單的基本骨架設定。
 
-`block "main"` 是本段落重點，使用 Hugo 的 [block](https://gohugo.io/functions/go-template/block/) 函式，在渲染不同的 [Page Kind](../docs/concept/templates.md#page-kind) 時會對應到不同的基礎模板，並且將基礎模板的 `{{ define "main" }}{{ end }}` 放進來。
+`block "main"` 是本段落重點，使用 Hugo 的 [block](https://gohugo.io/functions/go-template/block/) 函式，在渲染不同的 [Page Kind](../docs/concept/templates.md#page-kind) 時會對應到不同的佈局模板，並且將佈局模板的 `{{ define "main" }}{{ end }}` 放進來。
 
 最後的 `<footer>` 同樣是基本骨架設定。
 
-## 建立基礎模板
+## 建立佈局模板
 
-現在我們只有骨架還沒有任何基礎模板，因此執行會報錯的，先以最簡單的 fallback `all.html`，試試看，當 Hugo 找不到對應的模板時，`all.html` 是最後的 fallback：
+現在我們只有骨架還沒有任何佈局模板，因此執行會報錯的，先以最簡單的 fallback `all.html`，試試看，當 Hugo 找不到對應的模板時，`all.html` 是最後的 fallback：
 
 ```go-html-template {title="layouts/all.html"}
 {{ define "main" }}
@@ -401,9 +401,9 @@ menu:
 
 看網頁應該就會看到頁首多了 Home 和 Blog 兩個按鈕。
 
-## 建立更多基礎模板
+## 建立更多佈局模板
 
-剛才只建立了 `all.html` 暫時頂一下，現在我們先 `Ctrl + C` 停止伺服器，建立更多基礎模板，讓每種 Page Kind 都使用專屬的模板渲染。
+剛才只建立了 `all.html` 暫時頂一下，現在我們先 `Ctrl + C` 停止伺服器，建立更多佈局模板，讓每種 Page Kind 都使用專屬的模板渲染。
 
 {{% tabs %}}
   {{< tab label="page.html" >}}
@@ -505,7 +505,7 @@ menu:
 
 ## 拆分 partial
 
-現在我們把內容全部寫在基礎模板裡，隨著專案膨脹就開始要拆分。拆分也很簡單，比如把整個 `<head>` 標籤的內容放到 `layouts/_partials/head.html`，然後在原本的位置使用 `{{ partial "head.html" . }}` 就好了。
+現在我們把內容全部寫在 `baseof.html` 裡，隨著專案膨脹就開始要拆分。拆分也很簡單，比如把整個 `<head>` 標籤的內容放到 `layouts/_partials/head.html`，然後在原本的位置使用 `{{ partial "head.html" . }}` 就好了。
 
 > [!INFO] [context](https://gohugo.io/templates/introduction/#context)
 > 請注意 `partial` 後面的 `.` 代表 「目前 scope 的 context」，比如一般頁面最外層的 `.` 代表 `.Page` 頁面本身[^1]，因此 `head.html` partial 接收到的就是目前頁面。
