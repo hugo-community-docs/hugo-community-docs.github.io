@@ -263,7 +263,7 @@ Conditions include:
 - language: language
 - role: role (see [Sites Matrix](sites-matrix.md))
 - version: version (see [Sites Matrix](sites-matrix.md))
-- outputformat: [output format](https://gohugo.io/configuration/output-formats/), such as a custom JSON output
+- outputformat: (See [Output Formats](output-formats.md))
 - mediatype: [media type](https://gohugo.io/configuration/output-formats/)
 - kind: kind
 - type: type

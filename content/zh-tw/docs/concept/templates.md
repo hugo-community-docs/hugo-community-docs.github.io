@@ -261,7 +261,7 @@ baseof.section.de.html → 只用於德語的 section 頁面的 baseof 基礎模
 - language: 語言
 - role: 角色（見 [Sites Matrix](sites-matrix.md)）
 - version: 版本（見 [Sites Matrix](sites-matrix.md)）
-- outputformat: [輸出格式](https://gohugo.io/configuration/output-formats/)，如自訂 JSON 輸出
+- outputformat: (見 [輸出格式](output-formats.md))
 - mediatype: [媒體類型](https://gohugo.io/configuration/output-formats/)
 - kind: 種類
 - type: 類型

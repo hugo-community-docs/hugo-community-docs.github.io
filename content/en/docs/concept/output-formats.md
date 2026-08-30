@@ -140,23 +140,23 @@ And read that value:
 
 This approach fits situations that need cross page aggregation or a one-time precomputed value, such as [backlinks](https://github.com/jmooring/hugo-module-backlinks).
 
-## Use 3: Outputting Markdown
+## Use 3: Output Markdown
 
-Output formats can also output plain Markdown. A common use is generating `llms.txt`, which gives AI tools a plain text version of the site's content to read:
+Output formats can also produce plain Markdown, for example generating an additional `.md` version of each page, making it easy for readers to view the raw content or for other tools to consume:
 
 ```yaml
 outputFormats:
-  llmText:
-    mediaType: text/plain
-    baseName: llms
+  markdown:
+    mediaType: text/markdown
+    baseName: index
     isPlainText: true
 ```
 
 ```yaml
 outputs:
-  home:
+  page:
     - html
-    - llmText
+    - markdown
 ```
 
-The matching template, `layouts/index.llmText.txt`, outputs Markdown formatted content directly, with no HTML conversion involved.
+The corresponding template, `layouts/page.markdown.md`, outputs the Markdown content directly, without going through HTML conversion.

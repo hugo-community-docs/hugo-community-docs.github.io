@@ -141,21 +141,21 @@ Hugo 依照 `weight` 決定各 output format 的渲染順序，數字小的先�
 
 ## 用途三：輸出 Markdown
 
-Output format 也能輸出純 Markdown，常見用途是產生 `llms.txt`，提供 AI 工具讀取網站內容的純文字版本：
+Output format 也能輸出純 Markdown，例如為每個頁面額外產生一份 `.md` 版本，方便讀者查看原始內容或供其他工具讀取：
 
 ```yaml
 outputFormats:
-  llmText:
-    mediaType: text/plain
-    baseName: llms
+  markdown:
+    mediaType: text/markdown
+    baseName: index
     isPlainText: true
 ```
 
 ```yaml
 outputs:
-  home:
+  page:
     - html
-    - llmText
+    - markdown
 ```
 
-對應模板 `layouts/index.llmText.txt` 直接輸出 Markdown 格式的內容，不經過 HTML 轉換。
+對應模板 `_layouts/page.markdown.md` 直接輸出 Markdown 格式的內容，不經過 HTML 轉換。
