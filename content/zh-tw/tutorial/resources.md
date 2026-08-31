@@ -61,7 +61,7 @@ weight: 300
 
 使用 `with` 語法避免檔案不存在時對 `nil` 呼叫 `.RelPermalink` 造成錯誤。如果想直接報錯，則不要使用 `with` 語法。
 
-你也可以使用 [`.Content`](https://gohugo.io/functions/resources/concat/) 方法直接印出資源內容。
+你也可以使用 [`.Content`](https://gohugo.io/methods/resource/content/) 方法直接印出資源內容。
 
 ## 複製
 

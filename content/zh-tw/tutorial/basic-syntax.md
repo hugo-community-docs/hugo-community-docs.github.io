@@ -271,11 +271,11 @@ true
 ```
 
 ```go-html-template
-{{ partial "shipping-note.html" (dict "weight" 6 "city" "新竹") }}
+{{ partial "shipping-note.html" (dict "weight" 6 "city" "TX") }}
 ```
 
 ```html
-新竹：超重加收運費
+TX：超重加收運費
 ```
 
 `.weight` 與 `.city` 對應呼叫時 `dict` 裡的鍵。
