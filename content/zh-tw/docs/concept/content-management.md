@@ -75,7 +75,7 @@ content
 3. 文章頁面可以使用`檔名.md`，也可以使用`檔名/index.md`
 4. 標籤頁的 `_index.md` 同樣代表列表頁
 
-`p1.md` 和 `p2/index.md` 都可以建立獨立的文章，但是只有後者是 leaf bundle 可以擁有自身 bundle 的資源，如圖片或影片，後者不是 bundle，自然也無法擁有自身 bundle 的資源。
+`p1.md` 和 `p2/index.md` 都可以建立獨立的文章，但是只有後者是 leaf bundle 可以擁有自身 bundle 的資源，如圖片或影片，後者不是 bundle，當然也無法擁有 bundle 的資源。
 
 您應該永遠選擇 `post/index.md` 形式這樣專案結構才會統一，除非兩種情況：
 

@@ -5,7 +5,7 @@ weight: 300
 description: 'Markdown, front matter, and shortcode syntax used when writing content for the site created in the previous page.'
 ---
 
-Building on the site created in the previous page, this page covers the Markdown, front matter, and shortcode syntax you'll use when writing content.
+This page covers the Markdown, front matter, and shortcode syntax you'll use when writing content.
 
 ## Front Matter
 

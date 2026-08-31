@@ -4,17 +4,15 @@ slug: basic-syntax
 weight: 200
 ---
 
-延續前一篇的範例網站，全部寫在 `layouts/home.html`。
-
 ## 計算和比較
 
 Hugo 沒有 `+`、`<` 這些符號，比較需用函式呼叫。
 
 ```go-html-template
 {{ add 1 1 }}
-{{ sub 2 1}}
+{{ sub 2 1 }}
 {{ mul 2 2 }}
-{{ div 4 2}}
+{{ div 4 2 }}
 {{ eq 1 1 }}
 {{ ne 1 2 }}
 {{ lt 1 2 }}
@@ -43,16 +41,16 @@ true
 ```go-html-template {title="layouts/home.html"}
 {{ $x := 7 }}
 {{ if eq $x 6 }}
-  <p>是 6</p>
+  eq 6
 {{ else if eq $x 7 }}
-  <p>是 7</p>
+  eq 7
 {{ else }}
-  <p>其他</p>
+  ...
 {{ end }}
 ```
 
 ```html
-<p>是 7</p>
+eq 7
 ```
 
 ## with / else with
@@ -63,16 +61,16 @@ true
 {{ $v1 := "" }}
 {{ $v2 := "橘子" }}
 {{ with $v1 }}
-  <p>{{ . }}</p>
+  {{ . }}
 {{ else with $v2 }}
-  <p>{{ . }}</p>
+  {{ . }}
 {{ else }}
-  <p>都是空的</p>
+  都不是
 {{ end }}
 ```
 
 ```html
-<p>橘子</p>
+橘子
 ```
 
 ## and / or / not
@@ -97,28 +95,28 @@ range 等同於 for loop，Hugo 只有 for loop 沒有 while loop。
 
 ```go-html-template {title="layouts/home.html"}
 {{ range slice "蘋果" "香蕉" "橘子" }}
-  <p>{{ . }}</p>
+  {{ . }}<br>
 {{ end }}
 ```
 
 ```html
-<p>蘋果</p>
-<p>香蕉</p>
-<p>橘子</p>
+蘋果<br>
+香蕉<br>
+橘子<br>
 ```
 
 或是包含計數索引
 
 ```go-html-template {title="layouts/home.html"}
 {{ range $idx, $val := slice "蘋果" "香蕉" "橘子" }}
-  <p>{{ $idx }}: {{ $val }}</p>
+  {{ $idx }}: {{ $val }}<br>
 {{ end }}
 ```
 
 ```html
-<p>0: 蘋果</p>
-<p>1: 香蕉</p>
-<p>2: 橘子</p>
+0: 蘋果<br>
+1: 香蕉<br>
+2: 橘子<br>
 ```
 
 ## break / continue
@@ -133,12 +131,12 @@ range 等同於 for loop，Hugo 只有 for loop 沒有 while loop。
   {{ if eq . "橘子" }}
     {{ break }}
   {{ end }}
-  <p>{{ . }}</p>
+  {{ . }}
 {{ end }}
 ```
 
 ```html
-<p>蘋果</p>
+蘋果
 ```
 
 ## slice
@@ -258,7 +256,7 @@ partial 是獨立的模板檔案。用 `partial` 函式呼叫模板（LAYOUT）�
 true
 ```
 
-在 Hugo v0.165.0 之前，一個 partial 只能有一個 `return`。[#15215](https://github.com/gohugoio/hugo/pull/15215) 之後（預計於 v0.166.0 發布），partial 可以有多個 `return`，也支援提前回傳（early return）。
+[v0.166.0](https://github.com/gohugoio/hugo/releases/tag/v0.166.0) 之前只支援一個 `return`。
 
 **傳入多個值**
 
@@ -266,9 +264,9 @@ true
 
 ```go-html-template {title="layouts/_partials/shipping-note.html"}
 {{ if ge .weight 5 }}
-  <p>{{ .city }}：超重加收運費</p>
+  {{ .city }}：超重加收運費
 {{ else }}
-  <p>{{ .city }}：一般運費</p>
+  {{ .city }}：一般運費
 {{ end }}
 ```
 
@@ -277,7 +275,7 @@ true
 ```
 
 ```html
-<p>新竹：超重加收運費</p>
+新竹：超重加收運費
 ```
 
 `.weight` 與 `.city` 對應呼叫時 `dict` 裡的鍵。
@@ -350,7 +348,7 @@ KEY1、KEY2、KEY3……為選填的額外快取鍵（cache key），用來讓�
 [SHORTCODE.Store]: https://gohugo.io/methods/shortcode/store/
 [collections.NewScratch]: https://gohugo.io/functions/collections/newscratch/
 
-`.Store` 有順序關係，若呼叫 `.Get` 之前尚未呼叫過 `.Store`，`.Get` 自然沒有值。
+`.Store` 有順序關係，若呼叫 `.Get` 之前尚未呼叫過 `.Store`，`.Get` 就沒有值。
 
 `.Store` 內容的生命週期是整個程式週期，不會因為當前頁面渲染結束就被回收。
 

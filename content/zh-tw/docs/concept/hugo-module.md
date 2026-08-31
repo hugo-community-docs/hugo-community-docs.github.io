@@ -4,7 +4,7 @@ slug: hugo-modules
 weight: 600
 ---
 
-前面的 [Sites Matrix](sites-matrix.md) 與 [Multilingual](multilingual.md) 都提到了 module mount 的概念，這是 Hugo 很重大的特色，本文專門介紹 Hugo Modules 以及對應的 `hugo mod` 指令。
+本文專門介紹 Hugo Modules 以及對應的 `hugo mod` 指令。
 
 ## 什麼是 Module
 

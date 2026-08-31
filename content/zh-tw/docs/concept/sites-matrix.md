@@ -4,7 +4,7 @@ slug: sites-matrix
 weight: 500
 ---
 
-前一篇文章[多語言網站](multilingual.md)中介紹了 site 的概念，說明在 Hugo 中每個語言都是一個獨立的 site，而 [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) 進一步引入了 sites matrix 概念，將原本單一維度的「一個 language 對應一個 site」提升到三個維度的組合。本篇說明這個概念，以及如何用它控制內容的產生範圍。
+在 Hugo 中每個語言都是獨立的 site，而 [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) 進一步引入了 sites matrix 概念，將原本單一維度的「一個 language 對應一個 site」提升到三個維度的組合。本篇說明這個概念，以及如何用它控制內容的產生範圍。
 
 ## 三個維度
 

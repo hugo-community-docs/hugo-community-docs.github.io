@@ -5,7 +5,7 @@ weight: 500
 description: 'How Hugo v0.153.0 extends the single-dimension site model into a three-dimensional matrix of language, version, and role.'
 ---
 
-[Multilingual Sites](multilingual.md) introduced the concept of a site and explained that each language in Hugo is its own independent site. [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) went further and introduced the sites matrix concept, raising the old single dimension model of "one language equals one site" into a combination of three dimensions. This page explains the concept and how to use it to control the scope of content generation.
+Each language is its own independent site in Hugo. [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) went further and introduced the sites matrix concept, raising the old single dimension model of "one language equals one site" into a combination of three dimensions. This page explains the concept and how to use it to control the scope of content generation.
 
 ## Three Dimensions
 

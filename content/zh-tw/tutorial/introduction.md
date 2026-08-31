@@ -9,11 +9,13 @@ weight: 100
 本文基於基礎範例網站介紹，使用以下指令初始化：
 
 ```sh
-hugo new project my-site
+hugo new project my-site --format yaml
 cd my-site
 hugo new theme test
-echo "theme = [\"test\"]" >> hugo.yaml
+echo "theme: [\"test\"]" >> hugo.yaml
 ```
+
+`hugo new theme test` 會在 `themes/test/` 建立一個主題骨架，主題修改就在這個資料夾進行。
 
 ## 理解專案結構
 
@@ -28,13 +30,13 @@ Hugo 是多個頁面同時渲染的，務必要記得這點，避免寫出競態
 `layouts/home.html`：
 
 ```go-html-template {title="layouts/home.html"}
-{{ $v1 := 6 }}
-{{ $v2 := 7 }}
-<p>{{ mul $v1 $v2 }}</p>
+{{ $v1 := 3 }}
+{{ $v2 := 4 }}
+<p>{{ add $v1 $v2 }}</p>
 ```
 
 ```html
-<p>42</p>
+<p>7</p>
 ```
 
 `{{ }}` 內是求值的地方，外面原樣輸出。
@@ -45,11 +47,11 @@ Hugo 是多個頁面同時渲染的，務必要記得這點，避免寫出競態
 {{ $price := 100 }}
 {{ $price = 120 }}
 {{ $price = "特價中" }}
-<p>{{ $price }}</p>
+{{ $price }}
 ```
 
 ```html
-<p>特價中</p>
+特價中
 ```
 
 `:=` 建立，`=` 賦值。同一個變數可以重複賦值，型別也能中途換掉，這裡 `$price` 就從數字變成了字串。
@@ -57,13 +59,13 @@ Hugo 是多個頁面同時渲染的，務必要記得這點，避免寫出競態
 ## 函式
 
 ```go-html-template {title="layouts/home.html"}
-<p>{{ add 1 2 3 }}</p>
-<p>{{ strings.ToLower "HUGO" }}</p>
+{{ add 1 2 3 }}
+{{ strings.ToLower "HUGO" }}
 ```
 
 ```html
-<p>6</p>
-<p>hugo</p>
+6
+hugo
 ```
 
 函式跟物件無關，是無狀態的：只看你給的參數，同樣的參數永遠回傳同樣的結果，不會因為在哪個模板呼叫而有差異。
@@ -86,13 +88,6 @@ Hugo 是多個頁面同時渲染的，務必要記得這點，避免寫出競態
 
 同理，底下的 `{{ block "main" . }}{{ end }}` 把目前頁面（`.`）傳到名為 `"main"` 的佈局模板裡面，這些 `"main"` 則在 `layouts` 目錄的 page、home、section、term、taxonomy 被 `{{ define "main" }}` 定義。也就是說，這五個佈局模板的 `{{ define "main" }}` 內部的上下文，同樣也是「目前頁面」。
 
-可以把上下文存成變數重複使用：
-
-```go-html-template {title="layouts/home.html"}
-{{ $page := . }}
-<h1>{{ $page.Title }} - {{ $page.Title }}</h1>
-```
-
 ## 方法
 
 接在 `.` 後面呼叫的東西稱為方法，綁定的對象就是 `.` 代表的上下文本身，不同上下文，同樣的方法回傳結果就不同。
@@ -107,7 +102,7 @@ Hugo 是多個頁面同時渲染的，務必要記得這點，避免寫出競態
 
 ```go-html-template {title="layouts/home.html"}
 {{ $about := .Site.GetPage "/about" }}
-<p>{{ $about.Title }}</p>
+{{ $about.Title }}
 ```
 
 ## 上下文的切換
@@ -116,19 +111,19 @@ Hugo 是多個頁面同時渲染的，務必要記得這點，避免寫出競態
 <h1>{{ .Title }}</h1>
 
 {{ range slice "蘋果" "香蕉" }}
-  <p>{{ . }}</p>
+  {{ . }}<br>
 {{ end }}
 
 {{ with "橘子" }}
-  <p>{{ . }} / {{ $.Title }}</p>
+  {{ . }} / {{ $.Title }}
 {{ end }}
 ```
 
 ```html
 <h1>My Site Title</h1>
-<p>蘋果</p>
-<p>香蕉</p>
-<p>橘子 / My Site Title</p>
+蘋果<br>
+香蕉<br>
+橘子 / My Site Title
 ```
 
 `range`、`with` 裡面，`.` 換成當下的元素或值；`$.` 永遠回傳入當前模板最外層的上下文。

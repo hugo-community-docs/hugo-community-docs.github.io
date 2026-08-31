@@ -5,7 +5,7 @@ weight: 200
 description: 'How to scaffold a new Hugo site, install a theme, and start the local development server.'
 ---
 
-With Hugo installed, this page explains how to create a new site and start the local development server.
+This page explains how to create a new site with Hugo and start the local development server.
 
 ## Create a Project
 

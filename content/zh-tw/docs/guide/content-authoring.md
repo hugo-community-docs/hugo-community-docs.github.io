@@ -4,7 +4,7 @@ slug: content-authoring
 weight: 300
 ---
 
-延續上一篇建立的網站，本篇說明撰寫內容時會用到的 Markdown、front matter 與 shortcode。
+本篇說明撰寫內容時會用到的 Markdown、front matter 與 shortcode。
 
 ## Front Matter
 

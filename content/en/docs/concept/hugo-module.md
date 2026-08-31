@@ -5,7 +5,7 @@ weight: 600
 description: 'What a Hugo module is, how to initialize and import one, common hugo mod commands, and practical patterns like vendoring, replace, and multi-environment mounts.'
 ---
 
-The previous pages, [Sites Matrix](sites-matrix.md) and [Multilingual](multilingual.md), both mentioned the module mount concept. This is one of Hugo's most significant features, and this page covers Hugo Modules and the corresponding `hugo mod` command in detail.
+This page covers Hugo Modules and the corresponding `hugo mod` command in detail.
 
 ## What Is a Module
 
