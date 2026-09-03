@@ -5,7 +5,7 @@ slug: docs
 description: Hugo community docs 是由社群驅動的非官方 Hugo 文檔網站。
 ---
 
-Hugo community docs 是由社群維護的 Hugo 文檔，目的是讓大部分用戶都能快速的上手和理解 Hugo，內容基礎建立在 Hugo 官方文檔與 Hugo 團隊、社群多年累積的討論之上，在此致謝。
+Hugo community docs 是由社群維護的 Hugo 文檔，目的是讓用戶快速的上手和理解 Hugo，內容基礎建立在 Hugo 官方文檔與 Hugo 團隊、社群多年累積的討論之上，在此致謝。
 
 [開始閱讀文檔 →](docs/guide/introduction.md)
 

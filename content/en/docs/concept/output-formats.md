@@ -2,16 +2,16 @@
 title: 'Output Formats'
 slug: output-formats
 weight: 900
-description: 'How a single page can render in multiple output formats, and three practical uses: search indexes, build-order preprocessing, and Markdown output for AI tools.'
+description: 'How a single page can render in multiple output formats, and three practical uses.'
 ---
 
-Hugo supports having a single page produce multiple output formats at once. This is configured through [output formats](https://gohugo.io/configuration/output-formats/).
+Hugo supports having a single page produce multiple output formats. This is configured through [output formats](https://gohugo.io/configuration/output-formats/).
 
-There are three common uses for output formats:
+Output formats commonly serve three purposes:
 
-1. Generating a JSON index for site-wide search.
+1. Generating a site-wide JSON index for search.
 2. Using build order to preprocess data before rendering.
-3. Outputting Markdown (for example `llms.txt`) for AI tools or other tools to read.
+3. Outputting Markdown (for example, llms.txt) for AI tools or other consumers to read.
 
 ## Basic Configuration
 
@@ -25,7 +25,7 @@ outputFormats:
     isPlainText: true
 ```
 
-Then specify which pages should output this format, also in `hugo.yaml`:
+Then specify which pages should produce this format, also in `hugo.yaml`:
 
 ```yaml
 outputs:
@@ -35,13 +35,34 @@ outputs:
     - searchIndex
 ```
 
-This produces `index.json` in addition to `index.html` for the homepage.
+This makes the home page produce `index.json` in addition to `index.html`.
 
-The output content is determined by the matching template. Hugo looks for a template based on the format name, for example `layouts/index.searchIndex.json`.
+The output content is determined by the corresponding template. Hugo looks up the template by format name, for example `layouts/index.searchIndex.json`.
 
-## Use 1: JSON Index
+## Example 1: Outputting Markdown
 
-The most common use is generating a data index for site-wide search. A template loops through every page and outputs a single JSON file:
+Output plain Markdown for every page:
+
+```yaml
+outputFormats:
+  markdown:
+    mediaType: text/markdown
+    baseName: index
+    isPlainText: true
+```
+
+```yaml
+outputs:
+  page:
+    - html
+    - markdown
+```
+
+The corresponding template, `_layouts/page.markdown.md`, outputs the Markdown content directly.
+
+## Example 2: JSON Index
+
+Generate a data index for search. The template iterates over every page and outputs a JSON file:
 
 ```yaml
 outputFormats:
@@ -69,11 +90,17 @@ outputs:
 {{- $index | jsonify -}}
 ```
 
-A frontend search library such as Fuse.js then reads this JSON in the browser to build its index and run searches, with no backend server involved.
+A frontend search feature then reads this JSON in the browser to build an index and run searches, with no backend server involved.
 
 <details>
 
-<summary>Minimal example</summary>
+<summary>Minimal Fuse.js search example</summary>
+
+```html {title="baseof.html"}
+{{/* put this in the nav or header */}}
+<input type="text" id="searchInput" placeholder="Search...">
+<ul id="results"></ul>
+```
 
 ```html {title="baseof.html"}
 {{/* put this before the end of </body> */}}
@@ -112,19 +139,13 @@ A frontend search library such as Fuse.js then reads this JSON in the browser to
 </script>
 ```
 
-```html {title="baseof.html"}
-{{/* put this in the nav or header */}}
-<input type="text" id="searchInput" placeholder="Search...">
-<ul id="results"></ul>
-```
-
 </details>
 
-## Use 2: Preprocessing Through Build Order
+## Example 3: Preprocessing With Build Order
 
-Hugo determines each output format's render order by `weight`, with lower numbers rendering first. This means you can have one output format run first, write data into `.Store`, and let other formats rendered afterward (HTML, for example) read that data back out.
+Hugo determines the rendering order of output formats based on `weight`, with lower numbers rendering first. This means you can have one output format run first, write data into `.Store`, and let other formats rendered later (such as HTML) read it:
 
-Writing to the store while the JSON index renders:
+Write to the store during the JSON index render:
 
 ```go-html-template {title="layouts/home.searchIndex.json"}
 {{- range site.RegularPages }}
@@ -132,31 +153,10 @@ Writing to the store while the JSON index renders:
 {{- end }}
 ```
 
-And read that value:
+Then read it:
 
 ```go-html-template
 {{ $.Store.Get (printf "foo-%s" .RelPermalink) }}
 ```
 
-This approach fits situations that need cross page aggregation or a one-time precomputed value, such as [backlinks](https://github.com/jmooring/hugo-module-backlinks).
-
-## Use 3: Output Markdown
-
-Output formats can also produce plain Markdown, for example generating an additional `.md` version of each page, making it easy for readers to view the raw content or for other tools to consume:
-
-```yaml
-outputFormats:
-  markdown:
-    mediaType: text/markdown
-    baseName: index
-    isPlainText: true
-```
-
-```yaml
-outputs:
-  page:
-    - html
-    - markdown
-```
-
-The corresponding template, `layouts/page.markdown.md`, outputs the Markdown content directly, without going through HTML conversion.
+This approach works well when you need to aggregate across pages or perform a one-time precomputation, as with [backlinks](https://github.com/jmooring/hugo-module-backlinks).
