@@ -4,7 +4,41 @@ slug: content-authoring
 weight: 300
 ---
 
-本篇說明撰寫內容時會用到的 Markdown、front matter 與 shortcode。
+本篇說明撰寫文章內容會用到的相關知識，包含 content 目錄結構，Markdown、front matter 與 shortcode。
+
+## Content 結構
+
+content 資料夾結構如下：
+
+```sh
+content
+├── _index.md            # 1. 主頁
+├── docs
+│   ├── _index.md        # 2. 列表頁
+│   ├── p1.md            # 3-1. 文章頁面：直接使用檔名
+│   ├── p2               # 3-2. 文章頁面：使用 index.md
+│   │   ├── cover.jpg
+│   │   └── index.md
+│   └── bar              # 深層列表頁
+│       ├── _index.md    # 深層頁面的列表頁
+│       ├── post-1.md
+│       └── post-2.md
+└── tags
+    ├── _index.md        # 4. 標籤頁面的列表頁
+    └── my-tag.md        # 標籤頁
+```
+
+1. 主頁是放在最上層的 `_index.md`
+2. 其餘帶有底線的 `_index.md` 都是列表頁
+3. 文章頁面可以使用`檔名.md`，也可以使用`檔名/index.md`，**不會再有子頁面**
+4. 標籤頁的 `_index.md` 同樣代表列表頁
+
+`p1.md` 和 `p2/index.md` 都可以建立獨立的文章，但是只有後者可以擁有自身 bundle 的資源，如圖片或影片。您應該永遠選擇 `post-name/index.md` 形式這樣專案結構才會統一，除非兩種情況：
+
+1. 網站幾乎沒有圖片等資源
+2. 網站資源規劃全部放到 `assets` 目錄
+
+這兩種情況都用不到 bundle 資源，因此直接使用 `post.md` 顯然更乾淨簡潔。
 
 ## Front Matter
 

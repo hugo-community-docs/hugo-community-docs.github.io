@@ -24,66 +24,6 @@ title: '{{ .File.ContentBaseName }}'
 
 只要將該檔案放在 `archetypes/default.md` 即可。你也可以對各種頁面使用各自的預設值，詳細設定請見 [Archetypes 文檔](https://gohugo.io/content-management/archetypes/)。
 
-## Page Bundle
-
-`index.md` 與 `_index.md` 只差一個底線，代表的語意完全不同。
-
-- Leaf bundle：目錄下是 `index.md`，代表獨立頁面，**不會再有子頁面**。
-
-  ```text
-  content/posts/my-post/
-  ├── index.md
-  └── cover.png
-  ```
-
-- Branch bundle：目錄下是 `_index.md`，代表區段，底下可以有子頁面或子區段。
-
-  ```text
-  content/posts/
-  ├── _index.md
-  └── my-post/
-      ├── index.md
-      └── cover.png
-  ```
-
-- [Headless bundles](https://gohugo.io/content-management/build-options/)：進階用途，主要目的在不發佈頁面的情況下，只發佈指定的頁面、資產。
-
-## Content 結構
-
-一個典型的 content 資料夾結構如下：
-
-```sh
-content
-├── _index.md            # 1. 主頁
-├── docs
-│   ├── _index.md        # 2. 列表頁
-│   ├── p1.md            # 3-1. 文章頁面：直接使用檔名
-│   ├── p2               # 3-2. 文章頁面：使用 index.md
-│   │   ├── foo.jpg
-│   │   └── index.md
-│   └── bar              # 深層頁面
-│       ├── _index.md    # 深層頁面的列表頁
-│       ├── post-1.md
-│       └── post-2.md
-└── tags
-    ├── _index.md        # 4. 標籤頁面的列表頁
-    └── my-tag.md        # 標籤頁
-```
-
-1. 主頁是放在最上層的 `_index.md`
-2. 其餘帶有底線的 `_index.md` 都是列表頁
-3. 文章頁面可以使用`檔名.md`，也可以使用`檔名/index.md`
-4. 標籤頁的 `_index.md` 同樣代表列表頁
-
-`p1.md` 和 `p2/index.md` 都可以建立獨立的文章，但是只有後者是 leaf bundle 可以擁有自身 bundle 的資源，如圖片或影片，後者不是 bundle，當然也無法擁有 bundle 的資源。
-
-您應該永遠選擇 `post/index.md` 形式這樣專案結構才會統一，除非兩種情況：
-
-1. 網站幾乎沒有圖片等資源
-2. 網站資源規劃全部放到 `assets` 目錄
-
-這兩種情況都用不到 bundle 資源，因此直接使用 `post.md` 顯然更乾淨簡潔。
-
 ## Cascade
 
 Cascade 用於一次設定指定路徑以下的內容，免去逐檔案一一設定的麻煩。可以在 [hugo.yaml 中設定 cascade](https://gohugo.io/configuration/cascade/)，也可以在 [frontmatter 設定 cascade](https://gohugo.io/content-management/front-matter/#cascade-1)。

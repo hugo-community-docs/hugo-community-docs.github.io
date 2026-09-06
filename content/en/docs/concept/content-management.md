@@ -24,66 +24,6 @@ title: '{{ .File.ContentBaseName }}'
 
 Just place the file at `archetypes/default.md`. You can also set different defaults for different page types. See the [Archetypes documentation](https://gohugo.io/content-management/archetypes/) for details.
 
-## Page Bundle
-
-`index.md` and `_index.md` differ by a single underscore, but they carry entirely different meaning.
-
-- Leaf bundle: a directory containing `index.md` represents a standalone page that **cannot have child pages**.
-
-  ```text
-  content/posts/my-post/
-  ├── index.md
-  └── cover.png
-  ```
-
-- Branch bundle: a directory containing `_index.md` represents a section, which can contain child pages or child sections.
-
-  ```text
-  content/posts/
-  ├── _index.md
-  └── my-post/
-      ├── index.md
-      └── cover.png
-  ```
-
-- [Headless bundles](https://gohugo.io/content-management/build-options/): an advanced use case, mainly for publishing specific pages or assets without publishing the bundle itself.
-
-## Content Structure
-
-A typical content directory looks like this:
-
-```sh
-content
-├── _index.md            # 1. Home page
-├── docs
-│   ├── _index.md        # 2. List page
-│   ├── p1.md            # 3-1. Post page: filename only
-│   ├── p2               # 3-2. Post page: using index.md
-│   │   ├── foo.jpg
-│   │   └── index.md
-│   └── bar              # Nested page
-│       ├── _index.md    # List page for the nested section
-│       ├── post-1.md
-│       └── post-2.md
-└── tags
-    ├── _index.md        # 4. List page for tags
-    └── my-tag.md        # Tag page
-```
-
-1. The home page is the `_index.md` at the top level
-2. Every other `_index.md` with a leading underscore is a list page
-3. A post page can use either a `filename.md` or a `filename/index.md`
-4. A tag's `_index.md` is likewise a list page
-
-Both `p1.md` and `p2/index.md` can create a standalone post, but only the latter is a leaf bundle, which can own its own bundle resources such as images or video. The former isn't a bundle, so it can't own bundle resources of its own.
-
-You should default to the `post/index.md` form to keep your project structure consistent, except in two cases:
-
-1. The site has little or no image or other asset content
-2. All site assets are managed under the `assets` directory
-
-Neither case needs bundle resources, so using `post.md` directly is simpler and cleaner.
-
 ## Cascade
 
 Cascade lets you set values for every piece of content under a given path at once, so you don't have to configure each file individually. You can set cascade [in `hugo.yaml`](https://gohugo.io/configuration/cascade/), or [in front matter](https://gohugo.io/content-management/front-matter/#cascade-1).

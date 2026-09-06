@@ -7,6 +7,40 @@ description: 'Markdown, front matter, and shortcode syntax used when writing con
 
 This page covers the Markdown, front matter, and shortcode syntax you'll use when writing content.
 
+## Content Structure
+
+A content directory looks like this:
+
+```sh
+content
+├── _index.md            # 1. Home page
+├── docs
+│   ├── _index.md        # 2. List page
+│   ├── p1.md            # 3-1. Post page: filename only
+│   ├── p2               # 3-2. Post page: using index.md
+│   │   ├── foo.jpg
+│   │   └── index.md
+│   └── bar              # Nested list
+│       ├── _index.md    # List page for the nested section
+│       ├── post-1.md
+│       └── post-2.md
+└── tags
+    ├── _index.md        # 4. List page for tags
+    └── my-tag.md        # Tag page
+```
+
+1. The home page is the `_index.md` at the top level
+2. Every other `_index.md` with a leading underscore is a list page
+3. A post page can use either a `filename.md` or a `filename/index.md`, **cannot have child pages**
+4. A tag's `_index.md` is likewise a list page
+
+Both `p1.md` and `p2/index.md` can create a standalone post, but only the latter can hold its own bundle resources, such as images or videos. You should default to the `post-name/index.md` form to keep your project structure consistent, except in two cases:
+
+1. The site has little or no image or other asset content
+2. All site assets are managed under the `assets` directory
+
+Neither case needs bundle resources, so using `post.md` directly is simpler and cleaner.
+
 ## Front Matter
 
 Front matter is the block at the start of every content file that records that content's metadata. It supports three formats, yaml, YAML, and JSON, distinguished purely by delimiter:
