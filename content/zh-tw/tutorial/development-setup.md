@@ -13,6 +13,8 @@ weight: 400
 
 ## Formatter 設定
 
+### HTML
+
 可以使用 prettier 插件以格式化 HTML + go-template。
 
 ```sh
