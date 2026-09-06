@@ -155,9 +155,6 @@ hugo-community-docs 建議一律使用包含副檔名的方式連結，比如 `[
 > [!INFO]
 > 若連結路徑解析失敗，則代表主題的 [link render hook](https://gohugo.io/render-hooks/links/) 邏輯錯誤，應回報給主題，或是自行啟用 `renderHooks.link.useEmbedded = always`。
 
-> [!TIP]
-> 如要偵測連結正確性，可以再整合外部工具如 [rumdl](https://github.com/rvben/rumdl)，其 [MD057](https://rumdl.dev/md057/) 規則支援 Markdown 連結以及資產，以及絕對連結偵測和補全，是目前所有 Markdown linter 工具獨一檔的存在。
-
 ## Shortcodes
 
 Shortcode 是在 Markdown 內容中插入模板邏輯的方式，用來處理 Markdown 語法做不到的事，例如插入影片、建立 tabs、呼叫主題提供的元件。

@@ -3,6 +3,10 @@ title: FAQ
 description: '針對建置 Hugo 網站時遇到的問題，提供切實可行的解決方案，這些方案均來自真實的故障排除經驗。'
 ---
 
+## 連結檢查
+
+可以整合外部工具連結正確性，如 [rumdl](https://github.com/rvben/rumdl) [MD057](https://rumdl.dev/md057/) 規則支援 Markdown 連結以及資產，以及絕對連結偵測和補全。
+
 ## Partial 與 Template
 
 `{{ template }}` 是 Go template 提供的 template 功能，只能直接渲染文字，沒有任何其他功能。`{{ partial }}` 則是 Hugo 在 template 的基礎包裝後提供的功能，額外支援計數、回傳值、`partialCache` 等功能。

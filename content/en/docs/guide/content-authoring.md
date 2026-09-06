@@ -156,9 +156,6 @@ hugo-community-docs recommends always linking with the file extension included, 
 > [!INFO]
 > If a link path fails to resolve, that indicates a bug in the theme's [link render hook](https://gohugo.io/render-hooks/links/) logic. Report it to the theme, or enable `renderHooks.link.useEmbedded = always` yourself.
 
-> [!TIP]
-> To check link correctness, you can use external tools such as [rumdl](https://github.com/rvben/rumdl). Its [MD057](https://rumdl.dev/md057/) rule supports Markdown links and assets, along with absolute link detection and autocompletion, a feature currently unique among Markdown linters.
-
 ## Shortcodes
 
 Shortcodes are a way to insert template logic into Markdown content, used to handle things Markdown syntax alone can't, such as embedding videos, building tabs, or calling components provided by a theme.

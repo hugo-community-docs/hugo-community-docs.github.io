@@ -3,6 +3,10 @@ title: FAQ
 description: 'Practical answers to problems that come up while building a Hugo site, gathered from real troubleshooting experiences.'
 ---
 
+## Link Checking
+
+You can integrate external tools to verify link correctness. For example, [rumdl](https://github.com/rvben/rumdl)'s [MD057](https://rumdl.dev/md057/) rule supports Markdown links and assets, along with absolute link detection and completion.
+
 ## Configuration Merging
 
 Hugo merges different configuration keys using different rules: no merging, shallow merging, and deep merging. See [Merge configuration settings](https://gohugo.io/configuration/introduction/#merge-configuration-settings).
