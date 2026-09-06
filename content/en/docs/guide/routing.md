@@ -7,8 +7,6 @@ description: 'How Hugo determines each page URL, including default routing rules
 
 This page explains how Hugo determines the URL for each page. Get URL management right from the start. Broken links damage a site more than almost anything else, so plan your approach early.
 
-The default URL rules already fit most practical use cases, unless you have a clear, specific need. If you're building a general website or blog, skip ahead to [Setting a URL for a Single Page](#manually-setting-a-single-pages-url) and come back here later if you need to make adjustments.
-
 ## Default URL Rules
 
 Hugo automatically generates a URL based on the file path under `content/`:
@@ -18,7 +16,7 @@ content/posts/my-first-post.md   →   /posts/my-first-post/
 content/about.md                 →   /about/
 ```
 
-In other words, you don't need to set URLs manually. Place a file in the right directory and the URL is generated automatically.
+The default URL rules already fit most practical use cases, unless you have a clear, specific need.
 
 ## Custom URLs (Permalinks)
 

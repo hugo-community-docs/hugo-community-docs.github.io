@@ -76,9 +76,9 @@ module:
 
 ## Vendor
 
-`hugo mod vendor` 用於本地檢視與臨時修改除錯，此指令會將所有引用的 module 複製到 `_vendor` 目錄。
+`hugo mod vendor` 用於本地檢視與臨時修改除錯。
 
-直接修改 `_vendor` 內的檔案僅用於快速除錯，再次 vendor 就會被覆蓋，正式的客製化方式仍然是透過 UFS 在專案根目錄用相同路徑覆蓋。
+此指令會將所有引用的 module 複製到優先權更高的 `_vendor` 目錄，可以直接在 `_vendor` 目錄中對 module 修改測試。直接修改 `_vendor` 內的檔案僅用於快速除錯，再次 vendor 就會被覆蓋，正式的客製化方式仍然是透過 UFS 在專案根目錄用相同路徑覆蓋。
 
 ## Replace
 

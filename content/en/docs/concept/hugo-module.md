@@ -77,9 +77,9 @@ Here is a summary of commonly used `hugo mod` commands:
 
 ## Vendor
 
-Use `hugo mod vendor` for local inspection and temporary debugging tweaks. This command copies every imported module into the `_vendor` directory.
+`hugo mod vendor` is used for local inspection and temporary debugging.
 
-Editing files inside `_vendor` directly is only useful for quick debugging. The next vendor run overwrites your changes. For real customization, keep using UFS: override the same path in your project root.
+This command copies all imported modules into the `_vendor` directory, which has higher priority, letting you modify and test modules directly within the `_vendor` directory. Directly modifying files inside `_vendor` is only for quick debugging. Running vendor again will overwrite those changes. The proper way to customize is still to override the same path in the project root through the UFS.
 
 ## Replace
 

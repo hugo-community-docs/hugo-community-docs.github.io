@@ -77,7 +77,7 @@ pagination:
 
 ## [menu](https://gohugo.io/configuration/menus/)
 
-The site's navigation menu. Most themes read this setting to generate header or sidebar links:
+The site's navigation menu.
 
 ```yaml
 menus:
@@ -179,6 +179,10 @@ markup:
 ## Permalinks
 
 Link management is important enough to warrant its own page. See [URLs and Routing](routing.md).
+
+## Splitting Configuration Files
+
+If your configuration file becomes too large or complex, you can use a [configuration directory](https://gohugo.io/configuration/introduction/#configuration-directory) to split different keys into separate files.
 
 ## archetypes
 

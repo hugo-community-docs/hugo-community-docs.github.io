@@ -76,7 +76,7 @@ pagination:
 
 ## [menu](https://gohugo.io/configuration/menus/)
 
-網站導覽選單，多數主題會讀取這個設定產生頁首或側欄連結：
+網站導覽選單：
 
 ```yaml
 menus:
@@ -178,6 +178,10 @@ markup:
 ## Permalinks
 
 連結管理非常重要因此是獨立的一篇文章，請見[網址與路由](routing.md)。
+
+## 設定檔拆分
+
+若設定檔過於龐大複雜，可以使用[設定檔目錄](https://gohugo.io/configuration/introduction/#configuration-directory)將不同 key 拆分到不同檔案。
 
 ## archetypes
 
