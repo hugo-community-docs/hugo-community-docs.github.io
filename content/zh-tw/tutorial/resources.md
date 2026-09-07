@@ -15,7 +15,7 @@ weight: 300
 - [resources.Match](https://gohugo.io/functions/resources/match/)
 - [resources.ByType](https://gohugo.io/functions/resources/bytype/)
 
-這四種方式用於取得 `assets` 目錄的資源，如果要取得當前頁面 bundle 的資源則需改成 `.Resources.Get` `.Resources.GetMatch` 等等。
+這四種方式用於取得 `assets` 目錄的資源，如果要取得當前頁面的資源則需改成 `.Resources.Get` `.Resources.GetMatch` 等等。
 
 除了內部資源，Hugo 也能使用 [resources.GetRemote](https://gohugo.io/functions/resources/getremote/) 在構建期間發送請求取得外部資源，或是 [resources.FromString](https://gohugo.io/functions/resources/fromstring/) 將變數作為資源處理。
 
@@ -159,7 +159,7 @@ Hugo 會對資源快取避免重複計算。在單一次構建中，計算結果
 
 結束前複習本文的重點內容。
 
-**取得資源**：內部資源用 `resources.Get`、`resources.GetMatch`、`resources.Match`、`resources.ByType`，頁面 bundle 資源則改用 `.Resources` 系列方法；外部資源用 `resources.GetRemote`；字串轉資源用 `resources.FromString`。
+**取得資源**：內部資源用 `resources.Get`、`resources.GetMatch`、`resources.Match`、`resources.ByType`，頁面資源則改用 `.Resources` 系列方法；外部資源用 `resources.GetRemote`；字串轉資源用 `resources.FromString`。
 
 **使用資源**：資源建立後不會自動發佈，需呼叫 `.RelPermalink` 或 `.Publish` 才會輸出；搭配 `with` 語法可避免資源不存在時對 `nil` 呼叫方法而報錯；`.Content` 可直接取用資源內容。
 

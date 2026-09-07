@@ -15,7 +15,7 @@ You can create `resource.Resource` objects in several ways. As global functions,
 - [resources.Match](https://gohugo.io/functions/resources/match/)
 - [resources.ByType](https://gohugo.io/functions/resources/bytype/)
 
-These four methods retrieve resources from the `assets` directory. To retrieve resources from the current page bundle, use `.Resources.Get`, `.Resources.GetMatch`, and similar methods instead.
+These four methods are used to retrieve resources from the `assets` directory. To retrieve resources from the current page, use `.Resources.Get`, `.Resources.GetMatch`, and so on instead.
 
 Beyond internal resources, Hugo can also fetch external resources during the build with [resources.GetRemote](https://gohugo.io/functions/resources/getremote/), or convert a variable into a resource with [resources.FromString](https://gohugo.io/functions/resources/fromstring/).
 
@@ -160,7 +160,7 @@ Hugo caches resources to avoid redundant computation. Within a single build, Hug
 
 Before wrapping up, here's a review of the key points.
 
-**Getting resources**: Use `resources.Get`, `resources.GetMatch`, `resources.Match`, and `resources.ByType` for internal resources. Use the `.Resources` family of methods for page bundle resources instead. Use `resources.GetRemote` for external resources and `resources.FromString` to convert a string into a resource.
+**Getting resources**: Use `resources.Get`, `resources.GetMatch`, `resources.Match`, and `resources.ByType` for internal resources. Use the `.Resources` family of methods for page resources instead. Use `resources.GetRemote` for external resources and `resources.FromString` to convert a string into a resource.
 
 **Using resources**: Hugo doesn't automatically publish a resource after creation, you need to call `.RelPermalink` or `.Publish` to output it. The `with` syntax helps you avoid errors from calling a method on `nil` when a resource doesn't exist. `.Content` lets you access resource content directly.
 

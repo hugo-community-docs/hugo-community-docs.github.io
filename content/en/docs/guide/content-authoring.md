@@ -34,12 +34,12 @@ content
 3. A post page can use either a `filename.md` or a `filename/index.md`, **cannot have child pages**
 4. A tag's `_index.md` is likewise a list page
 
-Both `p1.md` and `p2/index.md` can create a standalone post, but only the latter can hold its own bundle resources, such as images or videos. You should default to the `post-name/index.md` form to keep your project structure consistent, except in two cases:
+Both `p1.md` and `p2/index.md` can create a standalone post, but only the latter can hold its own page resources, such as images or videos. You should default to the `post-name/index.md` form to keep your project structure consistent, except in two cases:
 
 1. The site has little or no image or other asset content
 2. All site assets are managed under the `assets` directory
 
-Neither case needs bundle resources, so using `post.md` directly is simpler and cleaner.
+Neither case needs page resources, so using `post.md` directly is simpler and cleaner.
 
 ## Front Matter
 
@@ -114,7 +114,7 @@ The **bold text** here will not render, the asterisks will be output literally.
 
 ## Referencing Images
 
-Where you place an image determines how you reference it. Hugo has three common locations: `assets/`, as a *page bundle* alongside your content, or `static/`. A later page covers the full directory structure; for now, here's how to reference images from each:
+Where you place an image determines how you reference it. Hugo has three common locations: `assets/`, as a `page resource` alongside your content, or `static/`. A later page covers the full directory structure; for now, here's how to reference images from each:
 
 - `assets/`
 
@@ -124,7 +124,7 @@ Where you place an image determines how you reference it. Hugo has three common 
   ![Alt text](/img/photo.png)
   ```
 
-- `Page Bundle`
+- `Page resource`
 
   Place both the image and the content file in the same directory under `content`, and reference the image with a relative path:
 
@@ -144,7 +144,7 @@ hugo-community-docs recommends placing images in `assets/`:
 
 - Files in `static/` aren't processed at all, and are output even if unused.
 - `static/` uses absolute paths (`/foo.png`). If the site is deployed to a subdirectory (for example `example.com/blog/`), every link needs to be updated to match. Links generated through `assets/` automatically resolve to the correct path, so no manual link changes are needed if the site moves or its deployment path changes.
-- Images placed as page bundles are difficult to reuse from other pages.
+- `Page resources` are meant to be accessed from within the page that owns them. It's difficult for other pages to access another page's page resources.
 
 > [!INFO]
 > If an image path fails to resolve, that indicates a bug in the theme's [image render hook](https://gohugo.io/render-hooks/images/) logic. Report it to the theme, or enable `renderHooks.image.useEmbedded = always` yourself.
