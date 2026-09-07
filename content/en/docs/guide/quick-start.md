@@ -30,10 +30,9 @@ The recommended approach. It is a Go module under the hood. Using [Ananke](https
 ```bash
 git init
 hugo mod init github.com/your-username/my-site  # or hugo mod init my-project
-hugo mod get github.com/gohugo-ananke/ananke/v2
 ```
 
-`git init` sets up a Git repository so you can track changes to your project. `hugo mod init` turns your site into a Go module. `hugo mod get` installs the theme.
+`git init` initializes the directory as a Git repository, letting you track your project's change history. `hugo mod init` initializes your project as a Go module.
 
 Then add this to `hugo.yaml`.
 
@@ -77,7 +76,7 @@ hugo new content posts/article-2/index.md   # standalone post
 hugo new content posts/article-3/index.md   # standalone post
 ```
 
-Then start the server:
+This creates the corresponding files in the `content` directory. Then, start the server:
 
 ```bash
 hugo server -DEF

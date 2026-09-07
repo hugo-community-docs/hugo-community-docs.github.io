@@ -30,10 +30,9 @@ cd my-site
 ```bash
 git init
 hugo mod init github.com/your-username/my-site  # or hugo mod init my-project
-hugo mod get github.com/gohugo-ananke/ananke/v2
 ```
 
-`git init` 將目錄初始化成 Git 儲存庫，允許你追蹤專案的修改歷史記錄。`hugo mod init` 把你的網站變成 go module；`hugo mod get` 用於安裝主題。
+`git init` 將目錄初始化成 Git 儲存庫，允許你追蹤專案的修改歷史記錄；`hugo mod init` 把你的專案初始化成 go module。
 
 接著在 `hugo.yaml` 加入：
 
@@ -77,7 +76,7 @@ hugo new content posts/article-2/index.md   # 獨立文章
 hugo new content posts/article-3/index.md   # 獨立文章
 ```
 
-然後啟動伺服器
+這會在 `content` 目錄建立對應的檔案，然後啟動伺服器
 
 ```bash
 hugo server -DEF
