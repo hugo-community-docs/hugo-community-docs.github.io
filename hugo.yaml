@@ -260,9 +260,10 @@ languages:
     label: English
     direction: ltr
     weight: 1
-    title: HCD
+    title: Hugo Community Docs
     params:
       description: Hugo Community Docs
+      headerTitle: HCD
       homepageTitle: Hugo Community Docs
       homepageTagline: ""
       footerCopyrightText: |
