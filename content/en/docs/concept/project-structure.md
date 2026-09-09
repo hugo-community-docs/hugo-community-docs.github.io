@@ -19,7 +19,7 @@ my-project/
 │   │   └── hugo.yaml   # Site configuration, can also live in the project root
 │   └── production/     # Environment-specific overrides
 ├── content/            # Markdown content 
-├── data/               # Custom data files (JSON/YAML/yaml) for templates
+├── data/               # Data files (JSON/YAML/yaml) for templates
 ├── i18n/               # Translations
 ├── layouts/            # Template files, the site's HTML structure
 ├── public/             # Build output directory
@@ -29,7 +29,7 @@ my-project/
 
 `resources` and `public` are regenerated on every build. You should add both directories to `.gitignore`, since there's no benefit to tracking generated files in Git.
 
-# Unified File System{#ufs}
+## Unified File System{#ufs}
 
 UFS (Unified File System) is Hugo's core mechanism for merging files. It treats directories with the same name in your project root, your theme, and your modules as one virtual file system. These layers stack by priority: files in your project root always override the theme's files, and when multiple themes share the same path, the theme loaded later overrides the one loaded earlier. The directories connected to UFS include:
 
@@ -58,7 +58,7 @@ UFS lets you customize a theme without forking it. Just create a file at the mat
 ```
 
 > [!IMPORTANT]
-> Don't copy theme files into your own project unless you know what you're doing. A common mistake is copying the theme's `assets` into your project root's `assets`. When you later update the theme, your site keeps using the old copied files instead of the new ones, breaking your styles.
+> Don't copy theme files into your own project unless you know exactly what you're doing. A common mistake is copying a theme's `assets` into the root `assets` directory. When the theme is later updated, part of your site will still use the old copied files, causing broken styles.
 
 ## UFS Merge Rules
 

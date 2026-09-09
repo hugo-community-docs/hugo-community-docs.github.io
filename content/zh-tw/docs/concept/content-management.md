@@ -28,19 +28,23 @@ title: '{{ .File.ContentBaseName }}'
 
 Cascade 用於一次設定指定路徑以下的內容，免去逐檔案一一設定的麻煩。可以在 [hugo.yaml 中設定 cascade](https://gohugo.io/configuration/cascade/)，也可以在 [frontmatter 設定 cascade](https://gohugo.io/content-management/front-matter/#cascade-1)。
 
+## Content 目錄結構
+
+見[內容撰寫](../guide/content-authoring.md#content-structure)。
+
 ## 引用文章和圖片
 
-見[內容撰寫](../guide/content-authoring.md#referencing-images)的說明。
+見[內容撰寫](../guide/content-authoring.md#referencing-images)。
 
 ## Shortcode
 
-見[內容撰寫](../guide/content-authoring.md#shortcodes)的說明。
+見[內容撰寫](../guide/content-authoring.md#shortcodes)。
 
 ## Summary and Description
 
 在 Hugo 中兩者的差異為 Summary 能根據文章開頭自動生成，支援 HTML，而 Description 則是在 front matter 手動輸入，只支援字串。在實際網站中，完全看主題怎麼使用這兩個 API，這不是 Hugo 能決定的事情。
 
-Summary 的自動生成可透過 `summaryLength` 控制，並且會保留、不截斷 `<p>` 標籤。也可以在 Markdown 中加入 `<!--more-->` 截斷，注意中間不可有空隔。
+Summary 的自動生成可透過 [`summaryLength`](https://gohugo.io/configuration/all/#summarylength) 控制，並且會保留、不截斷 `<p>` 標籤。也可以在 Markdown 中加入 `<!--more-->` 截斷，注意內部不可有空白。
 
 ## 數學
 
@@ -68,7 +72,7 @@ markup:
 **Heading**
 
 ```md
-## H1{class="foo"}
+## H2{class="foo"}
 ```
 
 **Paragraph**
@@ -142,7 +146,7 @@ Hugo 建議將作者視作一種文章分類的方式，這樣未來如果網站
 
 對於一般部落格來說，相關文章的運作方式大致取決於兩篇文章的分類學是否吻合，其他變量都不好做控制，除了分類學以外，作為用戶能額外控制的只有[設定檔中不同項目的權重](https://gohugo.io/configuration/related-content/)。
 
-詳細說明請見[相關文章運作](../faq.md#related-article)
+詳細說明請見[相關文章運作](../../tutorial/faq.md#related-article)
 
 ## 邏輯路徑{#logical-path}
 

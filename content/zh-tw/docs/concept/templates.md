@@ -11,38 +11,26 @@ weight: 600
 
 ## Page Kind
 
-Hugo 定義了以下五種 kind：
+Page Kind 概念和 [content 目錄結構](../guide/content-authoring.md#content-structure)的概念完全相同：
 
 - `home`：網站首頁
 - `page`：單一內容頁面，舊版稱作 `single`
 - `section`：區段列表頁，舊版稱作 `list`
-- `taxonomy`：某個分類法（taxonomy）底下所有詞條（term）的列表頁，例如 `/tags/`。若未提供對應的內容檔案，Hugo 會自動產生
-- `term`：分類法底下單一詞條的頁面，例如 `/tags/hugo/`。若未提供對應的內容檔案，Hugo 會自動產生
+- `taxonomy`：某個分類法（taxonomy）底下所有詞條（term）的列表頁，例如 `/tags/`。
+- `term`：分類法底下單一詞條的頁面
 
 `content/` 目錄結構與 page kind 的對應關係：
 
-```text
-content/
-├── _index.md                    # home
-├── posts/
-│   ├── _index.md                # section
-│   └── my-post/
-│       └── index.md             # page
-└── tags/
-    ├── _index.md                # taxonomy（可選）
-    └── hugo/
-        └── index.md             # term（可選）
-```
-
-`layouts/` 目錄結構與 page kind 的預設對應關係：
-
-```text
-layouts/
-├── home.html                    # home
-├── section.html                 # section
-├── taxonomy.html                # taxonomy
-├── term.html                    # term
-└── page.html                    # page
+```sh {title="content/"}
+content
+├── _index.md              # layouts/home.html
+├── docs
+│   ├── _index.md          # layouts/section.html
+│   └── p1.md              # layouts/page.html
+│
+└── tags
+    ├── _index.md          # layouts/taxonomy.html
+    └── my-tag.md          # layouts/term.html
 ```
 
 ## Page Type
@@ -51,7 +39,7 @@ layouts/
 
 舉例來說，同樣是 `page` kind，`content/posts/` 與 `content/movies/` 底下的文章，可以透過不同的 type 套用不同模板：
 
-```text
+```sh {title="layouts/"}
 layouts/
 ├── movies/
 │   ├── page.html      # movies 專用的 page 模板
@@ -85,7 +73,7 @@ layout: 'custom'
 
 這會對應到：
 
-```text
+```sh
 layouts/
 ├── custom.html    # 由 layout: custom 指定
 ├── home.html
@@ -222,7 +210,7 @@ Render hook 讓你自訂 Markdown 指定元素轉換成 HTML 的方式，例如�
 {{ partial "head.html" . }}
 ```
 
-第一個參數是模板名稱，二個參數（`.`）是傳入的 context。
+第一個參數是模板名稱，二個參數 `.` 是傳入的 context。
 
 ### _shortcodes 目錄{#shortcodes}
 
@@ -249,11 +237,12 @@ View 模板必須以 `.Render` 渲染，查找規則與 Hugo 的[模板查找順
 
 使用 `.` 分隔的檔名讓模板能同時過濾多個條件，包含語言、輸出格式、page kind 等等，在檔名中用 `.` 分隔各項條件即可：
 
-```text
-home.rss.xml           → 只用於首頁的 RSS 輸出
-section.de.html        → 只用於德語的 section 頁面
+```sh
+# section 頁面，德語專用
+section.de.html
 
-baseof.section.de.html → 只用於德語的 section 頁面的 baseof 基礎模板
+# 主頁 JSON 輸出，德語，v2.0.0 專用
+home.de._version_v2.0.0_.json
 ```
 
 條件包含
@@ -267,26 +256,25 @@ baseof.section.de.html → 只用於德語的 section 頁面的 baseof 基礎模
 - type: 類型
 - layout: 佈局
 
-在 [v0.161.0](https://github.com/gohugoio/hugo/releases/tag/v0.161.0) 之後，你也可以用更精確的方式標記，比如 `home._outputformat_rss_.xml`、`section._language_de_.html`、`baseof._kind_section_._language_de_.html`。
+在 [v0.161.0](https://github.com/gohugoio/hugo/releases/tag/v0.161.0) 之後，你可以用更精確的方式標記，比如 `home._outputformat_rss_.xml`、`section._language_de_.html`、`baseof._kind_section_._language_de_.html`。
 
-不同模板支援的條件類型如下：
+### 路徑深度{#path-distance}
 
-| 模板類型                   | Page Kind | 輸出格式 | 語言 | 路徑深度 |
+路徑匹配越接近目前渲染的內容，優先權越高，且路徑深度的優先權高於檔名條件，只有當兩者路徑距離相同時，才會回頭比較檔名條件的比對結果。
+
+### 支援情況
+
+不同模板類型對進階查找順序的支援各有不同，表格整理如下：
+
+|                            | Page Kind | 輸出格式 | 語言 | 路徑深度 |
 |----------------------------|:---------:|:--------:|:----:|:--------:|
 | [基礎模板](#base-template) | 支援      | 支援     | 支援 | 支援     |
 | [頁面模板](#page-template) | 支援      | 支援     | 支援 | 支援     |
 | Render hook                | ❌        | 支援     | 支援 | 支援     |
 | Shortcode                  | ❌        | 支援     | 支援 | ❌       |
 | Partial                    | ❌        | ❌       | ❌   | ❌       |
-| View                       | ❌        | ❌       | ❌   | ❌       |
-
-路徑深度請見下方說明。
-
-### 路徑深度{#path-distance}
-
-路徑匹配越接近目前渲染的內容，優先權越高，且**路徑深度的優先權高於檔名條件**，只有當兩者路徑距離相同時，才會回頭比較檔名條件的比對結果。
-
-例如同時存在 `layouts/movies/page.html` 與 `layouts/page.de.html`，渲染 `content/movies/` 底下的德語頁面時，`page.de.html` 雖然多比對了語言，但 `movies/page.html` 路徑更接近，Hugo 仍優先選擇 `movies/page.html`。
+| View                       | ❌        | ❌       | ❌   | 不適用   |
+{class="full-width-table"}
 
 ## 一個完整網站的範例
 

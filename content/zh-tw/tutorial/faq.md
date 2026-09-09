@@ -112,7 +112,7 @@ hugo-community-docs 的建議是外層 markdown notation，內層 standard notat
 
 Hugo 非常快，因此大多數情況無須擔心效能問題，而 [`partialCached`](https://gohugo.io/functions/partials/includecached/) 幾乎可以說是 Hugo 中唯一一個能進一步優化效能的方式。
 
-他的原理是每個 [site](concept/sites-matrix.md) 各自獨立的 LRU cache，如果沒有設定 variant，則以 partial name 作為 cache key，否則以 partial name + variants 做 cache key，variant 可以是零個或多個。
+他的原理是每個 [site](../docs/concept/sites-matrix.md) 各自獨立的 LRU cache，如果沒有設定 variant，則以 partial name 作為 cache key，否則以 partial name + variants 做 cache key，variant 可以是零個或多個。
 
 目前（v0.165.0）`partialCached` 的 LRU size 設定為 1000，此數值為內部實現沒有對外保證，隨時可能變動。
 

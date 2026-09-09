@@ -28,6 +28,10 @@ Just place the file at `archetypes/default.md`. You can also set different defau
 
 Cascade lets you set values for every piece of content under a given path at once, so you don't have to configure each file individually. You can set cascade [in `hugo.yaml`](https://gohugo.io/configuration/cascade/), or [in front matter](https://gohugo.io/content-management/front-matter/#cascade-1).
 
+## Content Structure
+
+See [Content Authoring](../guide/content-authoring.md#content-structure).
+
 ## Referencing Posts and Images
 
 See [Content Authoring](../guide/content-authoring.md#referencing-images).
@@ -40,7 +44,7 @@ See [Content Authoring](../guide/content-authoring.md#shortcodes).
 
 In Hugo, the difference is that Summary can be generated automatically from the start of a post and supports HTML, while Description is entered manually in front matter and only supports plain strings. How a site actually uses these two fields depends entirely on the theme, not on Hugo itself.
 
-Automatic Summary generation can be controlled through `summaryLength`, and preserves `<p>` tags rather than cutting through them. You can also truncate a summary manually in Markdown with `<!--more-->`, but be careful not to leave any space around it.
+Automatic summary generation can be controlled with [`summaryLength`](https://gohugo.io/configuration/all/#summarylength), and it preserves `<p>` tags without truncating them mid-tag. You can also insert `<!--more-->` in Markdown to mark the cutoff point manually. Note that there must be no spaces inside the marker.
 
 ## Math
 
@@ -68,7 +72,7 @@ If your theme uses a custom render hook, that render hook needs to implement Mar
 **Heading**
 
 ```md
-## H1{class="foo"}
+## H2{class="foo"}
 ```
 
 **Paragraph**
@@ -142,7 +146,7 @@ Hugo recommends treating authors as a taxonomy. This makes it painless to scale 
 
 For a typical blog, how related posts get selected largely comes down to whether two posts share the same taxonomies; other factors are hard to control directly. Beyond taxonomies, the only thing you can adjust as a user is [the weight of different fields in your configuration](https://gohugo.io/configuration/related-content/).
 
-See [How related content works](../faq.md#related-article) for details.
+See [How related content works](../../tutorial/faq.md#related-article) for details.
 
 ## Logical Path
 

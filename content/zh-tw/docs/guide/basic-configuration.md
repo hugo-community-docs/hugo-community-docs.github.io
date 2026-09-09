@@ -4,7 +4,7 @@ slug: basic-configuration
 weight: 500
 ---
 
-Hugo 的設定檔有上百個選項可以設定，初學者看到一定會非常迷惑，本文的目的是整理出 `hugo.yaml` 中最值得關注的設定，讓你不會在大量的設定中迷路。
+Hugo 的設定檔有上百個選項可以設定，本文整理出 `hugo.yaml` 中最值得關注的設定，讓你不會在大量的設定中迷路。
 
 ## [baseURL](https://gohugo.io/configuration/all/#baseurl)
 
@@ -123,6 +123,8 @@ menus:
             weight: 20
   ```
 
+  更多支援本地化的設定請見 [languages 文檔](https://gohugo.io/configuration/languages/#localized-settings)。
+
 ## params
 
 主題自訂設定的區塊，內容完全由主題決定，請參考所使用主題的文件：
@@ -177,7 +179,7 @@ markup:
 
 ## Permalinks
 
-連結管理非常重要因此是獨立的一篇文章，請見[網址與路由](routing.md)。
+連結管理非常重要因此是獨立的一篇文章，請見[網址管理](url-management.md)。
 
 ## 設定檔拆分
 

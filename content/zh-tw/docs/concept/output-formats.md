@@ -4,13 +4,7 @@ slug: output-formats
 weight: 900
 ---
 
-Hugo 支援一個頁面可以同時擁有多種輸出格式，此功能透過 [output formats](https://gohugo.io/configuration/output-formats/) 進行設定。
-
-output formats 常見的用途有三種：
-
-1. 產生全站搜尋用的 JSON 索引。
-2. 利用構建順序在渲染前預先處理資料。
-3. 輸出 Markdown 格式（例如 llms.txt）供 AI 或其他工具讀取。
+Hugo 支援一個頁面可以同時擁有多種[輸出格式](https://gohugo.io/configuration/output-formats/)。
 
 ## 基本設定
 
@@ -20,7 +14,7 @@ output formats 常見的用途有三種：
 outputFormats:
   searchIndex:
     mediaType: application/json
-    baseName: index
+    baseName: filename
     isPlainText: true
 ```
 
@@ -34,9 +28,7 @@ outputs:
     - searchIndex
 ```
 
-這會讓首頁除了 `index.html` 之外，額外產生 `index.json`。
-
-輸出的內容由對應的模板決定，Hugo 會依格式名稱尋找模板，例如 `layouts/index.searchIndex.json`。
+`layouts/home.searchIndex.json` 就會渲染 `public/filename.json`。
 
 ## 範例一：輸出 Markdown
 
@@ -54,14 +46,15 @@ outputFormats:
 outputs:
   page:
     - html
+    - rss
     - markdown
 ```
 
-對應模板 `_layouts/page.markdown.md` 直接輸出 Markdown 格式的內容。
+對應模板 `layouts/page.markdown.md` 直接輸出 Markdown 格式的內容。
 
 ## 範例二：JSON 索引
 
-產生搜尋用的資料索引。模板遍歷所有頁面，輸出成一份 JSON：
+模板遍歷所有頁面輸出成 JSON 索引用於站內搜尋功能：
 
 ```yaml
 outputFormats:
@@ -89,7 +82,7 @@ outputs:
 {{- $index | jsonify -}}
 ```
 
-前端搜尋功能則在瀏覽器端讀取這份 JSON 進行索引與搜尋，不需要後端伺服器參與。
+用戶端在瀏覽器端讀取這份 JSON，不需要後端伺服器參與。
 
 <details>
 
@@ -158,4 +151,4 @@ Hugo 依照 `weight` 決定各 output format 的渲染順序，數字小的先�
 {{ $.Store.Get (printf "foo-%s" .RelPermalink) }}
 ```
 
-此做法適合需要跨頁面彙總或預先計算一次的情境，如 [backlinks](https://github.com/jmooring/hugo-module-backlinks)。
+此做法適合需要跨頁面彙總或預先計算的情境，如 [backlinks](https://github.com/jmooring/hugo-module-backlinks)。

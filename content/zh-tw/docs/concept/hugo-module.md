@@ -8,9 +8,9 @@ weight: 600
 
 ## 什麼是 Module
 
-Module 是 Hugo 組織內容的基本單位。一個 module 可以是完整的 Hugo 專案，也可以只是提供某一種元件（content、layouts、assets、data、i18n、static、archetypes）的小型可重用套件。你安裝的主題，本質上就是一個 module。
+Module 是 Hugo 組織內容的基本單位。一個 module 可以是完整的 Hugo 專案，比如安裝的主題，也可以只是提供某一種元件（content、layouts、assets、data、i18n、static、archetypes）的小型可重用套件。
 
-Module 可以任意組合、巢狀引用，也可以掛載外部目錄，甚至是非 Hugo 專案的目錄，全部併入同一個 [UFS](project-structure.md#ufs)。
+Module 可以任意組合、巢狀引用，也可以掛載外部目錄，甚至是非 Hugo 專案的目錄，最後全部都併入同一個 [UFS](project-structure.md#ufs)。
 
 ## 初始化與引用
 
@@ -102,7 +102,7 @@ replace github.com/user/theme => /home/user/projects/theme
 
 Workspace 用於設定本地開發時的 module 配置，可以將他理解為暫時版的 replace 功能。舉例來說，開發本地 module 時直接套用本機檔案：
 
-```text {title="hugo.work"}
+```text {title="exampleSite/hugo.work"}
 go 1.20
 
 use .
@@ -112,12 +112,12 @@ use ../theme
 以環境變數暫時啟用：
 
 ```sh
-HUGO_MODULE_WORKSPACE=hugo.work hugo server
+HUGO_MODULE_WORKSPACE=hugo.work hugo server -s exampleSite
 ```
 
 或是在 `hugo.yaml` 設定長期啟用 workspace 模式：
 
-```yaml {title="hugo.yaml"}
+```yaml {title="exampleSite/hugo.yaml"}
 workspace: 'hugo.work'
 ```
 
@@ -127,11 +127,11 @@ Workspace 和 replace 最大的差異是允許暫時啟用且不會寫進 `go.mo
 
 ### 多語言網站
 
-如同[多語言網站](multilingual.md#獨立目錄)說的一樣，可以將指定目錄 mount 到指定位置的指定 site 上，以完成多語言設定。
+如同[多語言網站](multilingual.md#directory)說的一樣，可以將指定目錄 mount 到指定位置的指定 site 上，以完成多語言設定。
 
 ### 共用元件庫
 
-最基礎的應用，多個網站共用同一組 shortcode、partial 或 CSS，抽成獨立 module 讓所有網站引用：
+多個網站共用同一組 shortcode、partial 或 CSS，抽成獨立 module 讓所有網站引用：
 
 ```yaml
 module:
@@ -145,14 +145,14 @@ module:
 
 Workspace 可以輕鬆解決這個問題，設定方式為
 
-```text {title="hugo.work"}
+```text {title="exampleSite/hugo.work"}
 go 1.20
 
 use .
 use ../
 ```
 
-```yaml {title="hugo.yaml"}
+```yaml {title="exampleSite/hugo.yaml"}
 workspace = 'hugo.work'
 ```
 
@@ -165,11 +165,11 @@ module:
   mounts:
     - source: assets
       target: assets
-    - source: node_modules/@awmottaz/prettier-plugin-void-html/
-      target: assets/prettier-plugin-void-html
+    - source: node_modules/foo/
+      target: assets/foo
 ```
 
-在 JS 和模板中就能直接使用該目錄的內容。
+在模板中就能使用該目錄的內容。
 
 ### 內容與源碼分離
 
@@ -183,7 +183,7 @@ module:
 
 寫手只需要對 `site-content` 這個獨立 repo 有存取權限，不會誤動到 layouts 等程式碼部分。工程師只需要設定 CI 構建時下載這個 module 即可簡單達成權責分離。
 
-本地開發需要即時看到內容變更效果時，可以搭配前面提到的 `replace` 指向本地路徑或用 workspace 掛載。
+本地開發需要即時看到內容變更效果時，可以搭配前面提到的 workspace 方式掛載。
 
 ### 多環境設定分離
 

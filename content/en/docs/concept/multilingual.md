@@ -26,46 +26,47 @@ defaultContentLanguage = 'en'
 ```
 
 - `defaultContentLanguage`: The default language. Content with no language tag belongs to this language.
-- `[languages.en]`, `[languages.fr]`: Used to match against a directory name or filename suffix (`en`, `fr`). Only an exact string match counts as the same language. If no matching string is found, Hugo falls back to the default language. **Because Hugo always lowercases these keys before comparing them, you should always write your settings in lowercase**[^lowercase].
+- `[languages.en]`, `[languages.fr]`: Used to match against a directory name or filename suffix (`en`, `fr`). Only an exact string match counts as the same language. If no matching string is found, Hugo falls back to the default language[^lowercase]. Because Hugo always lowercases these keys before comparing them, you should always write your settings in lowercase.
 - `weight`: Determines the ordering of languages in menus and switchers.
 
 [^lowercase]: The `locale` setting is the exception, for the same reason explained in [Basic Configuration](../guide/basic-configuration.md#locale).
 
 ## Content Directory Structure
 
-There are two ways to map content to a language. Pick one.
+Multilingual content can be organized either by directory or by filename suffix. Pick one approach.
 
-### Language Suffix in the Filename
+### Filename Suffix
 
-Same path, same filename, distinguished by a language code suffix:
+Use a language code as a suffix to distinguish files with the same path and filename:
 
 ```text
 content/
-├── about.en.md
-└── about.fr.md
+├── _index.en.md
+└── _index.fr.md
 ```
 
 [Hugo v0.161.0](https://github.com/gohugoio/hugo/releases/tag/v0.161.0) also supports more flexible naming.
 
-### Separate Directories
+### Directory{#directory}
 
-Each language gets its own content directory, mapped through `contentDir`:
+Use a separate content directory per language, mapped through `contentDir`:
 
 ```yaml
-module:
-  mounts:
-    - source: content/en
-      target: content
-    - source: content/fr
-      target: content
+languages:
+  en:
+    contentDir: content/en
+    weight: 1
+  fr:
+    contentDir: content/fr
+    weight: 2
 ```
 
 ```text
 content/
 ├── en/
-│   └── about.md
+│   └── _index.md
 └── fr/
-    └── about.md
+    └── _index.md
 ```
 
 Content at the same path and filename under two different language directories is treated as a translation of the same page.
@@ -83,12 +84,12 @@ module:
 
 Worth remembering the term `module` here. It's a powerful part of Hugo that we'll cover in detail in [Hugo Modules](hugo-module.md).
 
-## Choosing Between the Two Structures
+### Which to Choose
 
-For a personal blog, the two approaches make no practical difference. If you want an actual comparison, here's hugo-community-docs's recommendation:
+For a personal blog, it makes no real difference either way. If you want a rule of thumb, hugo-community-docs suggests:
 
-- Few languages, small amount of content: Use the filename suffix approach. It requires the least configuration.
-- Many languages, or combined with other dimensions such as versioning (see [Sites Matrix](./sites-matrix)): Use separate directories. The structure is clearer, maps more directly to the underlying mount configuration, and is easier to extend later.
+- Few languages, small amount of content: a filename suffix is enough.
+- Many languages, or combined with other dimensions like versioning (see [Sites Matrix](sites-matrix.md)): use separate directories. The structure is clearer and easier to extend later.
 
 Developers who need more advanced functionality can refer to Hugo's official community discussion:
 

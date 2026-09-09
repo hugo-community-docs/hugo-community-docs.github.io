@@ -5,7 +5,7 @@ weight: 500
 description: 'The most important hugo.yaml settings to know first, out of the hundreds available.'
 ---
 
-Hugo's configuration file has hundreds of possible settings, which is bound to overwhelm beginners. This page's purpose is to highlight the settings in `hugo.yaml` that matter most, so you don't get lost in the sheer volume of options.
+Hugo's configuration file has hundreds of options you can set. This article highlights the settings in `hugo.yaml` most worth paying attention to, so you don't get lost in the sheer number of options.
 
 ## [baseURL](https://gohugo.io/configuration/all/#baseurl)
 
@@ -20,7 +20,7 @@ baseURL: 'https://example.com/'
 The site's language code, which affects output like the RSS feed and the HTML `lang` attribute:
 
 ```yaml
-locale: 'zh-TW'
+locale: 'en-US'
 ```
 
 > [!INFO]
@@ -124,6 +124,8 @@ menus:
             weight: 20
   ```
 
+  For more settings that support localization, see the [languages documentation](https://gohugo.io/configuration/languages/#localized-settings).
+
 ## params
 
 The block for theme-specific settings. Its contents are entirely up to the theme, so consult your theme's documentation:
@@ -133,7 +135,7 @@ params:
   showToc: true
 ```
 
-Like `menus`, `params` can be moved under `languages.params` to support localization. For more on localized settings, see the [languages documentation](https://gohugo.io/configuration/languages/#localized-settings).
+Like `menus`, `params` can be moved under `languages.params` to support localization. For more settings that support localization, see the [languages documentation](https://gohugo.io/configuration/languages/#localized-settings).
 
 ## [markup](https://gohugo.io/configuration/markup/)
 
@@ -178,7 +180,7 @@ markup:
 
 ## Permalinks
 
-Link management is important enough to warrant its own page. See [URLs and Routing](routing.md).
+Link management is important enough to warrant its own page. See [URL Management](url-management.md).
 
 ## Splitting Configuration Files
 

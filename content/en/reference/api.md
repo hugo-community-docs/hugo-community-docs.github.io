@@ -5,11 +5,7 @@ weight: 900
 description: 'How Hugo methods and functions relate to Go, and where to find the full API index on the official site.'
 ---
 
-You can think of Hugo development as its own language. It wraps Go's functionality for use in templates, and parses templates and reflects variables on its own, so it has effectively become a language in its own right. Only a limited subset of Go's functionality is exposed, so even if you're already familiar with Go and Go templates, you'll still need to check the documentation to use Hugo correctly.
-
-Hugo's API splits into two kinds: methods and functions. Methods are stateful and bound to an object. `.IsPage`, for example, is bound to the `.Page` object. Functions are stateless and can be called directly, and can also be used inside an [archetype](https://gohugo.io/content-management/archetypes/#article).
-
-The index below is compiled from the [official Hugo documentation](https://gohugo.io). This site doesn't duplicate that content. Follow the links back to the official pages to look things up.
+The index below is compiled from the [official Hugo documentation](https://gohugo.io).
 
 ## Hugo Pipes
 

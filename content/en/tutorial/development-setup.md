@@ -1,7 +1,7 @@
 ---
 title: 'Development Setup'
 slug: development-setup
-weight: 400
+weight: 150
 ---
 
 This article covers development-related setup for working with Hugo.
@@ -41,4 +41,4 @@ Alternatively, you can use Hugo's official [gotmplfmt](https://github.com/gohugo
 
 ### Markdown
 
-[rumdl](https://github.com/rvben/rumdl) is a Markdown LSP, not just a formatter, and it supports Hugo-specific conventions such as shortcodes, Markdown attributes, and a [custom root](https://rumdl.dev/md057/?h=057#configuration), among others.
+[rumdl](https://github.com/rvben/rumdl) is a Markdown LSP, not just a formatter, and it supports Hugo-specific conventions such as shortcodes, [Markdown attributes](https://rumdl.dev/flavors/?h=hugo#flavor-details), and a [custom root](https://rumdl.dev/md057/?h=057#configuration), among others.

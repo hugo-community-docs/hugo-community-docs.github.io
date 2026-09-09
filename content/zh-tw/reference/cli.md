@@ -4,7 +4,7 @@ slug: cli
 weight: 1000
 ---
 
-以下索引整理自 [Hugo 官方文檔](https://gohugo.io)，本站不重複撰寫這些內容，直接連回官方頁面查閱即可。
+以下索引整理自 [Hugo 官方文檔](https://gohugo.io)。
 
 ## [hugo build](https://gohugo.io/commands/hugo_build/)
 

@@ -7,39 +7,66 @@ description: 'Markdown, front matter, and shortcode syntax used when writing con
 
 This page covers the Markdown, front matter, and shortcode syntax you'll use when writing content.
 
-## Content Structure
+## Content Structure {#content-structure}
 
 A content directory looks like this:
 
 ```sh
 content
-├── _index.md            # 1. Home page
+├── _index.md              # 1. Home
 ├── docs
-│   ├── _index.md        # 2. List page
-│   ├── p1.md            # 3-1. Post page: filename only
-│   ├── p2               # 3-2. Post page: using index.md
+│   ├── _index.md          # 2. Section: List Page for Articles
+│   ├── p1.md              # 3-1. Page: Filename Only
+│   ├── p2                 # 3-2. Page: Using index.md
 │   │   ├── foo.jpg
 │   │   └── index.md
-│   └── bar              # Nested list
-│       ├── _index.md    # List page for the nested section
+│   └── bar
+│       ├── _index.md      # Section: Nested Section
 │       ├── post-1.md
 │       └── post-2.md
-└── tags
-    ├── _index.md        # 4. List page for tags
-    └── my-tag.md        # Tag page
+│
+│
+├── tags                   # Optional: Taxonomy and Term
+│   ├── _index.md          # 4. Taxonomy: List Page for Tags
+│   └── my-tag.md          # 5. Term: Single Tag Page (my-tag)
+│
+└── categories             # Optional: Another Taxonomy
+    ├── _index.md          # Taxonomy: List Page for Categories
+    └── tutorials.md       # Term: Single Category Page (tutorials)
 ```
 
-1. The home page is the `_index.md` at the top level
-2. Every other `_index.md` with a leading underscore is a list page
-3. A post page can use either a `filename.md` or a `filename/index.md`, **cannot have child pages**
-4. A tag's `_index.md` is likewise a list page
+### Home
 
-Both `p1.md` and `p2/index.md` can create a standalone post, but only the latter can hold its own page resources, such as images or videos. You should default to the `post-name/index.md` form to keep your project structure consistent, except in two cases:
+Place the home page at `_index.md` in the top-level `content` directory.
 
-1. The site has little or no image or other asset content
-2. All site assets are managed under the `assets` directory
+### Section
 
-Neither case needs page resources, so using `post.md` directly is simpler and cleaner.
+Use `_index.md` to create a list page. `docs/_index.md` lists every article under `docs`. `docs/bar/_index.md` lists every article in the nested `bar` section.
+
+### Page
+
+Create a post with either `filename.md` or `filename/index.md`. Posts can't have child pages.
+
+### Taxonomy
+
+Use `tags/` and `categories/` to group articles into taxonomies. Just like a section, each taxonomy has its own `_index.md` as a list page. For example, `tags/_index.md` lists every tag.
+
+Optional. Even without the actual file, Hugo still generates the corresponding HTML.
+
+### Term
+
+Each remaining file under a taxonomy directory is a single term page. `tags/my-tag.md` is the page for the `my-tag` tag. `categories/tutorials.md` is the page for the `tutorials` category.
+
+Optional. Even without the actual file, Hugo still generates the corresponding HTML.
+
+### p1.md or p2/index.md?
+
+Both `p1.md` and `p2/index.md` create a standalone post, but only `p2/index.md` can hold its own page resources, such as images or videos. Default to the `post-name/index.md` form to keep your project structure consistent. Use `post.md` only in two cases:
+
+1. Your site has little or no image or other asset content.
+2. Your site manages all assets under the `assets` directory.
+
+Neither case needs page resources, so `post.md` is simpler and cleaner.
 
 ## Front Matter
 
@@ -168,7 +195,7 @@ For example, embedding a YouTube video:
 
 {{< youtube id="dQw4w9WgXcQ" >}}
 
-Shortcodes use one of two syntaxes: `{{</*   */>}}` or `{{%/*   */%}}`. In practice, about 90% of cases use `{{</*   */>}}`, but which syntax a specific shortcode requires depends on how that shortcode is implemented internally. Follow the documentation provided by the theme or the shortcode's author.
+Shortcodes have two syntax forms: `{{</*   */>}}` and `{{%/*   */%}}`. Most cases use `{{</*   */>}}`, but which syntax a specific shortcode requires depends on how that shortcode is implemented internally. Refer to the documentation provided by the theme or the shortcode's author to be sure.
 
 To display shortcode syntax itself in your content without executing it, wrap it in `{{</*/* */*/>}}`:
 

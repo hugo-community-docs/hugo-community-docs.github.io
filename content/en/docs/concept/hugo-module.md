@@ -9,9 +9,9 @@ This page covers Hugo Modules and the corresponding `hugo mod` command in detail
 
 ## What Is a Module
 
-A module is Hugo's basic unit for organizing content. A module can be a full Hugo project, or it can be a small reusable package that provides just one type of component (content, layouts, assets, data, i18n, static, archetypes). A theme you install is, at its core, a module.
+A module is the basic unit Hugo uses to organize content. A module can be a complete Hugo project, a theme you've installed, for example, or it can be a small, reusable package that provides just one type of component: content, layouts, assets, data, i18n, static, or archetypes.
 
-Modules can be combined freely, referenced in a nested way, and can even mount external directories, including directories from non-Hugo projects. Everything gets merged into the same [UFS](project-structure.md#ufs).
+Modules can be combined and nested arbitrarily, and can also mount external directories, even directories from non-Hugo projects. Everything ultimately merges into the same [UFS](project-structure.md#ufs).
 
 ## Initialization and Imports
 
@@ -103,7 +103,7 @@ Because `replace` lives in `go.mod` and ships with your project, it applies to e
 
 Use a workspace to configure modules for local development. Think of it as a temporary version of replace. For example, when you're developing a local module, you can point directly to your local files:
 
-```text {title="hugo.work"}
+```text {title="exampleSite/hugo.work"}
 go 1.20
 
 use .
@@ -113,12 +113,12 @@ use ../theme
 Enable it temporarily with an environment variable:
 
 ```sh
-HUGO_MODULE_WORKSPACE=hugo.work hugo server
+HUGO_MODULE_WORKSPACE=hugo.work hugo server -s exampleSite
 ```
 
 Or enable workspace mode long-term in `hugo.yaml`:
 
-```yaml {title="hugo.yaml"}
+```yaml {title="exampleSite/hugo.yaml"}
 workspace: 'hugo.work'
 ```
 
@@ -128,11 +128,11 @@ The key difference between workspace and replace: workspace can be enabled tempo
 
 ### Multilingual Sites
 
-As described in [Multilingual Sites](multilingual.md#separate-directories), you can mount a given directory to a given site at a given location to complete multilingual configuration.
+As described in [Multilingual Sites](multilingual.md#directory), you can mount a given directory to a given site at a given location to complete multilingual configuration.
 
 ### Shared Component Libraries
 
-The most basic use case: multiple sites sharing the same set of shortcodes, partials, or CSS. Extract them into an independent module that every site can import:
+Multiple sites sharing the same set of shortcodes, partials, or CSS. Extract them into an independent module that every site can import:
 
 ```yaml
 [module]
@@ -146,14 +146,14 @@ When building a theme, it's common to include an `exampleSite/` directory inside
 
 A workspace solves this cleanly:
 
-```text {title="hugo.work"}
+```text {title="exampleSite/hugo.work"}
 go 1.20
 
 use .
 use ../
 ```
 
-```yaml {title="hugo.yaml"}
+```yaml {title="exampleSite/hugo.yaml"}
 workspace: 'hugo.work'
 ```
 
@@ -166,11 +166,11 @@ module:
   mounts:
     - source: assets
       target: assets
-    - source: node_modules/@awmottaz/prettier-plugin-void-html/
-      target: assets/prettier-plugin-void-html
+    - source: node_modules/foo/
+      target: assets/foo
 ```
 
-You can then use the contents of that directory directly in your JS and templates.
+You can then use the contents of that directory in your templates.
 
 ### Separating Content From Source Code
 
@@ -184,7 +184,7 @@ module:
 
 Writers only need access to the independent `site-content` repo, so they can't accidentally touch `layouts/` or other code. Engineers only need to configure CI to download this module at build time, which cleanly separates responsibilities.
 
-For local development where you need to see content changes immediately, combine this with the `replace` approach mentioned earlier, pointing to a local path, or mount it through a workspace instead.
+When local development requires seeing content changes in real time, you can mount it using the workspace approach mentioned earlier.
 
 ### Separating Configuration Across Environments
 

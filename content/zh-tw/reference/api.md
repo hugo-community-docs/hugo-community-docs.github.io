@@ -4,11 +4,7 @@ slug: api
 weight: 900
 ---
 
-你可以把 Hugo 開發理解成 Hugo 語言，他封裝了 Go 語言的功能提供給模板使用，並且自行解析模板、reflect 變數，可以說是自成一家的語言了。Go 語言的功能僅有有限的提供，因此即使你熟悉 Go/Go template，使用 Hugo 還是得看文檔才會使用。
-
-Hugo 的 API 分為兩種：Methods and Functions。Methods 是 stateful，綁定在物件上，如 `.IsPage` 是綁定在 `.Page` 物件上，functions 則為 stateless 可以直接呼叫，也能用於 [archetype](https://gohugo.io/content-management/archetypes/#article) 中。
-
-以下索引整理自 [Hugo 官方文檔](https://gohugo.io)，本站不重複撰寫這些內容，直接連回官方頁面查閱即可。
+以下索引整理自 [Hugo 官方文檔](https://gohugo.io)。
 
 ## Hugo Pipes
 

@@ -1,7 +1,7 @@
 ---
 title: '開發設定'
 slug: development-setup
-weight: 400
+weight: 150
 ---
 
 本文介紹 Hugo 開發相關設定。
@@ -41,4 +41,4 @@ npm install --save-dev prettier prettier-plugin-go-template
 
 ### Markdown
 
-[rumdl](https://github.com/rvben/rumdl) 是 Markdown LSP 而不只是 formatter，並且支援 Hugo 特殊用法，比如 shortcode, Markdown attributes, [custom root](https://rumdl.dev/md057/?h=057#configuration) 等等。
+[rumdl](https://github.com/rvben/rumdl) 是 Markdown LSP 而不只是 formatter，並且支援 Hugo 特殊用法，比如 shortcode, [Markdown attributes](https://rumdl.dev/flavors/?h=hugo#flavor-details), [custom root](https://rumdl.dev/md057/?h=057#configuration) 等等。

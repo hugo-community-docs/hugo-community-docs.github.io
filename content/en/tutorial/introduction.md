@@ -126,7 +126,7 @@ Banana<br>
 Orange / My Site Title
 ```
 
-Inside `range` and `with`, `.` switches to the current element or value. `$.` always refers to the outermost context of the current template.
+Inside `range` and `with`, `.` switches to the current element or value. Use `$` to access the outermost context of the current template, so `$.Title` refers to the `.Title` method on that outermost context, which is the current page's `.Title`.
 
 ## Pipes
 

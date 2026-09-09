@@ -84,7 +84,7 @@ A real-world use case is shown in the [official `templates.Defer` example](https
 
 Hugo is fast enough that performance is rarely a concern, and [`partialCached`](https://gohugo.io/functions/partials/includecached/) is close to the only remaining way to squeeze out further gains.
 
-It works through an LRU cache that is independent per [site](concept/sites-matrix.md). If no variant is specified, the cache key is the partial's name. Otherwise, the cache key is the partial's name plus its variants, and you can pass zero or more variants.
+It works through an LRU cache that is independent per [site](../docs/concept/sites-matrix.md). If no variant is specified, the cache key is the partial's name. Otherwise, the cache key is the partial's name plus its variants, and you can pass zero or more variants.
 
 As of v0.165.0, `partialCached`'s LRU size is set to 1000. This is an internal implementation detail, not a public guarantee, and it can change at any time.
 

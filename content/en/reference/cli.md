@@ -5,7 +5,7 @@ weight: 1000
 description: 'A pointer to the official Hugo CLI command reference.'
 ---
 
-The index below is compiled from the [official Hugo documentation](https://gohugo.io). This site doesn't duplicate that content. Follow the links back to the official pages to look things up.
+The index below is compiled from the [official Hugo documentation](https://gohugo.io).
 
 ## [hugo build](https://gohugo.io/commands/hugo_build/)
 

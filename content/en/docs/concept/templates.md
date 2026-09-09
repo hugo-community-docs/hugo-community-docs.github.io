@@ -9,38 +9,26 @@ This article introduces Hugo's template lookup mechanism, which determines which
 
 ## Page Kind
 
-Hugo defines five kinds:
+Page Kind maps directly onto the concepts covered in [Content Structure](../guide/content-authoring.md#content-structure):
 
 - `home`: the site's home page
 - `page`: a single content page, formerly called `single`
-- `section`: a section list page, formerly called `list`
-- `taxonomy`: a list page for all terms under a taxonomy, such as `/tags/`. Hugo generates this automatically if no content file exists
-- `term`: a page for a single term under a taxonomy, such as `/tags/hugo/`. Hugo generates this automatically if no content file exists
+- `section`: a section's list page, formerly called `list`
+- `taxonomy`: the list page for every term under a given taxonomy, for example `/tags/`
+- `term`: the page for a single term under a taxonomy
 
-Mapping between the `content/` structure and page kind:
+Here's how the `content/` directory structure maps to each page kind:
 
-```text
-content/
-├── _index.md                    # home
-├── posts/
-│   ├── _index.md                # section
-│   └── my-post/
-│       └── index.md             # page
-└── tags/
-    ├── _index.md                # taxonomy (optional)
-    └── hugo/
-        └── index.md             # term (optional)
-```
-
-Mapping between the `layouts/` structure and page kind by default:
-
-```text
-layouts/
-├── home.html                    # home
-├── section.html                 # section
-├── taxonomy.html                # taxonomy
-├── term.html                    # term
-└── page.html                    # page
+```sh {title="content/"}
+content
+├── _index.md              # layouts/home.html
+├── docs
+│   ├── _index.md          # layouts/section.html
+│   └── p1.md              # layouts/page.html
+│
+└── tags
+    ├── _index.md          # layouts/taxonomy.html
+    └── my-tag.md          # layouts/term.html
 ```
 
 ## Page Type
@@ -49,7 +37,7 @@ After Hugo determines the page kind, it determines the page type, which decides 
 
 For example, pages of the same `page` kind under `content/posts/` and `content/movies/` can use different templates through different types:
 
-```text
+```sh {title="layouts/"}
 layouts/
 ├── movies/
 │   ├── page.html      # page template for movies
@@ -83,7 +71,7 @@ layout: 'custom'
 
 This maps to:
 
-```text
+```sh
 layouts/
 ├── custom.html    # set by layout: custom
 ├── home.html
@@ -224,7 +212,7 @@ Render hooks let you customize how Hugo converts specific Markdown elements to H
 {{ partial "head.html" . }}
 ```
 
-The first argument is the template name, and the second (`.`) is the context passed in.
+The first argument is the template name, and the second argument `.` is the context passed in.
 
 ### The `_shortcodes` Directory{#shortcodes}
 
@@ -251,14 +239,15 @@ This covers only the basic concepts. Hugo's actual lookup rules go further: file
 
 A filename separated by `.` lets a single template filter on multiple conditions at once, such as language, output format, or page kind. Separate each condition with `.` in the filename:
 
-```text
-home.rss.xml           → applies only to RSS output for the home page
-section.de.html        → applies only to the German section page
+```sh
+# Section page, German only
+section.de.html
 
-baseof.section.de.html → the baseof base template for the German section page
+# Home page JSON output, German, v2.0.0 only
+home.de._version_v2.0.0_.json
 ```
 
-Conditions include:
+The available conditions are:
 
 - language: language
 - role: role (see [Sites Matrix](sites-matrix.md))
@@ -271,24 +260,23 @@ Conditions include:
 
 As of [v0.161.0](https://github.com/gohugoio/hugo/releases/tag/v0.161.0), you can also mark these more explicitly, for example `home._outputformat_rss_.xml`, `section._language_de_.html`, or `baseof._kind_section_._language_de_.html`.
 
-Support for each condition varies by template type:
+### Path Distance{#path-distance}
 
-| Template Type               | Page Kind | Output Format | Language | Path Distance |
+The closer a template's path is to the content being rendered, the higher its priority, and path distance takes precedence over filename conditions. Hugo only compares filename conditions when path distance is equal.
+
+### Support Overview
+
+Support for the advanced lookup order varies by template type. The table below summarizes this:
+
+|                              | Page Kind | Output Format | Language | Path Distance |
 |------------------------------|:---------:|:--------------:|:--------:|:----------:|
 | [Base template](#base-template) | Yes   | Yes             | Yes      | Yes        |
 | [Page template](#page-template) | Yes   | Yes             | Yes      | Yes        |
 | Render hook                  | ❌        | Yes             | Yes      | Yes        |
 | Shortcode                    | ❌        | Yes             | Yes      | ❌         |
 | Partial                      | ❌        | ❌              | ❌       | ❌         |
-| View                         | ❌        | ❌              | ❌       | ❌         |
-
-See below for path distance.
-
-### Path Distance{#path-distance}
-
-The closer a template's path is to the content being rendered, the higher its priority, and **path distance takes precedence over filename conditions**. Hugo only compares filename conditions when path distance is equal.
-
-For example, given both `layouts/movies/page.html` and `layouts/page.de.html`, when rendering a German page under `content/movies/`, `page.de.html` matches an additional condition (language), but Hugo still picks `movies/page.html`, since its path is closer.
+| View                         | ❌        | ❌              | ❌       | Not applicable |
+{class="full-width-table"}
 
 ## Complete Site Example
 

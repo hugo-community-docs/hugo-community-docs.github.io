@@ -4,11 +4,11 @@ slug: sites-matrix
 weight: 500
 ---
 
-在 Hugo 中每個語言都是獨立的 site，而 [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) 進一步引入了 sites matrix 概念，將原本單一維度的「一個 language 對應一個 site」提升到三個維度的組合。本篇說明這個概念，以及如何用它控制內容的產生範圍。
+本文說明 Sites Matrix，Hugo 每個語言都是獨立的 site，而 [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) 進一步將原本單一維度的「一個 language 對應一個 site」提升到三個維度的組合。
 
 ## 三個維度
 
-舊模型裡，site 只有語言這一個變數，新模型把 site 定義為三個維度組合出來的交集：
+新模型的 site 三個維度定義如下：
 
 - language：語言
 - version：版本
@@ -33,7 +33,7 @@ module:
             - v2.0.0
 ```
 
-設定檔使用到 sites 的地方包含
+代表指定 `zh-cn` 的 `v2.0.0`。Hugo 使用到 sites 的地方包含
 
 - [Module mounts](https://gohugo.io/configuration/module/#default-mounts)
 - [Segments](https://gohugo.io/configuration/segments/)
@@ -42,9 +42,14 @@ module:
 
 ## 實際設定
 
-多數專案的版本結構很單純：一個版本對應一個資料夾，不需要跨版本 fallback，實務上主要用在 module mount：
+以多版本網站，一個版本對應一個資料夾為例：
 
 ```yaml {title="hugo.yaml"}
+baseURL: https://example.org/
+locale: en-US
+title: Sites Matrix
+defaultContentVersion: v2.0.0
+defaultContentVersionInSubdir: true
 versions:
   v1.0.0: {}
   v2.0.0: {}
@@ -64,7 +69,7 @@ module:
             - v1.0.0
 ```
 
-意思是把 `content/vN.0.0` 這個模組<strong>固定（mount）</strong>在 `vN.0.0` 的版本 `content` 目錄，這樣設定後，`content/v2.0.0/` 底下的所有內容將只出現在 `v2.0.0` 這個 site。
+這樣設定後，`content/v1.0.0/` 底下的所有內容將只出現在 `v1.0.0` 這個 site，`v2.0.0` 也同理。
 
 也支援在 front matter 寫版本限制：
 
@@ -73,13 +78,25 @@ module:
 title: New Feature
 sites:
   matrix:
-    versions: ["> v0.3.0"]
+    versions: ["> v3.0.0"]
 ---
 ```
 
-## 與模板搭配
+不受版本控制的內容則可以建立專屬目錄：
 
-模板同樣可以用 `.Rotate` 取得同一邏輯頁面在其他維度組合下的對應版本，常見於實作版本切換器：
+```yaml {title="hugo.yaml"}
+module:
+  mounts:
+    - source: content/unversioned
+      target: content
+      sites:
+        matrix:
+          versions: "**"  # 掛載到所有版本
+```
+
+## 搭配模板
+
+模板可以用 [`.Rotate`](https://gohugo.io/methods/page/rotate/) 取得當前 logical path 在其他維度組合下的對應版本，以版本切換按鈕為例：
 
 ```html
 {{- with .Rotate "version" -}}
@@ -91,8 +108,6 @@ sites:
 {{- end -}}
 ```
 
-Hugo 預設 `version` 為 `v1.0.0`，即使專案沒有真正啟用多版本，`.Rotate "version"` 也一定會有結果，因此外層仍需要額外條件判斷是否要顯示版本切換器，不能只靠 `.Rotate` 是否為空來判斷。
+## 參考
 
-## 實際範例
-
-請見 [hugo-testing-56516](https://github.com/jmooring/hugo-testing/tree/hugo-forum-topic-56516)。
+- [混合版本化與非版本化內容](https://discourse.gohugo.io/t/question-about-the-multi-dimensional-content-model/57494)

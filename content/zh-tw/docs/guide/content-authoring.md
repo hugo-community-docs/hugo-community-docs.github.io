@@ -6,39 +6,66 @@ weight: 300
 
 本篇說明撰寫文章內容會用到的相關知識，包含 content 目錄結構，Markdown、front matter 與 shortcode。
 
-## Content 結構
+## Content 內容結構{#content-structure}
 
 content 資料夾結構如下：
 
 ```sh
 content
-├── _index.md            # 1. 主頁
+├── _index.md              # 1. 主頁
 ├── docs
-│   ├── _index.md        # 2. 列表頁
-│   ├── p1.md            # 3-1. 文章頁面：直接使用檔名
-│   ├── p2               # 3-2. 文章頁面：使用 index.md
-│   │   ├── cover.jpg
+│   ├── _index.md          # 2. Section：文章列表頁
+│   ├── p1.md              # 3-1. Page：僅使用檔名
+│   ├── p2                 # 3-2. Page：使用 index.md
+│   │   ├── foo.jpg
 │   │   └── index.md
-│   └── bar              # 深層列表頁
-│       ├── _index.md    # 深層頁面的列表頁
+│   └── bar
+│       ├── _index.md      # Section：巢狀 section
 │       ├── post-1.md
 │       └── post-2.md
-└── tags
-    ├── _index.md        # 4. 標籤頁面的列表頁
-    └── my-tag.md        # 標籤頁
+│
+│
+├── tags                   # 可選：分類法與詞條
+│   ├── _index.md          # 4. Taxonomy：tags 列表頁
+│   └── my-tag.md          # 5. Term：單一 tag 頁面（my-tag）
+│
+└── categories             # 可選：另一種分類法
+    ├── _index.md          # Taxonomy：categories 列表頁
+    └── tutorials.md       # Term：單一 category 頁面（tutorials）
 ```
 
-1. 主頁是放在最上層的 `_index.md`
-2. 其餘帶有底線的 `_index.md` 都是列表頁
-3. 文章頁面可以使用`檔名.md`，也可以使用`檔名/index.md`，**不會再有子頁面**
-4. 標籤頁的 `_index.md` 同樣代表列表頁
+### 主頁（Home）
 
-`p1.md` 和 `p2/index.md` 都可以建立獨立的文章，但是只有 `p2/index.md` 形式可以擁有自身頁面的資源，如圖片或影片。您應該永遠選擇 `post-name/index.md` 形式這樣專案結構才會統一，除非兩種情況：
+主頁是最上層的 `_index.md`。
 
-1. 網站幾乎沒有圖片等資源
-2. 網站資源規劃全部放到 `assets` 目錄
+### Section
 
-這兩種情況都用不到頁面資源，因此直接使用 `post.md` 顯然更乾淨簡潔。
+`_index.md` 代表列表頁，例如 `docs/_index.md` 是 `docs` 底下所有文章的列表頁，`docs/bar/_index.md` 則是巢狀 section 的列表頁。
+
+### Page
+
+文章頁面可以用 `filename.md` 或 `filename/index.md` 兩種形式，且不能有子頁面。
+
+### Taxonomy
+
+`tags/` 和 `categories/` 都是文章的分類法。這些目錄底下的 `_index.md` 同樣是列表頁，例如 `tags/_index.md` 是所有 tag 的列表頁。
+
+非必要，若不存在實體檔案，Hugo 仍會自動建立對應的 HTML 檔案。
+
+### Term
+
+分類法目錄底下的其他頁面則是單一詞條頁面，例如 `tags/my-tag.md` 是 `my-tag` 這個 tag 的頁面，`categories/tutorials.md` 則是 `tutorials` 這個 category 的頁面。
+
+非必要，若不存在實體檔案，Hugo 仍會自動建立對應的 HTML 檔案。
+
+### `p1.md` 還是 `p2/index.md`？
+
+`p1.md` 和 `p2/index.md` 都能建立獨立的文章，但只有後者能擁有自身的頁面資源，如圖片或影片。應該預設使用 `post-name/index.md` 形式以維持專案結構一致，除非遇到以下兩種情況：
+
+1. 網站幾乎沒有圖片等資源內容。
+2. 網站所有資源都統一放在 `assets` 目錄管理。
+
+這兩種情況都用不到頁面資源，因此直接使用 `post.md` 更簡潔乾淨。
 
 ## Front Matter
 
@@ -167,7 +194,7 @@ Shortcode 是在 Markdown 內容中插入模板邏輯的方式，用來處理 Ma
 
 {{< youtube id="dQw4w9WgXcQ" >}}
 
-Shortcode 有兩種語法：`{{</*   */>}}` 與 `{{%/*   */%}}`。實務上約九成情況會用到 `{{</*   */>}}`，但具體哪個 shortcode 該用哪種語法取決於該 shortcode 的原始碼實作方式，請以主題或該 shortcode 作者提供的文件為準。
+Shortcode 有兩種語法：`{{</*   */>}}` 與 `{{%/*   */%}}`。大部分情況會用到 `{{</*   */>}}`，但具體哪個 shortcode 該用哪種語法取決於該 shortcode 的原始碼實作方式，請以主題或該 shortcode 作者提供的文件為準。
 
 如果要在內容中直接顯示 shortcode 語法本身而不執行它，需要用 `{{</*/* */*/>}}` 包起來：
 

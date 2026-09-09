@@ -1,6 +1,6 @@
 ---
-title: '網址與路由'
-slug: routing
+title: '網址管理'
+slug: url-management
 weight: 600
 ---
 

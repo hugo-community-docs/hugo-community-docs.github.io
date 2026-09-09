@@ -1,6 +1,6 @@
 ---
-title: 'URLs and Routing'
-slug: routing
+title: 'URL Management'
+slug: url-management
 weight: 600
 description: 'How Hugo determines each page URL, including default routing rules and how to customize them.'
 ---

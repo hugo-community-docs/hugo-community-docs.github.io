@@ -21,7 +21,7 @@ If you are not sure which one to pick, install the **Extended edition**.
 
 ## Installation Methods
 
-You can install Hugo through a package manager or by downloading the binary manually. As explained in [Understanding Hugo](introduction.md#single-executable), Hugo is a single binary executable, so you can also download it and run it directly. Here is how the two approaches compare.
+You can install Hugo through a package manager or by downloading the binary manually. As explained in [Understanding Hugo](introduction.md#single-binary), Hugo is a single binary executable, so you can also download it and run it directly. Here is how the two approaches compare.
 
 - Package manager: manages your system packages in one place, but you need to learn how to use it. Some package managers also make it hard to downgrade or pin a specific version.
 - Manual binary: you install and manage versions by hand. It takes a bit more effort, but comes with no restrictions.

@@ -9,7 +9,7 @@ weight: 1
 
 Hugo 整合以下工具，也理所當然的繼承了他們的優點：
 
-- [go html/template](https://pkg.go.dev/html/template)、[go text/template](https://pkg.go.dev/text/template) 模板系統
+- [Go html/template](https://pkg.go.dev/html/template)、[Go text/template](https://pkg.go.dev/text/template) 模板系統
 - [Goldmark](https://github.com/yuin/goldmark) Markdown 解析和轉換
 - [esbuild](https://esbuild.github.io/) 高速打包 JS/TS
 - [PostCSS](https://postcss.org/)、[Dart Sass](https://sass-lang.com/dart-sass/)、[TailwindCSS](https://tailwindcss.com/) 整合
@@ -54,5 +54,3 @@ Hugo 已發展超過十年，許多開箱即用的功能（permalinks 設定、r
 - 無插件系統：Hugo 不支援插件擴充，功能限於內建整合的範圍內，超出範圍就需要自行處理，前端開發者也難以直接參與 Go 專案的貢獻。
 - 版本穩定性：Hugo 至今仍是 0.x 版本，尚未發布穩定 1.0 版本。
 - 維護規模較小：核心維護者人數極少，應評估依賴風險。
-
-本社群文檔會著重在「理解」而不是複製重寫官方文檔，遇到需要參考完整選項的地方，會直接連回官方文檔，你可以自行查閱。

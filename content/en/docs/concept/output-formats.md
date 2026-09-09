@@ -5,13 +5,7 @@ weight: 900
 description: 'How a single page can render in multiple output formats, and three practical uses.'
 ---
 
-Hugo supports having a single page produce multiple output formats. This is configured through [output formats](https://gohugo.io/configuration/output-formats/).
-
-Output formats commonly serve three purposes:
-
-1. Generating a site-wide JSON index for search.
-2. Using build order to preprocess data before rendering.
-3. Outputting Markdown (for example, llms.txt) for AI tools or other consumers to read.
+Hugo supports having a single page produce multiple [output formats](https://gohugo.io/configuration/output-formats/).
 
 ## Basic Configuration
 
@@ -21,7 +15,7 @@ Define the format you want to output in `hugo.yaml`:
 outputFormats:
   searchIndex:
     mediaType: application/json
-    baseName: index
+    baseName: filename
     isPlainText: true
 ```
 
@@ -35,9 +29,7 @@ outputs:
     - searchIndex
 ```
 
-This makes the home page produce `index.json` in addition to `index.html`.
-
-The output content is determined by the corresponding template. Hugo looks up the template by format name, for example `layouts/index.searchIndex.json`.
+And `layouts/home.searchIndex.json` renders `public/filename.json`.
 
 ## Example 1: Outputting Markdown
 
@@ -55,14 +47,15 @@ outputFormats:
 outputs:
   page:
     - html
+    - rss
     - markdown
 ```
 
-The corresponding template, `_layouts/page.markdown.md`, outputs the Markdown content directly.
+The corresponding template, `layouts/page.markdown.md`, outputs the Markdown content directly.
 
 ## Example 2: JSON Index
 
-Generate a data index for search. The template iterates over every page and outputs a JSON file:
+The template iterates over every page and outputs a JSON index for site search:
 
 ```yaml
 outputFormats:
@@ -90,7 +83,7 @@ outputs:
 {{- $index | jsonify -}}
 ```
 
-A frontend search feature then reads this JSON in the browser to build an index and run searches, with no backend server involved.
+Search happens entirely in the browser by reading this JSON, so no backend server is required.
 
 <details>
 
@@ -159,4 +152,4 @@ Then read it:
 {{ $.Store.Get (printf "foo-%s" .RelPermalink) }}
 ```
 
-This approach works well when you need to aggregate across pages or perform a one-time precomputation, as with [backlinks](https://github.com/jmooring/hugo-module-backlinks).
+This approach works well when you need to aggregate across pages or precompute something, as with [backlinks](https://github.com/jmooring/hugo-module-backlinks).
