@@ -271,12 +271,16 @@ languages:
     menus:
       main:
         - name: Docs
-          pageRef: /docs/guide/introduction
+          pageRef: /docs/guide
           weight: 40
+          params:
+            url: /docs/guide/introduction
 
         - name: Tutorial
           pageRef: /tutorial
           weight: 80
+          params:
+            url: /tutorial/introduction
 
         - name: Reference
           pageRef: /reference

@@ -45,7 +45,7 @@
 
     # Markdown flavor/dialect
     # Options: standard (default), gfm, commonmark, mkdocs, kramdown, jekyll, mdx, quarto
-    flavor = "gfm"
+    flavor = "hugo"
 
 [MD004]
     style = "dash" # Unordered list style
