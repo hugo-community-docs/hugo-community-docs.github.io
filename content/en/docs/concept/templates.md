@@ -21,14 +21,14 @@ Here's how the `content/` directory structure maps to each page kind:
 
 ```sh {title="content/"}
 content
-├── _index.md              # layouts/home.html
+├── _index.md       # Maps to layouts/home.html
 ├── docs
-│   ├── _index.md          # layouts/section.html
-│   └── p1.md              # layouts/page.html
+│   ├── _index.md   # Maps to layouts/section.html
+│   └── p1.md       # Maps to layouts/page.html
 │
 └── tags
-    ├── _index.md          # layouts/taxonomy.html
-    └── my-tag.md          # layouts/term.html
+    ├── _index.md   # Maps to layouts/taxonomy.html
+    └── my-tag.md   # Maps to layouts/term.html
 ```
 
 ## Page Type
@@ -94,6 +94,28 @@ The `layout` field takes precedence over kind- or type-based resolution.
 
 This section introduces the template categories under the `layouts` directory, including important content such as base templates and page templates.
 
+### `layouts` Directory Overview
+
+The `layouts/` directory holds the templates that render your site. Here's the overall structure:
+
+```sh {title="layouts directory overview"}
+layouts/
+├── baseof.html     # Base template
+├── page.html       # kind: page
+├── home.html       # kind: home
+├── section.html    # kind: section
+├── taxonomy.html   # kind: taxonomy
+├── term.html       # kind: term
+├── single.html     # Fallback for page
+├── list.html       # Fallback for home / section / taxonomy / term
+├── all.html        # Final fallback for every page template
+├── _markup/        # Configures how Markdown elements render (render hooks)
+├── _shortcodes/    # Called from content pages, not a page template
+└── _partials/      # Reusable fragments, not a page template
+```
+
+This section covers everything inside `layouts/`.
+
 ### Base Templates{#base-template}
 
 A base template is `baseof.html`, the shared outer structure for all page templates. It typically defines common elements such as `html`, `head`, and `body`, keeping the site consistent and easier to maintain.
@@ -157,31 +179,21 @@ If these conditions aren't met, Hugo ignores the base template and renders the p
   {{< /tab >}}
 {{% /tabs %}}
 
-### Page Templates{#page-template}
+### Page Templates {#page-template}
 
-Page templates map one to one with page kinds. Common page templates include:
+Page templates map directly to each [page kind](#page-kind):
 
-```text
-layouts/
-├── baseof.html
-├── page.html       # kind: page
-├── home.html       # kind: home
-├── section.html    # kind: section
-├── taxonomy.html   # kind: taxonomy
-├── term.html       # kind: term
-├── single.html     # fallback for page
-├── list.html       # fallback for home / section / taxonomy / term
-├── all.html        # final fallback for every page template
-├── _markup/        # controls how Markdown elements render (render hooks)
-├── _shortcodes/    # called from content pages, not a page template
-└── _partials/      # reusable sections, not a page template
-```
+- `layouts/home.html`
+- `layouts/page.html`
+- `layouts/section.html`
+- `layouts/taxonomy.html`
+- `layouts/term.html`
 
-Where:
+Along with these fallbacks:
 
-- `single` is the fallback when no `page` template exists
-- `list` is the fallback when no `home`, `section`, `taxonomy`, or `term` template exists
-- `all` is the final fallback for every page template
+- `layouts/single.html` is the fallback for `page`.
+- `layouts/list.html` is the fallback for `home`, `section`, `taxonomy`, and `term`.
+- `layouts/all.html` is the fallback for every page template.
 
 ### Other Templates
 
@@ -269,14 +281,14 @@ The closer a template's path is to the content being rendered, the higher its pr
 Support for the advanced lookup order varies by template type. The table below summarizes this:
 
 |                              | Page Kind | Output Format | Language | Path Distance |
-|------------------------------|:---------:|:--------------:|:--------:|:----------:|
+|------------------------------|-----------|----------------|----------|------------|
 | [Base template](#base-template) | Yes   | Yes             | Yes      | Yes        |
 | [Page template](#page-template) | Yes   | Yes             | Yes      | Yes        |
 | Render hook                  | ❌        | Yes             | Yes      | Yes        |
 | Shortcode                    | ❌        | Yes             | Yes      | ❌         |
 | Partial                      | ❌        | ❌              | ❌       | ❌         |
 | View                         | ❌        | ❌              | ❌       | Not applicable |
-{class="full-width-table"}
+{center="true"}
 
 ## Complete Site Example
 

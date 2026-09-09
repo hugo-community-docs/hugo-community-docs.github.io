@@ -23,14 +23,14 @@ Page Kind 概念和 [content 目錄結構](../guide/content-authoring.md#content
 
 ```sh {title="content/"}
 content
-├── _index.md              # layouts/home.html
+├── _index.md       # 對應 layouts/home.html
 ├── docs
-│   ├── _index.md          # layouts/section.html
-│   └── p1.md              # layouts/page.html
+│   ├── _index.md   # 對應 layouts/section.html
+│   └── p1.md       # 對應 layouts/page.html
 │
 └── tags
-    ├── _index.md          # layouts/taxonomy.html
-    └── my-tag.md          # layouts/term.html
+    ├── _index.md   # 對應 layouts/taxonomy.html
+    └── my-tag.md   # 對應 layouts/term.html
 ```
 
 ## Page Type
@@ -96,6 +96,28 @@ layouts/
 
 本段落介紹 `layouts` 目錄底下的模板分類，包含基礎模板、頁面模板等重要內容。
 
+### `layouts` 目錄總覽
+
+`layouts/` 目錄存放渲染網站的模板，結構總覽如下
+
+```sh {title="layouts 目錄總覽"}
+layouts/
+├── baseof.html     # 基礎模板
+├── page.html       # kind: page
+├── home.html       # kind: home
+├── section.html    # kind: section
+├── taxonomy.html   # kind: taxonomy
+├── term.html       # kind: term
+├── single.html     # page 的後備模板
+├── list.html       # home / section / taxonomy / term 的後備模板
+├── all.html        # 所有頁面模板的最終後備模板
+├── _markup/        # 設定 Markdown 元素的渲染方式（render hook）
+├── _shortcodes/    # 供內容頁面呼叫，不屬於頁面模板
+└── _partials/      # 可重用區段，不屬於頁面模板
+```
+
+本段落會介紹 `layouts/` 的所有內容。
+
 ### 基礎模板{#base-template}
 
 基礎模板就是 `baseof.html`，是所有頁面模板共用的外層架構，通常定義 `html`、`head`、`body` 等共通結構，以維持一致性，讓網站更容易維護。
@@ -157,29 +179,19 @@ layouts/baseof.html 和正確版本相同，但是頁面模板包含可以被直
 
 ### 頁面模板{#page-template}
 
-頁面模板與 page kind 一一對應，常見的頁面模板包括：
+頁面模板渲染的內容和 [page kind](#page-kind) 一一對應，包含
 
-```text
-layouts/
-├── baseof.html
-├── page.html       # kind: page
-├── home.html       # kind: home
-├── section.html    # kind: section
-├── taxonomy.html   # kind: taxonomy
-├── term.html       # kind: term
-├── single.html     # page 的後備模板
-├── list.html       # home / section / taxonomy / term 的後備模板
-├── all.html        # 所有頁面模板的最終後備模板
-├── _markup/        # 設定 Markdown 元素的渲染方式（render hook）
-├── _shortcodes/    # 供內容頁面呼叫，不屬於頁面模板
-└── _partials/      # 可重用區段，不屬於頁面模板
-```
+- `layouts/home.html`
+- `layouts/page.html`
+- `layouts/section.html`
+- `layouts/taxonomy.html`
+- `layouts/term.html`
 
-其中：
+以及後備選項
 
-- single 是 page 模板的後備選項
-- list 是 home、section、taxonomy、term 模板的後備選項
-- all 是所有頁面模板的後備選項
+- `layouts/single.html` 是 page 模板的後備選項
+- `layouts/list.html` 是 home、section、taxonomy、term 模板的後備選項
+- `layouts/all.html` 是所有頁面模板的後備選項
 
 ### 其他模板
 
@@ -267,14 +279,14 @@ home.de._version_v2.0.0_.json
 不同模板類型對進階查找順序的支援各有不同，表格整理如下：
 
 |                            | Page Kind | 輸出格式 | 語言 | 路徑深度 |
-|----------------------------|:---------:|:--------:|:----:|:--------:|
+|----------------------------|-----------|----------|------|----------|
 | [基礎模板](#base-template) | 支援      | 支援     | 支援 | 支援     |
 | [頁面模板](#page-template) | 支援      | 支援     | 支援 | 支援     |
 | Render hook                | ❌        | 支援     | 支援 | 支援     |
 | Shortcode                  | ❌        | 支援     | 支援 | ❌       |
 | Partial                    | ❌        | ❌       | ❌   | ❌       |
 | View                       | ❌        | ❌       | ❌   | 不適用   |
-{class="full-width-table"}
+{center="true"}
 
 ## 一個完整網站的範例
 
