@@ -17,7 +17,7 @@ cd my-blog
 
 Get the styles ready first. CSS has nothing to do with templates, so copy a simple template into `assets/css/main.css` for now.
 
-The reason it goes in `assets/` instead of `static/` is the same as what's covered in [Image References](../docs/guide/content-authoring.md): only resources under `assets/` get processed through Hugo Pipes. Anything in `static/` gets served as is, uncompressed.
+The reason it goes in `assets/` instead of `static/` is the same as what's covered in [Image References](../docs/guide/content-authoring.md#referencing-images): only resources under `assets/` get processed through Hugo Pipes. Anything in `static/` gets served as is, uncompressed.
 
 {{% admonition type="note" sign="-" title="CSS Template" %}}
 

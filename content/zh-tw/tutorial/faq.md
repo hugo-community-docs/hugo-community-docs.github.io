@@ -57,7 +57,7 @@ Hugo 對設定檔不同的鍵有不同的合併機制，分成不合併、淺層
 4. `{{ site.Store }}` + `{{ site.Get }}`
 5. `{{ printf "type: %T, val: %s" $var $var }}`
 6. `{{ warnf "%s $var" }}`
-7. 以上方案搭配 console.log 在瀏覽器印出
+7. 以上方案搭配 console.log 在瀏覽器印出，比如 [hugo-module-debug](https://github.com/jmooring/hugo-module-debug/)
 
 以及 [debug 函式](https://gohugo.io/functions/debug/)，還有 [templates.Current](https://gohugo.io/troubleshooting/inspection/)。
 

@@ -29,7 +29,7 @@ These are the only ways to do it. There is no other method.
 4. `{{ site.Store }}` + `{{ site.Get }}`
 5. `{{ printf "type: %T, val: %s" $var $var }}`
 6. `{{ warnf "%s $var" }}`
-7. Any of the above combined with `console.log` printed in the browser
+7. Any of the above combined with `console.log` printed in the browser, such as [hugo-module-debug](https://github.com/jmooring/hugo-module-debug/)
 
 Also see the [debug functions](https://gohugo.io/functions/debug/) and [templates.Current](https://gohugo.io/troubleshooting/inspection/).
 
