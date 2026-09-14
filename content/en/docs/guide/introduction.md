@@ -54,4 +54,3 @@ A few things worth knowing going in:
 - Mixed frontend/backend concepts: Hugo's template engine is written in Go, so even for a purely frontend site, you're working with Hugo's own syntax, addition, for instance, is written as `{{ add 1 1 }}`, and you'll need to check the docs for nearly everything.
 - No plugin system: Hugo doesn't support plugin extensions. Functionality is limited to what's built in, so anything beyond that is on you, and it's hard for frontend developers to contribute directly to a Go codebase.
 - Pre-1.0: Hugo is still on a 0.x version and hasn't reached a stable 1.0 release.
-- Small core team: The number of core maintainers is very small, which is worth factoring into your dependency risk assessment.
