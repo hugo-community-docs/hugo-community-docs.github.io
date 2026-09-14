@@ -151,7 +151,7 @@ markup:
 params:
   # =============================================================================
   # Custom parameters
-  lastUpdated: 0.165.0 # last updated version used in hugo_version_badge
+  lastUpdated: 0.166.0 # last updated version used in hugo_version_badge
   # =============================================================================
 
   # logo: /img/logo.svg # Path to the site logo image (assets/img/logo.svg -> /img/logo.svg)
