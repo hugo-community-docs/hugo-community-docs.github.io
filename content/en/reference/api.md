@@ -590,6 +590,7 @@ The index below is compiled from the [official Hugo documentation](https://gohug
 - [resources.Match](https://gohugo.io/functions/resources/match/)
 - [resources.Minify](https://gohugo.io/functions/resources/minify/)
 - [resources.PostProcess](https://gohugo.io/functions/resources/postprocess/)
+- [resources.Publish](https://gohugo.io/functions/resources/publish/)
 
 ### [safe](https://gohugo.io/functions/safe/)
 
