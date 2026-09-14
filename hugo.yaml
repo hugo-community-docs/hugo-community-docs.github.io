@@ -272,16 +272,16 @@ languages:
     menus:
       main:
         - name: Docs
-          pageRef: /docs/guide
+          pageRef: /docs
           weight: 40
           params:
-            url: /docs/guide/introduction
+            url: /docs/guide/introduction/
 
         - name: Tutorial
           pageRef: /tutorial
           weight: 80
           params:
-            url: /tutorial/introduction
+            url: /tutorial/introduction/
 
         - name: Reference
           pageRef: /reference
@@ -308,12 +308,16 @@ languages:
     menus:
       main:
         - name: 文檔
-          pageRef: /docs/guide/introduction
+          pageRef: /docs
           weight: 40
+          params:
+            url: /zh-tw/docs/guide/introduction/
 
         - name: 教學
           pageRef: /tutorial
           weight: 80
+          params:
+            url: /zh-tw/tutorial/introduction/
 
         - name: 參考
           pageRef: /reference
