@@ -174,14 +174,14 @@ hugo-community-docs recommends placing images in `assets/`:
 - `Page resources` are meant to be accessed from within the page that owns them. It's difficult for other pages to access another page's page resources.
 
 > [!INFO]
-> If an image path fails to resolve, that indicates a bug in the theme's [image render hook](https://gohugo.io/render-hooks/images/) logic. Report it to the theme, or enable `renderHooks.image.useEmbedded = always` yourself.
+> If an image path fails to resolve, that indicates a bug in the theme's [image render hook](https://gohugo.io/render-hooks/images/) logic. Report it to the theme, or enable `markup.goldmark.renderHooks.image.useEmbedded = always` yourself.
 
 ## Referencing Posts
 
 hugo-community-docs recommends always linking with the file extension included, for example `[link](../post-1/index.md)`, since this allows your IDE to autocomplete, navigate, and catch broken links.
 
 > [!INFO]
-> If a link path fails to resolve, that indicates a bug in the theme's [link render hook](https://gohugo.io/render-hooks/links/) logic. Report it to the theme, or enable `renderHooks.link.useEmbedded = always` yourself.
+> If a link path fails to resolve, that indicates a bug in the theme's [link render hook](https://gohugo.io/render-hooks/links/) logic. Report it to the theme, or enable `markup.goldmark.renderHooks.link.useEmbedded = always` yourself.
 
 ## Shortcodes
 

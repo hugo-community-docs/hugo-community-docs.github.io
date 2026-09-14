@@ -29,8 +29,7 @@ The reason it goes in `assets/` instead of `static/` is the same as what's cover
 	--color-muted: oklch(0.45 0.01 67);
 	--color-border: oklch(0.92 0.007 80);
 	--color-link: oklch(0.23 0.005 67);
-	--font-serif:
-		'Noto Serif TC', 'Noto Serif JP', 'Noto Serif SC', 'PingFang TC', 'Microsoft JhengHei', Georgia, serif;
+	--font-serif: 'PingFang TC', 'Microsoft JhengHei', Georgia, serif;
 	--space-1: 0.5rem;
 	--space-2: 1rem;
 	--space-3: 1.75rem;
@@ -58,13 +57,9 @@ body {
 	background: var(--color-bg);
 	color: var(--color-text);
 	font-family: var(--font-serif);
-	font-size: 19px;
 	line-height: 1.75;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
-	@media (width < 768px) {
-		font-size: 17px;
-	}
 }
 
 a {
@@ -86,6 +81,15 @@ table {
 	margin: var(--space-3) 0;
 	border-collapse: collapse;
 	font-size: calc((var(--text-1) + var(--text-2)) / 2);
+}
+
+img, svg, video, canvas, audio, iframe, embed, object {
+	display: block;
+	vertical-align: middle;
+}
+img, video {
+	max-width: 100%;
+	height: auto;
 }
 
 th,
@@ -137,7 +141,6 @@ pre {
 	padding-inline: 4px;
 	border-radius: 0.5em;
 	border: 1.25px solid oklch(0.697 0.153 272.01);
-	font-size: 0.875em;
 	line-height: 1.4;
 }
 
@@ -543,6 +546,8 @@ The five layout files, `baseof`, `page`, `section`, `taxonomy`, and `term`, corr
 
 > [!TIP]
 > You can also move all theme-related content into the themes directory to turn it into an actual theme. Doing so gives you a clearer separation of responsibility between your source code and your Markdown content.
+
+See the full repository example at [hugo-from-scratch](https://github.com/hugo-community-docs/hugo-from-scratch).
 
 ## Advanced Stylesheet Loading
 

@@ -173,14 +173,14 @@ hugo-community-docs 建議將圖片應該放在 `assets/`：
 - `頁面資源` 目的是在自身頁面取用自身資源，其他頁面難以取用別的頁面的頁面資源。
 
 > [!INFO]
-> 若圖片路徑解析失敗，則代表主題的 [image render hook](https://gohugo.io/render-hooks/images/) 邏輯錯誤，應回報給主題，或是自行啟用 `renderHooks.image.useEmbedded = always`。
+> 若圖片路徑解析失敗，則代表主題的 [image render hook](https://gohugo.io/render-hooks/images/) 邏輯錯誤，應回報給主題，或是自行啟用 `markup.goldmark.renderHooks.image.useEmbedded = always`。
 
 ## 文章引用
 
 hugo-community-docs 建議一律使用包含副檔名的方式連結，比如 `[link](../post-1/index.md)`，因為這樣 IDE 才能夠補全、跳轉以及檢查錯誤的連結。
 
 > [!INFO]
-> 若連結路徑解析失敗，則代表主題的 [link render hook](https://gohugo.io/render-hooks/links/) 邏輯錯誤，應回報給主題，或是自行啟用 `renderHooks.link.useEmbedded = always`。
+> 若連結路徑解析失敗，則代表主題的 [link render hook](https://gohugo.io/render-hooks/links/) 邏輯錯誤，應回報給主題，或是自行啟用 `markup.goldmark.renderHooks.link.useEmbedded = always`。
 
 ## Shortcodes
 
