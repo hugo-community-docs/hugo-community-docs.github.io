@@ -7,7 +7,7 @@ weight: 100
 description: 'How to install Hugo on each operating system and configure the PATH environment variable it needs to run.'
 ---
 
-This page explains how to install Hugo on each operating system and set up the environment variable (PATH) it needs to run.
+This page explains how to install Hugo on each operating system and configure the PATH environment variable it requires.
 
 ## Hugo Editions
 
