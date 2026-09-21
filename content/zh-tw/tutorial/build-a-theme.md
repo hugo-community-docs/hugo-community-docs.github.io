@@ -440,7 +440,7 @@ menu:
   {{ with .Content }}<article class="intro prose">{{ . }}</article>{{ end }}
 
   <ul>
-    {{ range .Pages.ByDate.Reverse }}
+    {{ range .Pages.ByDate }}
     <li>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </li>
@@ -490,7 +490,7 @@ menu:
   <h1 class="page-title">帶有 {{ .Title }} 標籤的文章</h1>
   {{ with .Content }}<article class="prose">{{ . }}</article>{{ end }}
 
-  {{ range .Pages.ByDate.Reverse }}
+  {{ range .Pages.ByDate }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </p>

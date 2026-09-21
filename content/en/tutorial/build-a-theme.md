@@ -439,7 +439,7 @@ Check the page. The header should now show Home and Blog links.
   {{ with .Content }}<article class="intro prose">{{ . }}</article>{{ end }}
 
   <ul>
-    {{ range .Pages.ByDate.Reverse }}
+    {{ range .Pages.ByDate }}
     <li>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </li>
@@ -489,7 +489,7 @@ Check the page. The header should now show Home and Blog links.
   <h1 class="page-title">Posts tagged {{ .Title }}</h1>
   {{ with .Content }}<article class="prose">{{ . }}</article>{{ end }}
 
-  {{ range .Pages.ByDate.Reverse }}
+  {{ range .Pages.ByDate }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </p>
