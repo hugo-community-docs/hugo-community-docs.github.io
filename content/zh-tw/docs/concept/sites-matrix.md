@@ -94,6 +94,36 @@ module:
           versions: "**"  # 掛載到所有版本
 ```
 
+## 補集{#complements}
+
+`matrix.mounts.sites` 比較好理解，與 `matrix` 同級的設定還有 complements（補集），用途是讓其他語言版本在缺少對應資源時，可以借用這份內容來補齊。
+
+以實際範例說明：
+
+```yaml {title="hugo.yaml"}
+module:
+  mounts:
+    - source: content/zh-cn
+      target: content
+      sites:
+        matrix:
+          languages:
+            - zh-cn
+    - source: content/en
+      target: content
+      sites:
+        matrix:
+          languages:
+            - 'en'
+        complements:
+          languages:
+           - "*"
+```
+
+中文和英文都只 mount 到自己的 sites，但是英文設定為所有語言的補集，因此當中文網站缺少英文網站的對應頁面時，缺少的頁面會使用英文站的版本，不會生成中文站的檔案。
+
+差異是當中文網站缺少頁面，其他頁面指向該頁面的連結會直接以英文站的替代，瀏覽時會跨過中英文網站。
+
 ## 搭配模板
 
 模板可以用 [`.Rotate`](https://gohugo.io/methods/page/rotate/) 取得當前 logical path 在其他維度組合下的對應版本，以版本切換按鈕為例：
@@ -111,3 +141,4 @@ module:
 ## 參考
 
 - [混合版本化與非版本化內容](https://discourse.gohugo.io/t/question-about-the-multi-dimensional-content-model/57494)
+- [多語言專案翻譯回退的效能優化](https://discourse.gohugo.io/t/performance-in-multilingual-project-with-site-content-mount-fallbacks/57586)

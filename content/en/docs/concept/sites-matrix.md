@@ -94,6 +94,36 @@ module:
           versions: "**"  # mounts to every version
 ```
 
+## Complements{#complements}
+
+`matrix.mounts.sites` is fairly straightforward to understand. Another setting at the same level as `matrix` is complements, which lets other language versions borrow content from this source when they're missing the corresponding resource.
+
+Here's a concrete example:
+
+```yaml {title="hugo.yaml"}
+module:
+  mounts:
+    - source: content/zh-cn
+      target: content
+      sites:
+        matrix:
+          languages:
+            - zh-cn
+    - source: content/en
+      target: content
+      sites:
+        matrix:
+          languages:
+            - 'en'
+        complements:
+          languages:
+           - "*"
+```
+
+Both Chinese and English are mounted only to their own sites, but English is set as the complement for all languages. So when the Chinese site is missing a page that exists on the English site, the missing page falls back to the English version, without generating missing files for the Chinese site.
+
+The key difference is that when the Chinese site lacks a page, links pointing to it from other pages will resolve directly to the English site instead, so browsing will cross over between the Chinese and English sites.
+
 ## Using It in Templates
 
 Templates can use [`.Rotate`](https://gohugo.io/methods/page/rotate/) to get the equivalent of the current logical path across other dimension combinations. Here's a version switcher:
@@ -111,3 +141,4 @@ Templates can use [`.Rotate`](https://gohugo.io/methods/page/rotate/) to get the
 ## Reference
 
 - [Mixing Versioned and Non-Versioned Content](https://discourse.gohugo.io/t/question-about-the-multi-dimensional-content-model/57494)
+- [Performance in multilingual project with site content mount fallbacks](https://discourse.gohugo.io/t/performance-in-multilingual-project-with-site-content-mount-fallbacks/57586)
