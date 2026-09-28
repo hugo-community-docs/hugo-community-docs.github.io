@@ -1,4 +1,4 @@
-import { utils } from './utils.js';
+import { utils } from '../../core/js/utils.js';
 
 const CONFIG = {
 	tocSelector: '.toc-sidebar',
