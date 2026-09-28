@@ -96,7 +96,7 @@ module:
 
 ## Complements{#complements}
 
-`matrix.mounts.sites` is fairly straightforward to understand. Another setting at the same level as `matrix` is complements, which lets other language versions borrow content from this source when they're missing the corresponding resource.
+Another setting at the same level as `matrix.mounts.sites.matrix` is complements, which lets other language versions borrow content from this source when they're missing the corresponding resource.
 
 Here's a concrete example:
 

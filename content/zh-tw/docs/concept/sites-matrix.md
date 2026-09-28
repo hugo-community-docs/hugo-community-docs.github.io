@@ -96,7 +96,7 @@ module:
 
 ## 補集{#complements}
 
-`matrix.mounts.sites` 比較好理解，與 `matrix` 同級的設定還有 complements（補集），用途是讓其他語言版本在缺少對應資源時，可以借用這份內容來補齊。
+與 `matrix.mounts.sites.matrix` 同級的設定還有 complements（補集），用途是讓其他語言版本在缺少對應資源時，可以借用這份內容來補齊。
 
 以實際範例說明：
 
