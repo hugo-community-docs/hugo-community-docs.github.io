@@ -1,4 +1,4 @@
-import { utils } from '../../core/js/utils.js';
+import { params } from '../../core/js/utils.js';
 
 const CONFIG = {
 	tocSelector: '.toc-sidebar',
@@ -65,7 +65,7 @@ function getLinkAnchorValue(link) {
 }
 
 function getAnchorTopOffset() {
-	if (utils.params.headerLayout !== 'sticky') {
+	if (params.headerLayout !== 'sticky') {
 		return 0;
 	}
 	const navbar = document.querySelector('#site-header');
