@@ -211,6 +211,7 @@ weight: 900
 - [Fill](https://gohugo.io/methods/resource/fill/)
 - [Filter](https://gohugo.io/methods/resource/filter/)
 - [Fit](https://gohugo.io/methods/resource/fit/)
+- [FrameCount](https://gohugo.io/methods/resource/framecount/)
 - [Height](https://gohugo.io/methods/resource/height/)
 - [MediaType](https://gohugo.io/methods/resource/mediatype/)
 - [Meta](https://gohugo.io/methods/resource/meta/)
