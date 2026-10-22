@@ -23,7 +23,7 @@ jobs:
     env:
       # Define tool versions
       GO_VERSION: 1.25.5
-      HUGO_VERSION: 0.164.0
+      HUGO_VERSION: 0.166.0
       TZ: Asia/Taipei
     steps:
       - name: Checkout
