@@ -30,15 +30,15 @@ Cascade lets you set values for every piece of content under a given path at onc
 
 ## Content Structure
 
-See [Content Authoring](../guide/content-authoring.md#content-structure).
+See [Content Authoring - Content Structure](../guide/content-authoring.md#content-structure).
 
 ## Referencing Posts and Images
 
-See [Content Authoring](../guide/content-authoring.md#referencing-images).
+See [Content Authoring - Referencing Images](../guide/content-authoring.md#referencing-images).
 
 ## Shortcode
 
-See [Content Authoring](../guide/content-authoring.md#shortcodes).
+See [Content Authoring - Shortcodes](../guide/content-authoring.md#shortcodes).
 
 ## Summary and Description
 

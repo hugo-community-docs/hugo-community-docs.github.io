@@ -23,7 +23,7 @@ If you are not sure which one to pick, install the **Extended edition**.
 
 You can install Hugo through a package manager or by downloading the binary manually. As explained in [Understanding Hugo](introduction.md#single-binary), Hugo is a single binary executable, so you can also download it and run it directly. Here is how the two approaches compare.
 
-- Package manager: manages your system packages in one place, but you need to learn how to use it. Some package managers also make it hard to downgrade or pin a specific version.
+- Package manager: manages your system packages in one place, but you need to learn how to use the manager. Some managers make it hard to downgrade or pin a version.
 - Manual binary: you install and manage versions by hand. It takes a bit more effort, but comes with no restrictions.
 
 <br>
@@ -34,6 +34,7 @@ You can install Hugo through a package manager or by downloading the binary manu
 
 Pick the package manager for your operating system. The PATH is set automatically.
 
+- mise: If you already have [mise](https://mise.jdx.dev/), this is the recommended option. Run `mise use -g hugo-extended@latest`
 - macOS: [Homebrew](https://brew.sh/) with `brew install hugo`
 - Windows: [Chocolatey](https://chocolatey.org/) with `choco install hugo-extended`, or [Scoop](https://scoop.sh/) with `scoop install hugo-extended`
 - Linux: see the [official Hugo installation docs](https://gohugo.io/installation/linux/)

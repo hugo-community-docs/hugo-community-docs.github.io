@@ -30,15 +30,15 @@ Cascade 用於一次設定指定路徑以下的內容，免去逐檔案一一設
 
 ## Content 目錄結構
 
-見[內容撰寫](../guide/content-authoring.md#content-structure)。
+見[內容撰寫 - Content 內容結構](../guide/content-authoring.md#content-structure)。
 
 ## 引用文章和圖片
 
-見[內容撰寫](../guide/content-authoring.md#referencing-images)。
+見[內容撰寫 - 圖片引用](../guide/content-authoring.md#referencing-images)。
 
 ## Shortcode
 
-見[內容撰寫](../guide/content-authoring.md#shortcodes)。
+見[內容撰寫 - Shortcodes](../guide/content-authoring.md#shortcodes)。
 
 ## Summary and Description
 

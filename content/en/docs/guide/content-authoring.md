@@ -59,14 +59,14 @@ Each remaining file under a taxonomy directory is a single term page. `tags/my-t
 
 Optional. Even without the actual file, Hugo still generates the corresponding HTML.
 
-### p1.md or p2/index.md?
+### `p1.md` or `p1/index.md`?
 
-Both `p1.md` and `p2/index.md` create a standalone post, but only `p2/index.md` can hold its own page resources, such as images or videos. Default to the `post-name/index.md` form to keep your project structure consistent. Use `post.md` only in two cases:
+Only `p1/index.md` can own page resources, such as images. Use the `p1/index.md` format everywhere to keep your project structure consistent, unless one of these two cases applies:
 
-1. Your site has little or no image or other asset content.
-2. Your site manages all assets under the `assets` directory.
+1. Your site has almost no images or other resources.
+2. Your site keeps all resources in a single `assets` directory.
 
-Neither case needs page resources, so `post.md` is simpler and cleaner.
+Neither case needs page resources, so the plain `p1.md` format is simpler and cleaner.
 
 ## Front Matter
 
@@ -141,7 +141,7 @@ The **bold text** here will not render, the asterisks will be output literally.
 
 ## Referencing Images
 
-Where you place an image determines how you reference it. Hugo has three common locations: `assets/`, as a `page resource` alongside your content, or `static/`. A later page covers the full directory structure; for now, here's how to reference images from each:
+Where you store an image determines how you reference it. Hugo has three common locations: the `assets/` directory, page resources in the `content/` directory, and the `static/` directory. Later chapters cover the full directory structure. This section only covers how to reference images from each of the three locations:
 
 - `assets/`
 
@@ -169,9 +169,9 @@ Where you place an image determines how you reference it. Hugo has three common 
 
 hugo-community-docs recommends placing images in `assets/`:
 
-- Files in `static/` aren't processed at all, and are output even if unused.
-- `static/` uses absolute paths (`/foo.png`). If the site is deployed to a subdirectory (for example `example.com/blog/`), every link needs to be updated to match. Links generated through `assets/` automatically resolve to the correct path, so no manual link changes are needed if the site moves or its deployment path changes.
-- `Page resources` are meant to be accessed from within the page that owns them. It's difficult for other pages to access another page's page resources.
+- Hugo can't process files in `static/`. It copies them to your site as they are, even if unused.
+- `static/` relies on absolute paths (`/foo.png`). If you deploy your site to a subdirectory (such as `example.com/blog/`), you need to adjust every link. Links that Hugo generates from `assets/` automatically point to the correct path.
+- `Page resources` are meant for a page to use its own resources. It's hard for other pages to use the page resources of a different page.
 
 > [!INFO]
 > If an image path fails to resolve, that indicates a bug in the theme's [image render hook](https://gohugo.io/render-hooks/images/) logic. Report it to the theme, or enable `markup.goldmark.renderHooks.image.useEmbedded = always` yourself.

@@ -22,7 +22,7 @@ Hugo 提供三種發行版本：
 
 你可以透過套件管理器安裝，或是手動下載 binary 檔案。正如[認識 Hugo](./introduction.md#單一執行檔)所說的，Hugo 是一個二進制執行檔，因此你可以直接下載單一檔案直接執行，兩者差異如下：
 
-- 套件管理器：以管理器統一管理電腦系統套件，但是需要學會使用方式。且有些管理器難以降版本、指定版本。
+- 套件管理器：以管理器統一管理電腦系統套件，但是需要學會如何使用管理器。有些管理器難以降版本、指定版本。
 - 二進制安裝：手動安裝，手動管理版本，稍微麻煩但是沒有任何限制。
 
 <br>
@@ -33,6 +33,7 @@ Hugo 提供三種發行版本：
 
 依作業系統選擇對應的套件管理器安裝，PATH 會自動設定完成。
 
+- mise: 如果你的電腦已經有 [mise](https://mise.jdx.dev/)，這是最推薦的安裝方式，`mise use -g hugo-extended@latest`
 - macOS: [Homebrew](https://brew.sh/) + `brew install hugo`
 - Windows: [Chocolatey](https://chocolatey.org/) + `choco install hugo-extended` 或使用[Scoop](https://scoop.sh/) + `scoop install hugo-extended`
 - Linux: 詳見 [Hugo 官方安裝文檔](https://gohugo.io/installation/linux/)
