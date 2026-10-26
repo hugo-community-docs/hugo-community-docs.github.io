@@ -147,5 +147,35 @@
 			"{{< /accordion-item >}}"
 		],
 		"description": "Single accordion item. title is required; use inside an accordion block. open (bool) expands by default."
-	}
+	},
+
+	"Yore Details": {
+		"scope": "markdown",
+		"prefix": "yore-details",
+		"body": [
+			"{{% details summary=\"${1:Details}\"${2: open=true} %}}",
+			"",
+			"${3:Content}",
+			"",
+			"{{% /details %}}"
+		],
+		"description": "Details shortcode: collapsible block. summary supports Markdown. open (bool) expands by default. Must use markdown notation {{%  %}}."
+	},
+
+	"Yore Tree": {
+		"scope": "markdown",
+		"prefix": "yore-tree",
+		"body": [
+			"{{< tree${1: open=\"false\"} >}}",
+			"```sh",
+			"${2:.}",
+			"├── ${3:src}  # ${4:Source code}",
+			"│   └── ${5:main.go}",
+			"├── ${6:empty}  @dir",
+			"└── ${7:dist/}  @file",
+			"```",
+			"{{< /tree >}}"
+		],
+		"description": "Tree shortcode: collapsible directory tree. Flags: @dir, @file, @open, @closed."
+	},
 }

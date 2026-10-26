@@ -85,9 +85,7 @@ outputs:
 
 Search happens entirely in the browser by reading this JSON, so no backend server is required.
 
-<details>
-
-<summary>Minimal Fuse.js search example</summary>
+{{% details summary="Minimal Fuse.js search example" %}}
 
 ```html {title="baseof.html"}
 {{/* put this in the nav or header */}}
@@ -132,7 +130,7 @@ Search happens entirely in the browser by reading this JSON, so no backend serve
 </script>
 ```
 
-</details>
+{{% /details %}}
 
 ## Example 3: Preprocessing With Build Order
 

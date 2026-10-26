@@ -57,6 +57,7 @@ outputs: # Custom output formats per page type
     - HTML
     - RSS
     - markdown
+    - headers
   section:
     - HTML
     - RSS

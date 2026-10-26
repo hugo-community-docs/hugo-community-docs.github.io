@@ -84,9 +84,7 @@ outputs:
 
 用戶端在瀏覽器端讀取這份 JSON，不需要後端伺服器參與。
 
-<details>
-
-<summary>Fuse.js 搜尋最小範例</summary>
+{{% details summary="Fuse.js 搜尋最小範例" %}}
 
 ```html {title="baseof.html"}
 {{/* put this in the nav or header */}}
@@ -131,7 +129,7 @@ outputs:
 </script>
 ```
 
-</details>
+{{% /details %}}
 
 ## 範例三：利用構建順序預處理
 

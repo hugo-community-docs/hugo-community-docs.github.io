@@ -5,19 +5,41 @@
 		"body": [
 			"{{< card",
 			"  title=\"${1:Title}\"",
-			"  href=\"${2:https://example.com}\"",
-			"  desc=\"${3:Description.}\"",
-			"  image=\"${4:/img/01.webp}\"",
+			"  url=\"${2:https://example.com}\"",
+			"  target=\"${3|_blank,_self|}\"",
+			"  desc=\"${4:Description.}\"",
+			"  metaText=\"${5:Meta text.}\"",
+			"  icon=\"${6:cube}\"",
+			"  media=\"${7:/img/01.webp}\"",
+			"  mediaType=\"${8|image,video,iframe|}\"",
+			"  width=${9:16}",
+			"  height=${10:9}",
+			"  fit=\"${11|cover,contain|}\"",
+			"  ratio=\"${12:16/9}\"",
 			">}}"
 		],
-		"description": "General-purpose preview card with title, description, optional image or icon, and metadata."
+		"description": "General-purpose card component."
+	},
+
+	"Yore Cards": {
+		"scope": "markdown",
+		"prefix": "yore-cards",
+		"body": [
+			"{{< cards cols=${1|3,1,2,4|} gap=\"${2|m,s,l|}\" >}}",
+			"{{< card",
+			"  title=\"${3:Title}\"",
+			"  desc=\"${4:Description.}\"",
+			">}}",
+			"{{< /cards >}}"
+		],
+		"description": "Responsive grid of card shortcodes."
 	},
 
 	"Yore Article Card": {
 		"scope": "markdown",
 		"prefix": "yore-article",
 		"body": [
-			"{{< article path=\"${1:/docs/40-getting-started}\" desc=${2|true,false|} meta=${3|true,false|} >}}"
+			"{{< article path=\"${1:/docs/40-getting-started}\" desc=${2|true,false|} meta=${3|true,false|} lang=\"${4:en}\" >}}"
 		],
 		"description": "Visual preview card for an internal page. path is required."
 	},
@@ -37,7 +59,7 @@
 		"body": [
 			"{{< email address=\"${1:hello@example.com}\" >}}"
 		],
-		"description": "Obfuscates an email address using base64 encoding, decoded client-side into a mailto link."
+		"description": "Obfuscates an email address."
 	},
 
 	"Yore Embed Code": {
@@ -71,7 +93,7 @@
 		"scope": "markdown",
 		"prefix": "yore-fig",
 		"body": [
-			"{{% fig attrs=\"${1:class='center-cap center-img'}\" src=\"${2:/img/04.webp}\" alt=\"${3:alt}\" caption=\"${4:Caption text}\" %}}"
+			"{{% fig attrs=\"${1:class='yr-center-cap yr-center-img'}\" src=\"${2:/img/04.webp}\" alt=\"${3:alt}\" caption=\"${4:Caption text}\" %}}"
 		],
 		"description": "Renders an image inside a figure element with a figcaption that supports footnotes. Must use markdown notation."
 	},
@@ -87,6 +109,15 @@
 			"{{% /float %}}"
 		],
 		"description": "Floats arbitrary content left or right with text wrapping."
+	},
+
+	"Yore Float Clear": {
+		"scope": "markdown",
+		"prefix": "yore-float-clear",
+		"body": [
+			"{{% float-clear %}}",
+		],
+		"description": "Clear float in both side."
 	},
 
 	"Yore Cols": {
@@ -167,9 +198,9 @@
 		"scope": "markdown",
 		"prefix": "yore-icon",
 		"body": [
-			"{{< icon \"${1:github}\" >}}"
+			"{{< icon name=\"${1:github}\" label=\"${2:GitHub}\" class=\"${3:text-lg}\" rotate=${4:90} flip=\"${5|x,y,both|}\" animation=\"${6|spin,pulse,bounce|}\" >}}"
 		],
-		"description": "Renders an inline SVG icon from the theme's icon library."
+		"description": "Inline SVG icon from the theme's icon library. name is required. label, class, rotate, flip and animation are optional. flip accepts x, y or both. animation accepts spin, pulse or bounce. Delete unused parameters."
 	},
 
 	"Yore Audio": {
@@ -203,7 +234,7 @@
 		"scope": "markdown",
 		"prefix": "yore-pdf",
 		"body": [
-			"{{< pdf src=\"${1:/docs/file.pdf}\" page=\"${2:1}\" height=\"${3:800px}\" >}}"
+			"{{< pdf src=\"${1:/docs/file.pdf}\" title=\"${2:PDF title for screen readers}\" page=\"${3:1}\" height=\"${4:800px}\" >}}"
 		],
 		"description": "Embeds a PDF file using an inline iframe viewer. src is required."
 	},
