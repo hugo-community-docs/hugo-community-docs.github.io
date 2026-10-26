@@ -132,22 +132,45 @@ Search happens entirely in the browser by reading this JSON, so no backend serve
 
 {{% /details %}}
 
-## Example 3: Preprocessing With Build Order
+## Example 3: Generating a CSP Hash for `_headers`{#csp-hash}
 
-Hugo determines the rendering order of output formats based on `weight`, with lower numbers rendering first. This means you can have one output format run first, write data into `.Store`, and let other formats rendered later (such as HTML) read it:
+Give `headers` a higher `weight` so Hugo renders `_headers` last, after all computations for other outputs are complete. Each HTML page stores the hash of its inline script in `hugo.Store`. Then `_headers` reads the stored hashes and builds the `Content-Security-Policy` header.
 
-Write to the store during the JSON index render:
+Define the format in `hugo.yaml`. Set `delimiter` to an empty string to name the file `_headers` without an extension:
 
-```go-html-template {title="layouts/home.searchIndex.json"}
-{{- range site.RegularPages }}
-  {{- $.Store.Set (printf "foo-%s" .RelPermalink) ($preProcessedResult) }}
-{{- end }}
+```yaml
+outputFormats:
+  headers:
+    mediaType: text/header
+    baseName: _headers
+    isPlainText: true
+    notAlternative: true
+    weight: 20
+mediaTypes:
+  text/header:
+    delimiter: ''
+outputs:
+  home:
+    - html
+    - headers
 ```
 
-Then read it:
+Store the hash after the inline script. Hash the minified content so that minifying it again doesn't change the content:
 
-```go-html-template
-{{ $.Store.Get (printf "foo-%s" .RelPermalink) }}
+```go-html-template {title="layouts/head.html"}
+{{- $el := resources.Get "critical.js" | minify -}}
+<script>{{ $el.Content | safeJS }}</script>
+{{- $hash := printf "sha256-%s" ($el.Content | sha256 | encoding.HexDecode | base64Encode) -}}
+{{- hugo.Store.SetInMap "js-hashes" "critical" $hash -}}
 ```
 
-This approach works well when you need to aggregate across pages or precompute something, as with [backlinks](https://github.com/jmooring/hugo-module-backlinks).
+Read the stored hashes in `layouts/home.headers`:
+
+```go-html-template {title="layouts/home.headers"}
+{{- $s := "" -}}
+{{- range $name, $hash := hugo.Store.Get "js-hashes" -}}
+  {{- $s = printf "%s '%s'" $s $hash -}}
+{{- end -}}
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' {{ $s }};
+```

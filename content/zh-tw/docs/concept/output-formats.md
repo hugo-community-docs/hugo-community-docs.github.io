@@ -131,22 +131,45 @@ outputs:
 
 {{% /details %}}
 
-## 範例三：利用構建順序預處理
+## 範例 3：為 `_headers` 產生 CSP 雜湊{#csp-hash}
 
-Hugo 依照 `weight` 決定各 output format 的渲染順序，數字小的先渲染。這代表你可以讓某個 output format 先執行，把資料寫入 `.Store`，讓之後渲染的其他格式（例如 HTML）取用：
+將 `headers` 設定為較高的 `weight` 讓 Hugo 最後才輸出 `_headers` 檔案，此時其他輸出都已完成所有計算。每個 HTML 頁面會把內嵌腳本的雜湊存進 `hugo.Store`。接著 `_headers` 讀取已儲存的雜湊，建立 `Content-Security-Policy` 標頭。
 
-在 JSON 索引渲染期間寫入 store：
+在 `hugo.yaml` 定義格式。將 `delimiter` 設為空字串，檔名就會是沒有副檔名的 `_headers`：
 
-```go-html-template {title="layouts/home.searchIndex.json"}
-{{- range site.RegularPages }}
-  {{- $.Store.Set (printf "foo-%s" .RelPermalink) ($preProcessedResult) }}
-{{- end }}
+```yaml
+outputFormats:
+  headers:
+    mediaType: text/header
+    baseName: _headers
+    isPlainText: true
+    notAlternative: true
+    weight: 20
+mediaTypes:
+  text/header:
+    delimiter: ''
+outputs:
+  home:
+    - html
+    - headers
 ```
 
-並且讀取：
+在內嵌腳本之後儲存雜湊。請對壓縮後的內容計算雜湊避免內容因再次壓縮而變動：
 
-```go-html-template
-{{ $.Store.Get (printf "foo-%s" .RelPermalink) }}
+```go-html-template {title="layouts/head.html"}
+{{- $el := resources.Get "critical.js" | minify -}}
+<script>{{ $el.Content | safeJS }}</script>
+{{- $hash := printf "sha256-%s" ($el.Content | sha256 | encoding.HexDecode | base64Encode) -}}
+{{- hugo.Store.SetInMap "js-hashes" "critical" $hash -}}
 ```
 
-此做法適合需要跨頁面彙總或預先計算的情境，如 [backlinks](https://github.com/jmooring/hugo-module-backlinks)。
+在 `layouts/home.headers` 讀取已儲存的雜湊：
+
+```go-html-template {title="layouts/home.headers"}
+{{- $s := "" -}}
+{{- range $name, $hash := hugo.Store.Get "js-hashes" -}}
+  {{- $s = printf "%s '%s'" $s $hash -}}
+{{- end -}}
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' {{ $s }};
+```
