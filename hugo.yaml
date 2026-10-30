@@ -302,6 +302,7 @@ languages:
     title: Hugo 社群文檔
     hasCJKLanguage: true
     params:
+      chineseConverter: true
       description: Hugo 社群文檔
       footerCopyrightText: |
         版權所有 © 2026 Hugo Community Docs。<br>
