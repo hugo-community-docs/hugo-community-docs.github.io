@@ -11,13 +11,12 @@ This page explains how to install Hugo on each operating system and configure th
 
 ## Hugo Editions
 
-Hugo ships in three editions.
+Hugo ships in two editions:
 
-- Standard: the base edition. It does not include Sass/SCSS processing.
-- Extended: the edition recommended for most use cases. It includes built-in Sass/SCSS compilation. As of [v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0), it is identical to the standard edition.
-- Extended/Deploy: builds on Extended and adds the `hugo deploy` command, which lets you deploy directly to cloud storage services.
+- Standard edition[^hugo-versions].
+- Deploy edition: builds on the standard edition and adds the `hugo deploy` command, which lets you deploy directly to cloud storage services.
 
-If you are not sure which one to pick, install the **Extended edition**.
+If you are not sure which one to pick, that means you should install the **Standard edition**.
 
 ## Installation Methods
 
@@ -103,3 +102,5 @@ The following tools are not required for Hugo to run, but you will commonly use 
 
 - [Git](https://git-scm.com/downloads): version control software, used when installing themes or managing your project.
 - [Go](https://go.dev/doc/install): Hugo also supports managing project dependencies more flexibly through Go modules. This means your site project itself becomes a Go module, which is required to use the `hugo mod` family of commands.
+
+[^hugo-versions]: Older versions of Hugo shipped in three editions: the plain edition (the base edition), the Extended edition (with built-in WebP/SCSS compilation), and the Extended/Deploy edition (which additionally adds the `hugo deploy` command). As of [v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0), the plain edition and the Extended edition behave identically; after [v0.170.0](https://github.com/gohugoio/hugo/releases/tag/v0.170.0) the Extended edition was formally removed.
