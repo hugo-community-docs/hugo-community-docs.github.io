@@ -245,13 +245,7 @@ main {
 </html>
 ```
 
-The rendered `lang` attribute uses `{{ .Site.Language.Locale }}`, the same `locale` setting covered in [Basic Configuration](../docs/guide/basic-configuration.md#locale), rendered directly. That's why you need a region code in capital form, like `en-US`.
-
-`<head>` and `<header>` are simple skeleton setup, nothing more.
-
 `block "main"` is the key part here. It uses Hugo's [block](https://gohugo.io/functions/go-template/block/) function. When rendering different [Page Kinds](../docs/concept/templates.md#page-kind), Hugo maps to a different layout template and slots that template's `{{ define "main" }}{{ end }}` into this spot.
-
-The `<footer>` is, again, basic skeleton setup.
 
 ## Create Layout Templates
 
@@ -590,15 +584,15 @@ This example loads a single stylesheet. A typical project usually has multiple C
 {{ end }}
 ```
 
-`resources.Concat` performs simple concatenation and has several limitations. Hugo 0.158.0's new `css.Build` feature is more powerful. It supports `@import` between CSS files, which makes development more modern. The template usage stays simple:
+`resources.Concat` performs simple concatenation. Hugo 0.158.0's new `css.Build` feature is more powerful. It supports `@import` between CSS files, which makes development more modern. The template usage stays simple:
 
 ```go-html-template
-{{/* just add  '| css.Build'  to get this feature */}}
 {{ $buildOpts := dict
 	"minify" (hugo.IsProduction)
 	"target" (slice "chrome121" "firefox122" "safari17.3")
 }}
 
+{{/* just add  '| css.Build'  to get this feature */}}
 {{ with resources.Get "css/main.css" | css.Build $buildOpts }}
   {{ if hugo.IsDevelopment }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">

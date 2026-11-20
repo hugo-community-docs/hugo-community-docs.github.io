@@ -246,13 +246,7 @@ baseof 是所有頁面共用的 HTML 骨架。建立 `layouts/baseof.html`：
 </html>
 ```
 
-首先渲染 `lang` 使用的 `{{ .Site.Language.Locale }}` 就是[基礎篇](../docs/guide/basic-configuration.md#locale)的 `locale` 設定，直接被渲染，因此才會需要 `en-US` 這種區域碼大寫的形式。
-
-接下來 `<head>` `<header>` 都是簡單的基本骨架設定。
-
 `block "main"` 是本段落重點，使用 Hugo 的 [block](https://gohugo.io/functions/go-template/block/) 函式，在渲染不同的 [Page Kind](../docs/concept/templates.md#page-kind) 時會對應到不同的佈局模板，並且將佈局模板的 `{{ define "main" }}{{ end }}` 放進來。
-
-最後的 `<footer>` 同樣是基本骨架設定。
 
 ## 建立佈局模板
 
@@ -591,15 +585,15 @@ my-blog/
 {{ end }}
 ```
 
-`resources.Concat` 只是簡單的串接，有很多限制，而 Hugo 0.158.0 新推出的 `css.Build` 功能更為強大，支援在 CSS files 間互相使用 `@import` 語法，讓開發更現代化。模板使用很簡單：
+`resources.Concat` 只是簡單的串接，而 Hugo 0.158.0 新推出的 `css.Build` 功能更為強大，支援在 CSS files 間互相使用 `@import` 語法，讓開發更現代化。模板使用很簡單：
 
 ```go-html-template
-{{/* 只須加上  '| css.Build'  即可享受此功能 */}}
 {{ $buildOpts := dict
 	"minify" (hugo.IsProduction)
 	"target" (slice "chrome121" "firefox122" "safari17.3")
 }}
 
+{{/* 只須加上  '| css.Build'  即可享受此功能 */}}
 {{ with resources.Get "css/main.css" | css.Build $buildOpts }}
   {{ if hugo.IsDevelopment }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">
@@ -611,7 +605,7 @@ my-blog/
 {{ end }}
 ```
 
-但是 CSS 新增了很多功能：
+CSS 新增了很多功能：
 
 ```css {title="assets/css/main.css"}
 /* 支援 CSS cascade layer 語法 */
