@@ -159,9 +159,9 @@ params:
   blogLayout: 3-col # Overall site column layout. [2-col | 3-col]
 
   # Theme
-  themeColorScheme: latex # Color palette for the theme. [avocado | blowfish | congo | fire | latex | one-light | wood]
-  themeLightDarkMode: light # Default color mode on first visit. [light | dark]
-  themeLightDarkSwitcher: true # Show a button letting visitors toggle light/dark mode
+  themeColorScheme: latex # Color palette for the theme. [avocado | congo | fire | latex | one-light | wood]
+  themeLightDarkMode: device # Default color mode on first visit. [light | dark | device]
+  themeLightDarkSwitcher: true # Show a button letting visitors toggle light/dark/device mode
 
   # Author
   # See https://yore.zsl0621.cc/docs/features/authors/
@@ -208,6 +208,7 @@ params:
   # docsIcon: "xmark" # Icon shown in the docs nav bar
   # docsNavClass: "bg-success" # Extra classes applied to the docs nav
   docsAutoCollapseCategories: false # Automatically collapse other categories in the docs nav when one is expanded
+  docsSidebarHidable: true
 
   # Section
   sectionQuickReference: false # Show a quick-reference block at the top of section listing pages
