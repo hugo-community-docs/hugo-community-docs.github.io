@@ -228,6 +228,8 @@ params:
   breadcrumb: true # Show breadcrumb navigation
   breadcrumbSchema: true # Emit breadcrumb structured data (schema.org) for SEO
   codeCopy: true # Show a "copy" button on code blocks
+  externalLinkMarker: ' ↗︎' # Marker appended to external links. Set to an empty string to disable.
+  externalLinkWarning: false # Show a confirmation dialog before opening an external link.
   mathEnabled: false # Load the math rendering library on every page
   menuHighlight: true # Highlight the current page's entry in the navigation menu
   scrollToTop: true # Show a "scroll to top" button
