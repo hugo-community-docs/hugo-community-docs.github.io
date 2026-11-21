@@ -8,7 +8,7 @@ weight: 300
 
 ## Content 內容結構{#content-structure}
 
-content 資料夾結構如下：
+content 資料夾結構如下示意圖：
 
 ```sh
 content
@@ -34,9 +34,11 @@ content
     └── tutorials.md       # Term：單一 category 頁面（tutorials）
 ```
 
+以下介紹示意圖中的所有內容。
+
 ### 主頁（Home）
 
-主頁是最上層的 `_index.md`。
+主頁是最上層的 `_index.md`，注意不是 `index.md`。
 
 ### Section
 
@@ -69,9 +71,9 @@ content
 
 ## Front Matter
 
-Front matter 是每個內容檔案開頭的區塊，記錄該篇內容的中繼資料，支援 yaml、YAML、JSON 三種格式，純粹以分隔符號區分：
+Front matter 是每個內容檔案開頭的區塊，記錄該篇內容的中繼資料，支援 TOML、YAML、JSON 三種格式，純粹以分隔符號區分：
 
-- yaml：`+++` 包起來
+- TOML：`+++` 包起來
 - YAML：`---` 包起來
 - JSON：直接用 `{ }` 包起來
 

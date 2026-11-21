@@ -1,10 +1,10 @@
 ---
-title: 'Hugo Modules'
+title: 'Hugo 模組'
 slug: hugo-modules
 weight: 600
 ---
 
-本文專門介紹 Hugo Modules 以及對應的 `hugo mod` 指令。
+本文專門介紹 Hugo 模組（Modules）以及對應的 `hugo mod` 指令。
 
 ## 什麼是 Module
 

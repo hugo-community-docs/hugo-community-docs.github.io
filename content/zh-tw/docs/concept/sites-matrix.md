@@ -1,10 +1,10 @@
 ---
-title: 'Sites Matrix'
+title: 網站矩陣
 slug: sites-matrix
 weight: 500
 ---
 
-本文說明 Sites Matrix，Hugo 每個語言都是獨立的 site，而 [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) 進一步將原本單一維度的「一個 language 對應一個 site」提升到三個維度的組合。
+本文說明網站矩陣（Sites Matrix），Hugo 每個語言都是獨立的 site，而 [Hugo v0.153.0](https://github.com/gohugoio/hugo/releases/tag/v0.153.0) 進一步將原本單一維度的「一個 language 對應一個 site」提升到三個維度的組合。
 
 ## 三個維度
 

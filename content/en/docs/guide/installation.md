@@ -13,14 +13,14 @@ This page explains how to install Hugo on each operating system and configure th
 
 Hugo ships in two editions:
 
-- Standard edition[^hugo-versions].
+- Standard edition.
 - Deploy edition: builds on the standard edition and adds the `hugo deploy` command, which lets you deploy directly to cloud storage services.
 
-If you are not sure which one to pick, that means you should install the **Standard edition**.
+If you are not sure which one to pick, that means you should install the **Standard edition**[^hugo-versions].
 
 ## Installation Methods
 
-You can install Hugo through a package manager or by downloading the binary manually. As explained in [Understanding Hugo](introduction.md#single-binary), Hugo is a single binary executable, so you can also download it and run it directly. Here is how the two approaches compare.
+You can install Hugo through a package manager or by downloading the binary manually. Here is how the two approaches compare.
 
 - Package manager: manages your system packages in one place, but you need to learn how to use the manager. Some managers make it hard to downgrade or pin a version.
 - Manual binary: you install and manage versions by hand. It takes a bit more effort, but comes with no restrictions.
@@ -42,9 +42,9 @@ Pick the package manager for your operating system. The PATH is set automaticall
 
   {{< tab label="Manual Binary Download" >}}
 
-Go to the [Hugo GitHub Releases](https://github.com/gohugoio/hugo/releases) page and download the archive for your operating system and architecture. A filename containing `extended` is the Extended edition. Extract the archive and place the executable in a directory listed in your PATH.
+Go to the [Hugo GitHub Releases](https://github.com/gohugoio/hugo/releases) page and download the archive for your operating system and architecture. Extract the archive and place the executable in a directory listed in your PATH.
 
-After downloading, your system does not know where `hugo` is, so running `hugo` in the terminal at this point will show an error. Setting the PATH (called an environment variable on Windows) tells your system to look in that directory to find and run the executable.
+After downloading, your system does not know where `hugo` is. Setting the PATH (called an environment variable on Windows) tells your system to look in that directory to find and run the executable.
 
 > [!NOTE]- macOS/Linux
 >

@@ -9,7 +9,7 @@ This page covers the Markdown, front matter, and shortcode syntax you'll use whe
 
 ## Content Structure {#content-structure}
 
-A content directory looks like this:
+The `content` folder structure looks like this:
 
 ```sh
 content
@@ -35,9 +35,11 @@ content
     └── tutorials.md       # Term: Single Category Page (tutorials)
 ```
 
+The following sections cover everything in the diagram.
+
 ### Home
 
-Place the home page at `_index.md` in the top-level `content` directory.
+Place the home page at `_index.md` in the top-level `content` directory. Note that it's not `index.md`.
 
 ### Section
 
@@ -70,9 +72,9 @@ Neither case needs page resources, so the plain `p1.md` format is simpler and cl
 
 ## Front Matter
 
-Front matter is the block at the start of every content file that records that content's metadata. It supports three formats, yaml, YAML, and JSON, distinguished purely by delimiter:
+Front matter is the block at the start of every content file that records that content's metadata. It supports three formats, TOML, YAML, and JSON, distinguished purely by delimiter:
 
-- yaml: wrapped in `+++`
+- TOML: wrapped in `+++`
 - YAML: wrapped in `---`
 - JSON: wrapped directly in `{ }`
 
